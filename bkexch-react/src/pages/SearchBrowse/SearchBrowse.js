@@ -11,11 +11,19 @@ class SearchBrowse extends React.Component {
         searchfield: ''
     }
 
+    handleSearch = (e) => {
+        this.setState({searchfield: e.target.value})
+    }
+
     render() {
+        const {textbooks, searchfield} = this.state;
+        const filteredTextbooks = textbooks.filter(textbook => {
+            return textbook.title.toLowerCase().includes(searchfield.toLowerCase())
+        })
         return(
             <div className='page'>
-                <SearchBar/>
-                <TextbookList textbooks={this.state.textbooks}/>
+                <SearchBar handleSearch={this.handleSearch} placeholder='Search textbook titles'/>
+                <TextbookList textbooks={filteredTextbooks}/>
             </div>
         )
     }
