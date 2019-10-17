@@ -14,10 +14,6 @@ class SignupPopup extends React.Component {
 		passwordMsg: ""
 	}
 
-	togglePopup() {
-    	this.setState({showPopup: !this.state.showPopup})
- 	}
-
 	handleInputChange = (event) => {
 		const target = event.target
 		const name = target.name
@@ -88,8 +84,10 @@ class SignupPopup extends React.Component {
 
 		if (!(this.state.name === "") && (this.state.emailMsg === "") && !(this.state.password === "") 
 									&& (this.state.password === this.state.confirmPassword)) {
+			
 			{ /* Sends a user to the server, requires server call */ }
-			users.push(this.state)
+			const user = {"name": this.state.name, "email": this.state.email, "password": this.state.password}
+			users.push(user)
 
 			this.setState({
 				name: "",
