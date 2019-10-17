@@ -1,0 +1,46 @@
+.popup {
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+	border: 1px solid #ccc;
+	padding: 20px 20px 22px 19px;
+	background-color: white;
+	top: 60px;
+	position: absolute;
+	left: 455px;
+	height: 238px;
+	width: 310px;
+}
+
+#signup {
+	padding-bottom: 10px;
+	font-size: 20px;
+	font-weight: 500
+}
+
+.form {
+	width: 500px;
+	clear: both;
+	padding-bottom: 12px;
+}
+
+.label{
+    float: left;
+    width: 140px;
+    text-align: left;
+
+}
+
+#nameMsg, #emailMsg, #passwordMsg {
+	font-size: 12px;
+	color: red;
+	padding-left: 140px;
+}
+
+
+#submit {
+	margin-left: 200px;
+	width: 100px;
+	border: 0px;
+	box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+	background-color: black;
+	color: white;
+}
