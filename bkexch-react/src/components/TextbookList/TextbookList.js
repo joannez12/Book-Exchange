@@ -1,9 +1,14 @@
 import React from 'react';
+import TextbookListing from '../TextbookListing/TextbookListing';
 
-function TextbookList() {
+function TextbookList({textbooks}) {
     return(
         <div>
-
+            {
+                textbooks.map(textbook => (
+                    <TextbookListing textbook={textbook}/>
+                ))
+            }
         </div>
     )
 }
