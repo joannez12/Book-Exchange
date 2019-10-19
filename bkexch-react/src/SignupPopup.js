@@ -11,7 +11,8 @@ class SignupPopup extends React.Component {
 		password: "",
 		confirmPassword: "",
 		emailMsg: "",
-		passwordMsg: ""
+		passwordMsg: "",
+		loggedIn: false
 	}
 
 	handleInputChange = (event) => {
@@ -45,6 +46,7 @@ class SignupPopup extends React.Component {
 
 		if (users.length >= 1) {
 			for (let i = 0; i < users.length; i++) {
+				{ /* Gets users from server and compares it to user email, requires server call */ }
 				if (users[i].email === this.state.email) {
 					this.setState({emailMsg: "email exist"})
 					return
@@ -86,7 +88,7 @@ class SignupPopup extends React.Component {
 									&& (this.state.password === this.state.confirmPassword)) {
 			
 			{ /* Sends a user to the server, requires server call */ }
-			const user = {"name": this.state.name, "email": this.state.email, "password": this.state.password}
+			const user = {"name": this.state.name, "email": this.state.email, "password": this.state.password, "loggedIn": true}
 			users.push(user)
 
 			this.setState({
@@ -96,57 +98,49 @@ class SignupPopup extends React.Component {
 				password: "",
 				confirmPassword: "",
 				emailMsg: "",
-				passwordMsg: ""
+				passwordMsg: "",
+				loggedIn: false				
 			})
 			
 		} 
-		console.log(users)
 	}
 
 	render() {
 		return (
 			<div className="popup">
-				<div id="signup">SIGN UP</div>
-					{ /* <button type="button" id="close" onClick={}>X</button> */}
-					<div className="form">
-						<div className="label">Name:</div>
-							<input type="text" 
-								value = { this.state.name }
-								onChange = { this.handleInputChange }
-								name = "name"
-								placeholder = "Enter Name" />
-							<div id="nameMsg"> { this.state.nameMsg } </div>
-					</div>
-
-					<div className="form">
+				<form className="popupContent">
+					<h3>Sign Up <button type="button" className="close">X</button></h3>
+						<div className="label"> Name:</div>
+								<input className="input" type="text" 
+									value = { this.state.name }
+									onChange = { this.handleInputChange }
+									name = "name"
+									placeholder = "Enter Name" />
+								<div id="nameMsg"> { this.state.nameMsg } </div>
 						<div className="label">Email:</div>
-							<input type="text" 
+							<input className="input" type="text" 
 								value = { this.state.email }
 								onChange = { this.handleInputChange }
 								name = "email"
 								placeholder = "Enter Email" />
 							<div id="emailMsg"> { this.state.emailMsg } </div>
-					</div>
-								
-					<div className="form">
+						
 				 		<div className="label">Password:</div>
-				 			<input type="password" 
+				 			<input className="input" type="password" 
 				 				value = { this.state.password }
 				 				onChange = { this.handleInputChange }
 				 				name = "password"
 				 				placeholder = "Password" /> 
-				 	</div>
-				 	<div className="form">
 				 		<div className="label">Confirm Password:</div>
-				 			<input type="password" 
+				 			<input className="input" type="password" 
 				 				value = { this.state.confirmPassword }
 				 				onChange = { this.handleInputChange }
 				 				name = "confirmPassword"
 				 				placeholder = "Password" /> 
 				 			<div id="passwordMsg"> { this.state.passwordMsg } </div>
-
-				 	</div>
-				 	<button type="button" id="submit" onClick={this.submitChange}>Sign Up</button>
+				 		
+				 		<div align="right"><button type="button" id="signup" onClick={this.submitChange}>Sign Up</button></div>
+				</form>
 			</div>
 		)
 	}

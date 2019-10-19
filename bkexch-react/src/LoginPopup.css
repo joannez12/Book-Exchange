@@ -30,12 +30,12 @@
   	display: inline-block;
 }
 
-#nameMsg, #emailMsg, #passwordMsg {
+#emailMsg, #passwordMsg {
 	font-size: 12px;
 	color: red;
 }
 
-#signup {
+#login {
 	width: 70px;
 	margin-top: 10px;
 	border: 0px;
