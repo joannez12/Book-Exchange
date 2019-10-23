@@ -1,23 +1,28 @@
-const textbooks = [
+const exchanges = [
     {
         id: 1,
         title: 'Physics 200',
         author: 'Santo Mckinney',
         seller: 'Bonnie Cruz',
+        buyer: 'Jeannette Mcneil',
         price: 2300
     },
     {
         id: 2,
         title: 'Psych 1240',
         author: 'Marie Fitzgerald',
-        seller: 'Vonda Greer',
+        seller: 'Bonnie Cruz',
+        buyer: 'Jeannette Mcneil',
+
         price: 264
     },
     {
         id: 3,
         title: 'Modern OS',
         author: 'Jeffrey Costa',
-        seller: 'Jeannette Mcneil',
+        seller: 'Bonnie Cruz',
+        buyer: 'Jeannette Mcneil',
+
         price: 67
     },
     {
@@ -25,6 +30,8 @@ const textbooks = [
         title: 'Basket Weaving',
         author: 'Violet Ritter',
         seller: 'Connie Rangel',
+        buyer: 'Jeannette Mcneil',
+
         price: 89
     },
     {
@@ -32,8 +39,10 @@ const textbooks = [
         title: 'Ai For Dummies',
         author: 'Brenda Hanson',
         seller: 'Aaron Calhoun',
+        buyer: 'Jeannette Mcneil',
+
         price: 21
     }
 ]
 
-export default textbooks;
+export default exchanges;

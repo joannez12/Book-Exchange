@@ -7,3 +7,14 @@
 .page {
   max-width: 1500px;
 }
+
+.mainheader {
+  top: 0px;
+  width: 100%;
+  border: solid;
+  text-align: right;
+}
+.mainheader * {
+  display: inline-block;
+  padding: 10px;
+}

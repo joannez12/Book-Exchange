@@ -10,7 +10,7 @@ const posts = [
         id: 2,
         title: 'Psych 1240',
         author: 'Marie Fitzgerald',
-        seller: 'Vonda Greer',
+        seller: 'Bonnie Cruz',
         price: 264
     },
     {
