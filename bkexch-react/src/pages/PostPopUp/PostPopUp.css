@@ -1,0 +1,7 @@
+.descInput {
+    width: 100%;
+    min-height: 200px;
+    padding-top:3px;
+    padding-bottom: 3px;
+    display: inline-block;
+}

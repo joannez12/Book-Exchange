@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../SignupPopup.css';
-
+import './PostPopUp.css';
 
 class PostPopUp extends React.Component {
     state = {
@@ -10,7 +10,11 @@ class PostPopUp extends React.Component {
     render() {
         return (
             <form className="popupContent">
-                <h3> NEW POST<button type='button' className='close'>X</button> </h3>
+                <h3> New Post<button
+                    type='button'
+                    className='close'
+                    onClick = { () => this.props.close() }
+                >X</button> </h3>
                 <div className="label"> Title:</div>
                 <input className="input" type="text"
                        placeholder = "Enter title" />
@@ -21,7 +25,7 @@ class PostPopUp extends React.Component {
                 <input className="input" type="text"
                        placeholder = "Enter price" />
                 <div className="label"> Description:</div>
-                <input className="input" type="text"
+                <textarea className="descInput" type="text"
                        placeholder = "Description" />
                 <div align="right">
                     <button
@@ -30,9 +34,6 @@ class PostPopUp extends React.Component {
                         >Publish
                     </button>
                 </div>
-
-
-
             </form>
         )
     }

@@ -23,11 +23,10 @@ class MainHeader extends React.Component {
                 <h3><a onClick = { () => this.handleSignup() }>Sign Up</a></h3>
                 <h3><a onClick = { () => this.handlePostPopUp() } >Post</a></h3>
                 <h3><a href="/history">History</a></h3>
-
             </div>
              { this.state.signup ? <SignupPopup close = { () => this.handleSignup() } /> : null }
                 {
-                    this.state.addPost ? <PostPopUp /> : null
+                    this.state.addPost ? <PostPopUp close = { () => this.handlePostPopUp() }/> : null
                 }
            	</>
         )
