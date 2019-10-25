@@ -4,17 +4,12 @@
   align-items: center;
 }
 
-.page {
-  max-width: 1500px;
+.navigationbar {
+  width: 100%;
+  position: sticky;
+  top: 0;
 }
 
-.mainheader {
-  top: 0px;
-  width: 100%;
-  border: solid;
-  text-align: right;
-}
-.mainheader * {
-  display: inline-block;
-  padding: 10px;
+.page {
+  max-width: 1500px;
 }

@@ -10,7 +10,7 @@ class PostPopUp extends React.Component {
     render() {
         return (
             <form className="popupContent">
-                <h3> NEW POST<button type='button' className='close'>X</button> </h3>
+                <h3> NEW POST<button type='button' className='close' onClick = { this.props.close }>X</button> </h3>
                 <div className="label"> Title:</div>
                 <input className="input" type="text"
                        placeholder = "Enter title" />

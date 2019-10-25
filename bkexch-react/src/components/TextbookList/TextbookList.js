@@ -6,7 +6,7 @@ function TextbookList({textbooks}) {
         <div>
             {
                 textbooks.map(textbook => (
-                    <TextbookListing textbook={textbook}/>
+                    <TextbookListing key={textbook.id} textbook={textbook}/>
                 ))
             }
         </div>
