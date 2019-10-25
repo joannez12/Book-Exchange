@@ -4,76 +4,11 @@ import './HistoryBrowse.css';
 import posts from "../../post";
 import exchanges from "./exchange";
 
-function MyPostTableHepler(post){
-    return(
-        <tr>
-            <td>{post.title}</td>
-            <td>{post.author}</td>
-            <td>{post.price}</td>
-            <td>
-                <button type="button">Delete</button>
-                <button type="button">Edit</button>
-            </td>
-        </tr>
-    )
-}
+import MyPostTable from "../../components/HistoryBrowse/MyPostTable";
+import HistoryTable from "../../components/HistoryBrowse/HistoryTable";
 
-class MyPostTable extends React.Component {
-    render(){
-        return(
-            <div>
-                <table className='table'>
-                    <tr>
-                        <th>Book</th>
-                        <th>Author</th>
-                        <th>Price</th>
-                        <th>Option</th>
-                    </tr>
-                    {
-                        this.props.posts.map( post => MyPostTableHepler(post))
-                    }
 
-                </table>
-            </div>
-        )
-    }
-}
 
-function HistoryTableHepler(exchange){
-    return(
-        <tr>
-            <td>{exchange.title}</td>
-            <td>{exchange.author}</td>
-            <td>{exchange.buyer}</td>
-            <td>{exchange.price}</td>
-            <td>
-                <button type="button">Delete</button>
-            </td>
-        </tr>
-    )
-}
-
-class HistoryTable extends React.Component {
-    render(){
-        return(
-            <div>
-                <table className='table'>
-                    <tr>
-                        <th>Book</th>
-                        <th>Author</th>
-                        <th>Buyer</th>
-                        <th>Price</th>
-                        <th>Option</th>
-                    </tr>
-                    {
-                        this.props.exchanges.map( exchange => HistoryTableHepler(exchange))
-                    }
-
-                </table>
-            </div>
-        )
-    }
-}
 class HistoryBrowse extends React.Component {
     state = {
         account:{id:12, name:'Bonnie Cruz'},
@@ -81,14 +16,47 @@ class HistoryBrowse extends React.Component {
         posts: posts,
     }
 
+    getMyPosts(account, posts){
+        return posts.filter(post => post.seller === account.name);
+    }
+
+    getMyExchange(account, exchanges){
+        return exchanges.filter(exchange => exchange.seller === account.name);
+    }
+
+    deletePost(post){
+        for(let i = 0; i<posts.length; i++){
+            if(posts[i] === post){
+                posts.splice(i,1);
+            }
+        }
+        this.setState({posts: posts});
+    }
+
+    deleteHistory(exchange){
+        for(let i = 0; i<exchanges.length; i++){
+            if(exchanges[i] === exchange){
+                exchanges.splice(i,1);
+            }
+        }
+        this.setState({exchanges: exchanges});
+    }
+
     render() {
         return(
             <div>
                 <h4>User Name: {this.state.account.name}</h4>
                 <h4>My Posts</h4>
-                <MyPostTable posts={posts}/>
+
+                <MyPostTable
+                    posts={this.getMyPosts(this.state.account, this.state.posts)}
+                    deletePost={this.deletePost.bind(this)}
+                />
                 <h4>History</h4>
-                <HistoryTable exchanges={exchanges}/>
+                <HistoryTable
+                    exchanges={this.getMyExchange(this.state.account, this.state.exchanges)}
+                    deleteHistory={this.deleteHistory.bind(this)}
+                />
             </div>
         )
     }
