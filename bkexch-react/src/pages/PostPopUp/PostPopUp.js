@@ -30,9 +30,6 @@ class PostPopUp extends React.Component {
                         >Publish
                     </button>
                 </div>
-
-
-
             </form>
         )
     }
