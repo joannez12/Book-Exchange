@@ -30,7 +30,7 @@ class SignupPopup extends React.Component {
 	 			return
 		}
 		if (type === "email") {
-		{ /* Gets users from server and compares it to user email to see if email exist already, requires server call */ }
+			 /* Gets users from server and compares it to user email to see if email exist already, requires server call */
 			users.filter((user) => user.email === input).length >= 1 ? this.setState({emailMsg: "email exists"}) : this.setState({emailMsg: ""})
 			return
 		}
@@ -59,7 +59,7 @@ class SignupPopup extends React.Component {
 		if (this.state.name !== "" && this.state.nameMsg === "" && this.state.email !== "" && this.state.emailMsg=== "" && this.state.password !== "" && 
 			this.state.passwordMsg === "" && this.state.password === this.state.confirmPassword) {
 			
-			{ /* Sends a user to the server, requires server call */ }
+			/* Sends a user to the server, requires server call */
 			const user = {"name": this.state.name, "email": this.state.email, "password": this.state.password, "loggedIn": true}
 			users.push(user)
 

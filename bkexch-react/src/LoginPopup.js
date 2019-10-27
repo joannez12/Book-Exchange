@@ -1,9 +1,9 @@
 import React from 'react';
 import './LoginPopup.css';
 
-const users = [ {email: "123@gmail.com", password: "123"} ]
+const users = [ {id: 1, email: "123@gmail.com", password: "123"} ]
 
-class LoginpPopup extends React.Component {
+class LoginPopup extends React.Component {
 	state = {
 		email: "",
 		password: "",
@@ -58,7 +58,8 @@ class LoginpPopup extends React.Component {
 						emailMsg: "",
 						passwordMsg: ""
 					})
-					users[i].loggedIn = true;
+					this.props.handleSignin(users[i].id);
+					this.props.close();
 				} else {
 					this.setState({passwordMsg: "incorrect password"})
 				}
@@ -72,7 +73,7 @@ class LoginpPopup extends React.Component {
 		return (
 			<div className="popup">
 				<form className="popupContent">
-					<h3>Log In <button type="button" className="close">X</button></h3>
+					<h3>Log In <button type="button" className="close" onClick={this.props.close}>X</button></h3>
 						<div className="label">Email:</div>
 							<input className="input" type="text" 
 								value = { this.state.email }
@@ -96,4 +97,4 @@ class LoginpPopup extends React.Component {
 	}
 }
 
-export default LoginpPopup;
+export default LoginPopup;
