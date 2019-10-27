@@ -23,12 +23,8 @@ class MainHeader extends React.Component {
        this.setState(prevState => ({addpost: !prevState.addpost, signup: false, signin: false}), console.log(this.state))
     }
 
-    showSignin = () => {
-        this.setState(prevState => ({signin: !prevState.signin, signup: false, addpost: false}), console.log(this.state))
-    }
-
     handleSignin = () => {
-        this.props.user ? this.props.handleSignin(-1) : this.showSignin()
+        this.props.user ? this.props.handleSignin(-1) : this.setState({signin: true})
     }
 
     render(){
@@ -49,7 +45,7 @@ class MainHeader extends React.Component {
             </div>
             { this.state.signup ? <SignupPopup close ={this.handleSignup} /> : null }
             { this.state.addpost ? <PostPopUp close={this.handlePostPopUp} /> : null }
-            { this.state.signin ? <LoginPopup close={this.showSignin} handleSignin={this.props.handleSignin}/> : null}
+            <LoginPopup show={this.state.signin} onHide={() => this.setState({signin: false})} handleSignin={this.props.handleSignin}/>
             </>
         )
     }
