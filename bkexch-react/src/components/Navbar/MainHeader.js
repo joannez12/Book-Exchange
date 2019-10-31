@@ -46,6 +46,7 @@ class MainHeader extends React.Component {
             { this.state.signup ? <SignupPopup close ={this.handleSignup} /> : null }
             { this.state.addpost ? <PostPopUp close={this.handlePostPopUp} /> : null }
             <LoginPopup show={this.state.signin} onHide={() => this.setState({signin: false})} handleSignin={this.props.handleSignin}/>
+            <SignupPopup show={this.state.signup} onHide={() => this.setState({signup: false})} handleSignup={this.props.handleSignup}/>
             </>
         )
     }
