@@ -1,4 +1,6 @@
 import React from 'react';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import './SignupPopup.css';
 
 const users = []
@@ -11,8 +13,7 @@ class SignupPopup extends React.Component {
 		password: "",
 		confirmPassword: "",
 		emailMsg: "",
-		passwordMsg: "",
-		loggedIn: false
+		passwordMsg: ""
 	}
 
 	handleInputChange = (event) => {
@@ -60,7 +61,7 @@ class SignupPopup extends React.Component {
 			this.state.passwordMsg === "" && this.state.password === this.state.confirmPassword) {
 			
 			/* Sends a user to the server, requires server call */
-			const user = {"name": this.state.name, "email": this.state.email, "password": this.state.password, "loggedIn": true}
+			const user = {"id": users.length+1, "name": this.state.name, "email": this.state.email, "password": this.state.password}
 			users.push(user)
 
 			this.setState({
@@ -70,51 +71,60 @@ class SignupPopup extends React.Component {
 				password: "",
 				confirmPassword: "",
 				emailMsg: "",
-				passwordMsg: "",
-				loggedIn: false	
+				passwordMsg: ""
 			})
 
-			this.props.close() 
+			this.props.onHide()
 		} 
 	}
 
 	render() {
+		const { handleSignup, ...other } = this.props;
 		return (
-			<form className="popupContent">
-				<h3>Sign Up <button type="button" className="close" onClick = { () => this.props.close() }>X</button></h3>
-					<div className="label"> Name:</div>
-						<input className="input" type="text" 
-							value = { this.state.name }
-							onChange = { this.handleInputChange }
-							name = "name"
-							placeholder = "Enter Name" />
-						<div id="nameMsg"> { this.state.nameMsg } </div>
+			<Modal {...other} animation={false}>
+				<Modal.Header closeButton>
+					<Modal.Title>
+						Sign Up
+					</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<label>Name:</label>
+					<input className="input" type="text" 
+						value = { this.state.name }
+						onChange = { this.handleInputChange }
+						name = "name"
+						placeholder = "Enter Name" />
+					<p id="nameMsg"> { this.state.nameMsg } </p>
 
-					<div className="label">Email:</div>
-						<input className="input" type="text" 
-							value = { this.state.email }
-							onChange = { this.handleInputChange }
-							name = "email"
-							placeholder = "Enter Email" />
-						<div id="emailMsg"> { this.state.emailMsg } </div>
+					<label>Email:</label>
+					<input className="input" type="text" 
+						value = { this.state.email }
+						onChange = { this.handleInputChange }
+						name = "email"
+						placeholder = "Enter Email" />
+					<p id="emailMsg"> { this.state.emailMsg } </p>
 						
-				 	<div className="label">Password:</div>
-				 		<input className="input" type="password" 
-				 			value = { this.state.password }
-				 			onChange = { this.handleInputChange }
-				 			name = "password"
-				 			placeholder = "Password" /> 
+				 	<label>Password:</label>
+				 	<input className="input" type="password" 
+				 		value = { this.state.password }
+				 		onChange = { this.handleInputChange }
+				 		name = "password"
+				 		placeholder = "Password" /> 
+				 	<p></p>
 
-				 	<div className="label">Confirm Password:</div>
-				 		<input className="input" type="password" 
-				 			value = { this.state.confirmPassword }
-				 			onChange = { this.handleInputChange }
-				 			name = "confirmPassword"
-				 			placeholder = "Password" /> 
-				 		<div id="passwordMsg"> { this.state.passwordMsg } </div>
-				 		
-				 	<div align="right"><button type="button" id="signup" onClick={this.submitChange}>Sign Up</button></div>
-			</form>
+				 	<label>Confirm Password:</label>
+				 	<input className="input" type="password" 
+				 		value = { this.state.confirmPassword }
+				 		onChange = { this.handleInputChange }
+				 		name = "confirmPassword"
+				 		placeholder = "Confirm Password" /> 
+				 	<p id="passwordMsg"> { this.state.passwordMsg } </p>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant="secondary" onClick={this.props.onHide}>Close</Button>
+					<Button variant="primary" onClick={this.submitChange}>Sign Up</Button>
+				</Modal.Footer>
+			</Modal>
 		)
 	}
 }
