@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import TextbookList from '../../components/TextbookList/TextbookList';
+import './SearchBrowse.css';
 
 //Textbooks will be received from a server but is harded coded for part 1
 import textbooks from '../../textbooks';
@@ -11,8 +12,8 @@ class SearchBrowse extends React.Component {
         searchfield: ''
     }
 
-    handleSearch = (e) => {
-        this.setState({searchfield: e.target.value})
+    handleSearch = (searchfield) => {
+        this.setState({searchfield: searchfield})
     }
 
     render() {
@@ -22,9 +23,9 @@ class SearchBrowse extends React.Component {
         })
         return(
             <div className='page'>
-                <h1> --- Textbooks --- </h1>
+                <h1 className="title"> - Textbooks - </h1>
                 <SearchBar handleSearch={this.handleSearch} placeholder='Search textbook titles'/>
-                <TextbookList textbooks={filteredTextbooks}/>
+                {filteredTextbooks.length !== 0 ? <TextbookList textbooks={filteredTextbooks}/> : <h3>No textbooks found.</h3> }
             </div>
         )
     }

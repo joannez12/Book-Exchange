@@ -1,3 +1,7 @@
+.navigationbar {
+    z-index: 10;
+}
+
 .navLink {
     color: rgb(202, 202, 202);
 }
