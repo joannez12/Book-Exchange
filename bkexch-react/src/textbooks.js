@@ -4,6 +4,7 @@ const textbooks = [
         title: 'Physics 200',
         author: 'Santo Mckinney',
         seller: 'Bonnie Cruz',
+        description: 'Decent condition, contains highlighting',
         price: 2300
     },
     {
@@ -11,6 +12,7 @@ const textbooks = [
         title: 'Psych 1240',
         author: 'Marie Fitzgerald',
         seller: 'Vonda Greer',
+        description: 'Perfect condition',
         price: 264
     },
     {
@@ -18,6 +20,7 @@ const textbooks = [
         title: 'Modern OS',
         author: 'Jeffrey Costa',
         seller: 'Jeannette Mcneil',
+        description: '',
         price: 67
     },
     {
@@ -25,6 +28,7 @@ const textbooks = [
         title: 'Basket Weaving',
         author: 'Violet Ritter',
         seller: 'Connie Rangel',
+        description: 'Willing to negotiate price',
         price: 89
     },
     {
@@ -32,6 +36,7 @@ const textbooks = [
         title: 'Ai For Dummies',
         author: 'Brenda Hanson',
         seller: 'Aaron Calhoun',
+        description: 'Brand new',
         price: 21
     }
 ]

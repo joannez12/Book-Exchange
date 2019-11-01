@@ -1,9 +1,13 @@
 .listing {
-    flex-basis: 45%;
     margin: 10px;
+    color: black;
+    flex-basis: 30%;
 }
 
 .listing:hover {
-    box-shadow: 0 3px 5px 0 rgb(228, 228, 228);
-    transition: box-shadow 0.5s ease-in;
+    box-shadow: 0 4px 5px 0 rgb(228, 228, 228);
+    transition: box-shadow 0.5s;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
 }
