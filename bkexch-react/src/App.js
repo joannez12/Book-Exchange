@@ -11,15 +11,15 @@ class App extends React.Component {
     user: null
   }
 
-  handleSignin = (userId) => {
-    userId === -1 ? this.setState({user: null}) : this.setState({user: userId})
+  handleSignin = (user) => {
+    user === -1 ? this.setState({user: null}) : this.setState({user: user})
   }
 
   render() {
     return (
       <div className="App">
-        <MainHeader user={this.state.user} handleSignin={this.handleSignin}/>
         <Router>
+          <MainHeader user={this.state.user} handleSignin={this.handleSignin}/>
           <Switch>
             <Route exact path="/" component={SearchBrowse} />
             <Route exact path="/history" component={HistoryBrowse} />

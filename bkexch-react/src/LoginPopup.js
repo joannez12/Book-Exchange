@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import './LoginPopup.css';
 
-const users = [{ id: 1, email: "123@gmail.com", password: "123" }]
+const users = [{ id: 1, email: "123@gmail.com", password: "123", name: "Mike Smith" }]
 
 class LoginPopup extends React.Component {
 	state = {
@@ -60,7 +60,7 @@ class LoginPopup extends React.Component {
 						emailMsg: "",
 						passwordMsg: ""
 					})
-					this.props.handleSignin(users[i].id);
+					this.props.handleSignin(users[i]);
 					this.props.onHide();
 				} else {
 					this.setState({ passwordMsg: "incorrect password" })
