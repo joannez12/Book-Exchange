@@ -22,6 +22,7 @@ class SearchBrowse extends React.Component {
         })
         return(
             <div className='page'>
+                <h1> --- Textbooks --- </h1>
                 <SearchBar handleSearch={this.handleSearch} placeholder='Search textbook titles'/>
                 <TextbookList textbooks={filteredTextbooks}/>
             </div>

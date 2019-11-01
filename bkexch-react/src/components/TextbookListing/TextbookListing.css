@@ -1,5 +1,9 @@
 .listing {
-    border: 2px solid gray;
-    width: 300px;
-    text-align: center;
+    flex-basis: 45%;
+    margin: 10px;
+}
+
+.listing:hover {
+    box-shadow: 0 3px 5px 0 rgb(228, 228, 228);
+    transition: box-shadow 0.5s ease-in;
 }
