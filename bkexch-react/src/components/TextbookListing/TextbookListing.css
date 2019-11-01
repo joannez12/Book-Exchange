@@ -1,7 +1,7 @@
 .listing {
     margin: 10px;
     color: black;
-    flex-basis: 30%;
+    width: 20rem;
 }
 
 .listing:hover {
