@@ -45,8 +45,8 @@ class MainHeader extends React.Component {
                             <Link to="/history" className="navLink">History</Link>
                         </Nav>
                         <ButtonToolbar>
-                            {this.props.user ? <Button variant="info" onClick={this.handlePostPopUp}>Post</Button>
-                                : <Button variant="secondary" onClick={this.handleSignup}>Register</Button>}
+                            {this.props.user ? <Button variant="secondary" onClick={this.handlePostPopUp}>Post</Button>
+                                : <Button variant="primary" onClick={this.handleSignup}>Register</Button>}
                             <Button variant="primary" onClick={this.handleSigninButton}>{this.props.user ? "Sign Out" : "Sign In"}</Button>
                         </ButtonToolbar>
                     </Navbar>
@@ -55,6 +55,7 @@ class MainHeader extends React.Component {
                 {this.state.addpost ? <PostPopUp close={this.handlePostPopUp} /> : null}
                 <LoginPopup show={this.state.signin} onHide={() => this.setState({ signin: false })} handleSignin={this.props.handleSignin} />
                 <SignupPopup show={this.state.signup} onHide={() => this.setState({ signup: false })} handleSignup={this.props.handleSignup} />
+                <PostPopUp show={this.state.addpost} onHide={() => this.setState({ addpost: false })} handlePostPopUp={this.props.handlePostPopUp} />
             </>
         )
     }
