@@ -18,6 +18,10 @@
   align-items: center;
 }
 
-.btn-toolbar .btn {
+.btn {
   margin: 0 5px;
+}
+
+.red {
+  color: rgb(201, 0, 0);
 }

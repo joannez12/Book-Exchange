@@ -5,6 +5,7 @@ const textbooks = [
         author: 'Santo Mckinney',
         seller: 'Bonnie Cruz',
         description: 'Decent condition, contains highlighting',
+        imgUrl: 'https://kbimages1-a.akamaihd.net/23a0de3d-afbd-41f6-bad5-39e1d38257e1/1200/1200/False/kaplan-sadock-s-concise-textbook-of-clinical-psychiatry.jpg',
         price: 2300
     },
     {
@@ -13,6 +14,7 @@ const textbooks = [
         author: 'Marie Fitzgerald',
         seller: 'Vonda Greer',
         description: 'Perfect condition',
+        imgUrl: 'https://kbimages1-a.akamaihd.net/23a0de3d-afbd-41f6-bad5-39e1d38257e1/1200/1200/False/kaplan-sadock-s-concise-textbook-of-clinical-psychiatry.jpg',
         price: 264
     },
     {
@@ -20,6 +22,7 @@ const textbooks = [
         title: 'Modern OS',
         author: 'Jeffrey Costa',
         seller: 'Jeannette Mcneil',
+        imgUrl: 'https://kbimages1-a.akamaihd.net/23a0de3d-afbd-41f6-bad5-39e1d38257e1/1200/1200/False/kaplan-sadock-s-concise-textbook-of-clinical-psychiatry.jpg',
         description: '',
         price: 67
     },
@@ -29,6 +32,7 @@ const textbooks = [
         author: 'Violet Ritter',
         seller: 'Connie Rangel',
         description: 'Willing to negotiate price',
+        imgUrl: 'https://kbimages1-a.akamaihd.net/23a0de3d-afbd-41f6-bad5-39e1d38257e1/1200/1200/False/kaplan-sadock-s-concise-textbook-of-clinical-psychiatry.jpg',
         price: 89
     },
     {
@@ -37,6 +41,7 @@ const textbooks = [
         author: 'Brenda Hanson',
         seller: 'Aaron Calhoun',
         description: 'Brand new',
+        imgUrl: 'https://kbimages1-a.akamaihd.net/23a0de3d-afbd-41f6-bad5-39e1d38257e1/1200/1200/False/kaplan-sadock-s-concise-textbook-of-clinical-psychiatry.jpg',
         price: 21
     }
 ]
