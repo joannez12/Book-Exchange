@@ -51,7 +51,7 @@ class LoginPopup extends React.Component {
 		}
 
 		for (let i = 0; i < users.length; i++) {
-			/* Gets users from server and compares it to user email, password, requires server call */
+			{ /* Gets users from server and compares it to user email, password, requires server call */ }
 			if (users[i].email === this.state.email) {
 				if (users[i].password === this.state.password) {
 					this.setState({
