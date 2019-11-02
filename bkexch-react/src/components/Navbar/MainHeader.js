@@ -5,6 +5,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Button from 'react-bootstrap/Button';
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Dropdown from 'react-bootstrap/Dropdown'
 import SignupPopup from '../../SignupPopup';
 import PostPopUp from "../../pages/PostPopUp/PostPopUp";
 import LoginPopup from '../../LoginPopup';
@@ -19,7 +21,6 @@ class MainHeader extends React.Component {
 
     handleSignup = () => {
         this.setState(prevState => ({ signup: !prevState.signup, signin: false, addpost: false }), console.log(this.state))
-
     }
 
     handlePostPopUp = () => {
@@ -45,17 +46,15 @@ class MainHeader extends React.Component {
                             <Link to="/history" className="navLink">History</Link>
                         </Nav>
                         <ButtonToolbar>
-                            {this.props.user ? <Button variant="secondary" onClick={this.handlePostPopUp}>Post</Button>
+                            {this.props.user ? <> <Button variant="secondary" onClick={this.handlePostPopUp}>Post</Button>, <DropdownButton title={this.props.user.name}><Dropdown.Item><Link to="/history">History</Link></Dropdown.Item></DropdownButton> </>
                                 : <Button variant="primary" onClick={this.handleSignup}>Register</Button>}
                             <Button variant="primary" onClick={this.handleSigninButton}>{this.props.user ? "Sign Out" : "Sign In"}</Button>
                         </ButtonToolbar>
                     </Navbar>
                 </div>
-                {this.state.signup ? <SignupPopup close={this.handleSignup} /> : null}
-                {this.state.addpost ? <PostPopUp close={this.handlePostPopUp} /> : null}
-                <LoginPopup show={this.state.signin} onHide={() => this.setState({ signin: false })} handleSignin={this.props.handleSignin} />
+                <LoginPopup show={this.state.signin} onHide={() => this.setState({ signin: false })} handleSignin={this.props.handleSignin}/>
                 <SignupPopup show={this.state.signup} onHide={() => this.setState({ signup: false })} handleSignup={this.props.handleSignup} />
-                <PostPopUp show={this.state.addpost} onHide={() => this.setState({ addpost: false })} handlePostPopUp={this.props.handlePostPopUp} />
+                <PostPopUp show={this.state.addpost} onHide={() => this.setState({ addpost: false })} handlePostPopUp={this.props.handlePostPopUp} addPost={this.props.addPost} user={this.props.user}/>
             </>
         )
     }
