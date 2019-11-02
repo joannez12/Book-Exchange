@@ -51,7 +51,7 @@ class ChangeEmailPopup extends React.Component {
     }
 
     render() {
-        const { handleChangeEmailPopup, ...other } = this.props;
+        const { ...other } = this.props;
         return (
             <Modal {...other} animation={false}>
                 <Modal.Header closeButton>

@@ -15,15 +15,11 @@ class App extends React.Component {
     user === -1 ? this.setState({user: null}) : this.setState({user: user})
   }
 
-  addPost = () => {
-    this.setState({})
-  }
-
   render() {
     return (
       <div className="App">
         <Router>
-          <MainHeader user={this.state.user} handleSignin={this.handleSignin} addPost={this.addPost}/>
+          <MainHeader user={this.state.user} handleSignin={this.handleSignin} addPost={()=>this.setState({})} deleted={()=>this.setState({user: null})} />
           <Switch>
             <Route exact path="/" component={SearchBrowse} />
             {this.state.user ? <Route exact path="/history" component={ () => <HistoryBrowse user={this.state.user} />} /> : null }

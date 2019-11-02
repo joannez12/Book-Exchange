@@ -57,7 +57,7 @@ class ChangePasswordPopup extends React.Component {
                 <Modal.Body>
 
                     <label>New Password:</label>
-                    <input className="input" type="text"
+                    <input className="input" type="password"
                         value={this.state.password}
                         onChange={this.handleInputChange}
                         name="password"
@@ -65,7 +65,7 @@ class ChangePasswordPopup extends React.Component {
                     <p></p>
 
                     <label>Confirm Password:</label>
-                    <input className="input" type="text"
+                    <input className="input" type="password"
                         value={this.state.confirmPassword}
                         onChange={this.handleInputChange}
                         name="confirmPassword"

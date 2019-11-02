@@ -50,6 +50,9 @@ class LoginPopup extends React.Component {
 			this.setState({ passwordMsg: "password required" })
 		}
 		if (this.state.email !== "" && this.state.password !== "") {
+			if (users.length === 0) {
+				this.setState({emailMsg: "email does not exist"})
+			}
 			for (let i = 0; i < users.length; i++) {
 				/* Gets users from server and compares it to user email, password, requires server call */
 				if (users[i].email === this.state.email) {

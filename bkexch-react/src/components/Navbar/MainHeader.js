@@ -11,8 +11,6 @@ import SignupPopup from "../../pages/PopUps/SignupPopup";
 import PostPopUp from "../../pages/PopUps/PostPopUp";
 import LoginPopup from "../../pages/PopUps/LoginPopup";
 import ProfilePopup from "../../pages/PopUps/ProfilePopup";
-import ChangeEmailPopup from "../../pages/PopUps/ChangeEmailPopup";
-import ChangePasswordPopup from "../../pages/PopUps/ChangePasswordPopup";
 import "./MainHeader.css";
 
 class MainHeader extends React.Component {
@@ -20,9 +18,7 @@ class MainHeader extends React.Component {
         signup: false,
         addpost: false,
         signin: false,
-        profile: false,
-        changeEmail: false,
-        changePassword: false
+        profile: false
     }
 
     handleSignup = () => {
@@ -46,14 +42,6 @@ class MainHeader extends React.Component {
         this.setState(prevState => ({ profile: !prevState.profile}))
     }
 
-    handleChangeEmailPopup = () => {
-        this.setState(prevState => ({ changeEmail: !prevState.changeEmail}))
-    }
-
-    handleChangePasswordPopup = () => {
-        this.setState(prevState => ({ changePassword: !prevState.changePassword}))
-    }
-
     render() {
         return (
             <>
@@ -70,9 +58,7 @@ class MainHeader extends React.Component {
                 <LoginPopup show={this.state.signin} onHide={() => this.setState({ signin: false })} handleSignin={this.props.handleSignin}/>
                 <SignupPopup show={this.state.signup} onHide={() => this.setState({ signup: false })}  />
                 <PostPopUp show={this.state.addpost} onHide={() => this.setState({ addpost: false })} addPost={this.props.addPost} user={this.props.user}/>
-                {this.props.user ? <ProfilePopup show={this.state.profile} onHide={() => this.setState({ profile: false })} changeEmail={() => this.setState({changeEmail: true})} changePassword={() => this.setState({changePassword: true})} user={this.props.user} /> : null }
-                {this.state.changeEmail ? <ChangeEmailPopup show={this.state.changeEmail} onHide={() => this.setState({ changeEmail: false })} user={this.props.user} /> : null }
-                {this.state.changePassword ? <ChangePasswordPopup show={this.state.changePassword} onHide={() => this.setState({ changePassword: false })} user={this.props.user} /> : null }
+                {this.props.user ? <ProfilePopup show={this.state.profile} onHide={() => this.setState({ profile: false })} user={this.props.user} deleted={this.props.deleted} /> : null }
             </>
         )
     }
