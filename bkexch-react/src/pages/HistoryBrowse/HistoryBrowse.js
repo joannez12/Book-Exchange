@@ -11,7 +11,7 @@ import HistoryTable from "../../components/HistoryBrowse/HistoryTable";
 
 class HistoryBrowse extends React.Component {
     state = {
-        account:{id:12, name:'Bonnie Cruz'},
+        account:this.props.user,
         exchanges: exchanges,
         posts: posts,
     }

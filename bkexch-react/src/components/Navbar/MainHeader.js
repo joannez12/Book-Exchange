@@ -7,24 +7,30 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Button from 'react-bootstrap/Button';
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
-import SignupPopup from '../../SignupPopup';
-import PostPopUp from "../../pages/PostPopUp/PostPopUp";
-import LoginPopup from '../../LoginPopup';
+import SignupPopup from "../../pages/PopUps/SignupPopup";
+import PostPopUp from "../../pages/PopUps/PostPopUp";
+import LoginPopup from "../../pages/PopUps/LoginPopup";
+import ProfilePopup from "../../pages/PopUps/ProfilePopup";
+import ChangeEmailPopup from "../../pages/PopUps/ChangeEmailPopup";
+import ChangePasswordPopup from "../../pages/PopUps/ChangePasswordPopup";
 import "./MainHeader.css";
 
 class MainHeader extends React.Component {
     state = {
         signup: false,
         addpost: false,
-        signin: false
+        signin: false,
+        profile: false,
+        changeEmail: false,
+        changePassword: false
     }
 
     handleSignup = () => {
-        this.setState(prevState => ({ signup: !prevState.signup, signin: false, addpost: false }), console.log(this.state))
+        this.setState(prevState => ({ signup: !prevState.signup}))
     }
 
     handlePostPopUp = () => {
-        this.setState(prevState => ({ addpost: !prevState.addpost, signup: false, signin: false }), console.log(this.state))
+        this.setState(prevState => ({ addpost: !prevState.addpost}))
     }
 
     handleSigninButton = () => {
@@ -36,6 +42,18 @@ class MainHeader extends React.Component {
         }
     }
 
+    handleProfilePopup = () => {
+        this.setState(prevState => ({ profile: !prevState.profile}))
+    }
+
+    handleChangeEmailPopup = () => {
+        this.setState(prevState => ({ changeEmail: !prevState.changeEmail}))
+    }
+
+    handleChangePasswordPopup = () => {
+        this.setState(prevState => ({ changePassword: !prevState.changePassword}))
+    }
+
     render() {
         return (
             <>
@@ -43,15 +61,18 @@ class MainHeader extends React.Component {
                     <Navbar sticky="top" bg="dark" variant="dark">
                         <Link to="/"><Navbar.Brand>Toronto Book Exchange</Navbar.Brand></Link>
                         <ButtonToolbar className="ml-auto">
-                            {this.props.user ? <> <Button variant="secondary" onClick={this.handlePostPopUp}>Post</Button>, <DropdownButton title={this.props.user.name}><Dropdown.Item><Link to="/history">History</Link></Dropdown.Item></DropdownButton> </>
+                            {this.props.user ? <> <Button variant="secondary" onClick={this.handlePostPopUp}>Post</Button>, <DropdownButton title={this.props.user.name}><Dropdown.Item onClick={this.handleProfilePopup}>Profile</Dropdown.Item><Dropdown.Item as={ Link } to='/history'>History</Dropdown.Item></DropdownButton> </>
                                 : <Button variant="primary" onClick={this.handleSignup}>Register</Button>}
                             <Button variant="primary" onClick={this.handleSigninButton}>{this.props.user ? "Sign Out" : "Sign In"}</Button>
                         </ButtonToolbar>
                     </Navbar>
                 </div>
                 <LoginPopup show={this.state.signin} onHide={() => this.setState({ signin: false })} handleSignin={this.props.handleSignin}/>
-                <SignupPopup show={this.state.signup} onHide={() => this.setState({ signup: false })} handleSignup={this.props.handleSignup} />
-                <PostPopUp show={this.state.addpost} onHide={() => this.setState({ addpost: false })} handlePostPopUp={this.props.handlePostPopUp} addPost={this.props.addPost} user={this.props.user}/>
+                <SignupPopup show={this.state.signup} onHide={() => this.setState({ signup: false })}  />
+                <PostPopUp show={this.state.addpost} onHide={() => this.setState({ addpost: false })} addPost={this.props.addPost} user={this.props.user}/>
+                {this.props.user ? <ProfilePopup show={this.state.profile} onHide={() => this.setState({ profile: false })} changeEmail={() => this.setState({changeEmail: true})} changePassword={() => this.setState({changePassword: true})} user={this.props.user} /> : null }
+                {this.state.changeEmail ? <ChangeEmailPopup show={this.state.changeEmail} onHide={() => this.setState({ changeEmail: false })} user={this.props.user} /> : null }
+                {this.state.changePassword ? <ChangePasswordPopup show={this.state.changePassword} onHide={() => this.setState({ changePassword: false })} user={this.props.user} /> : null }
             </>
         )
     }

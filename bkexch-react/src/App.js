@@ -26,7 +26,7 @@ class App extends React.Component {
           <MainHeader user={this.state.user} handleSignin={this.handleSignin} addPost={this.addPost}/>
           <Switch>
             <Route exact path="/" component={SearchBrowse} />
-            <Route exact path="/history" component={HistoryBrowse} />
+            {this.state.user ? <Route exact path="/history" component={ () => <HistoryBrowse user={this.state.user} />} /> : null }
           </Switch>
         </Router>
       </div>
