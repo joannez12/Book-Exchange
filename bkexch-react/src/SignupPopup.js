@@ -2,11 +2,12 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import './SignupPopup.css';
+import users from './users';
 
-const users = []
 
 class SignupPopup extends React.Component {
 	state = {
+		users: users,
 		name: "",
 		nameMsg: "",
 		email: "",
@@ -65,6 +66,7 @@ class SignupPopup extends React.Component {
 			users.push(user)
 
 			this.setState({
+				users: users,
 				name: "",
 				nameMsg: "",
 				email: "",
