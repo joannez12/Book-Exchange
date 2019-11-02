@@ -2,11 +2,11 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import './LoginPopup.css';
-
-const users = [{ id: 1, email: "123@gmail.com", password: "123", name: "Bonnie Cruz" }]
+import users from './users';
 
 class LoginPopup extends React.Component {
 	state = {
+		users: users,
 		email: "",
 		password: "",
 		emailMsg: "",
@@ -49,24 +49,26 @@ class LoginPopup extends React.Component {
 		if (this.state.password === "") {
 			this.setState({ passwordMsg: "password required" })
 		}
-
-		for (let i = 0; i < users.length; i++) {
-			/* Gets users from server and compares it to user email, password, requires server call */
-			if (users[i].email === this.state.email) {
-				if (users[i].password === this.state.password) {
-					this.setState({
-						email: "",
-						password: "",
-						emailMsg: "",
-						passwordMsg: ""
-					})
-					this.props.handleSignin(users[i]);
-					this.props.onHide();
+		if (this.state.email !== "" && this.state.password !== "") {
+			for (let i = 0; i < users.length; i++) {
+				/* Gets users from server and compares it to user email, password, requires server call */
+				if (users[i].email === this.state.email) {
+					if (users[i].password === this.state.password) {
+						this.setState({
+							users: users,
+							email: "",
+							password: "",
+							emailMsg: "",
+							passwordMsg: ""
+						})
+						this.props.handleSignin(users[i]);
+						this.props.onHide();
+					} else {
+						this.setState({ passwordMsg: "incorrect password" })
+					}
 				} else {
-					this.setState({ passwordMsg: "incorrect password" })
+					this.setState({ emailMsg: "email does not exist" })
 				}
-			} else {
-				this.setState({ emailMsg: "email does not exist" })
 			}
 		}
 	}
