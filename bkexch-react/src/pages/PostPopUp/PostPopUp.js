@@ -3,11 +3,12 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import './PostPopUp.css';
 import textbooks from '../../textbooks';
-
+import posts from "../../post";
 
 class PostPopUp extends React.Component {
     state = {
-        textbooks: textbooks,
+    	textbooks: textbooks,
+    	posts: posts,
         title: "",
         author: "",
         price: "",
@@ -24,6 +25,7 @@ class PostPopUp extends React.Component {
         this.setState({[name]: value})
     }
 
+
     submitChange = (event) => {
         if (this.state.title === "") {
             this.setState({ titleMsg: "title required" })
@@ -33,14 +35,19 @@ class PostPopUp extends React.Component {
         }
         if (this.state.price === "") {
             this.setState({ priceMsg: "price required" })
+        } else if (this.state.price !== parseInt(this.state.price).toString() || this.state.price !== parseFloat(this.state.price).toString()) {
+        	this.setState({ priceMsg: "invalid price"})
         }
+        
 
-        if (this.state.title !== "" && this.state.author !== "" && this.state.price !== "") {
-            textbooks.push({id: this.state.textbooks.length + 1, title: this.state.title, author: this.state.author, seller: "USER", price: this.state.price})
+        if (this.state.title !== "" && this.state.author !== "" && this.state.price !== "" && (this.state.price === parseInt(this.state.price).toString() || this.state.price === parseFloat(this.state.price).toString())) {
+            textbooks.push({id: this.state.textbooks.length + 1, title: this.state.title, author: this.state.author, seller: this.props.user.name, price: this.state.price})
             console.log(textbooks)
+            posts.push({id: this.state.textbooks.length + 1, title: this.state.title, author: this.state.author, seller: this.props.user.name, price: this.state.price})
 
             this.setState({
-                textbooks: textbooks,
+            	textbooks: textbooks,
+            	posts: posts,
                 title: "",
                 author: "",
                 price: "",
@@ -49,12 +56,13 @@ class PostPopUp extends React.Component {
                 priceMsg: ""
             })
 
+            this.props.addPost();
             this.props.onHide();
         }
     }
 
     render() {
-        const { handlePostPopUp, ...other } = this.props;
+        const { handlePostPopUp, addPost, ...other } = this.props;
         return (
             <Modal {...other} animation={false}>
                 <Modal.Header closeButton>
