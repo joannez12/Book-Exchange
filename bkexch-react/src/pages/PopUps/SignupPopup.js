@@ -62,7 +62,7 @@ class Input extends React.Component {
 			this.setState({success: "account created"})
 
 			/* Gets users from server, requires server call */
-			const user = {"id": users.length+1, "name": this.state.name, "email": this.state.email, "password": this.state.password}
+			const user = {"id": users.length+1, "name": this.state.name, "email": this.state.email, "password": this.state.password, "isAdmin": false}
 			users.push(user)
 
 			this.setState({
