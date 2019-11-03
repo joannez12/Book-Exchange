@@ -25,3 +25,7 @@
     height: auto;
     min-height: 330px;
 }
+
+.buttonMenu {
+    display: flex;
+}

@@ -1,9 +1,11 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import { useHistory} from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import {deletePost} from '../../helper';
+import {useHistory} from 'react-router-dom';
 import './TextbookListing.css';
 
-function TextbookListing({ textbook }) {
+function TextbookListing({ textbook, updatePosts, isAdmin }) {
     const { id, title, author, seller, price} = textbook;
     let history = useHistory();
     return (
@@ -12,8 +14,13 @@ function TextbookListing({ textbook }) {
                     <Card.Title>{title}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{author}</Card.Subtitle>
                 </Card.Body>
-                <Card.Footer className="text-muted">
+                <Card.Footer className="text-muted footer">
                     <small>${price} - {seller}</small>
+                    {isAdmin ? <Button variant="danger" size="sm" onClick={(e) => {
+                        e.stopPropagation();
+                        deletePost(id);
+                        updatePosts();
+                        }}>Delete</Button> : null}
                 </Card.Footer>
             </Card>
     )

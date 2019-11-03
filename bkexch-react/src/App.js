@@ -45,7 +45,7 @@ class App extends React.Component {
         <Router>
           <MainHeader user={this.state.user} handleSignin={this.handleSignin} deleted={()=>this.setState({user: null})} />
           <Switch>
-            <Route exact path="/" component={SearchBrowse} />
+            <Route exact path="/" component={() => <SearchBrowse user={this.state.user} />}/>
             {this.state.user ? <Route exact path="/messagebox" component={ () => <MessageBox user={this.state.user} />} /> : null }
             <Route exact path="/history" component={ () => <HistoryBrowse user={this.state.user} />} />
             <Route path="/textbooks/:id" children={<ViewTextbook user={this.state.user} handleSendMessage={this.handleSendMessage.bind(this)} />} />

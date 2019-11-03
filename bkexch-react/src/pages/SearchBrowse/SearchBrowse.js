@@ -16,6 +16,14 @@ class SearchBrowse extends React.Component {
         this.setState({searchfield: searchfield})
     }
 
+    updatePosts = () => {
+        this.setState({textbooks: textbooks})
+    }
+
+    componentDidMount() {
+        this.updatePosts()
+    }
+
     render() {
         const {textbooks, searchfield} = this.state;
         const filteredTextbooks = textbooks.filter(textbook => {
@@ -25,7 +33,7 @@ class SearchBrowse extends React.Component {
             <div className='page'>
                 <h1 className="title"> - Textbooks For Sale - </h1>
                 <SearchBar handleSearch={this.handleSearch} placeholder='Search textbook titles'/>
-                {filteredTextbooks.length !== 0 ? <TextbookList textbooks={filteredTextbooks}/> : <h3>No textbooks found.</h3> }
+                {filteredTextbooks.length !== 0 ? <TextbookList textbooks={filteredTextbooks} updatePosts={this.updatePosts} user={this.props.user}/> : <h3>No textbooks found.</h3> }
             </div>
         )
     }
