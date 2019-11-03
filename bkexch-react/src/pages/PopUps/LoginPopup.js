@@ -4,7 +4,8 @@ import Button from 'react-bootstrap/Button';
 import './LoginPopup.css';
 import users from '../../users';
 
-class LoginPopup extends React.Component {
+
+class Input extends React.Component {
 	state = {
 		users: users,
 		email: "",
@@ -77,6 +78,34 @@ class LoginPopup extends React.Component {
 	}
 
 	render() {
+		return (
+			<>
+			<label>Email:</label>
+				<input className="input" type="text"
+					value={this.state.email}
+					onChange={this.handleInputChange}
+					name="email"
+					placeholder="Enter Email" />
+				<p id="emailMsg"> {this.state.emailMsg} </p>
+
+			<label>Password:</label>
+				<input className="input" type="password"
+					value={this.state.password}
+					onChange={this.handleInputChange}
+					name="password"
+					placeholder="Password" />
+				<p id="passwordMsg"> {this.state.passwordMsg} </p>
+			</>
+		)
+	}
+}
+
+class LoginPopup extends React.Component {
+	submitChange = () => {
+		this.refs.child.submitChange();
+	}
+
+	render() {
 		const { handleSignin, ...other } = this.props;
 		return (
 			<Modal {...other} animation={false}>
@@ -86,21 +115,7 @@ class LoginPopup extends React.Component {
 						</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
-						<label>Email:</label>
-						<input className="input" type="text"
-							value={this.state.email}
-							onChange={this.handleInputChange}
-							name="email"
-							placeholder="Enter Email" />
-						<p id="emailMsg"> {this.state.emailMsg} </p>
-
-						<label>Password:</label>
-						<input className="input" type="password"
-							value={this.state.password}
-							onChange={this.handleInputChange}
-							name="password"
-							placeholder="Password" />
-						<p id="passwordMsg"> {this.state.passwordMsg} </p>
+						<Input ref="child" onHide={this.props.onHide} handleSignin={this.props.handleSignin} />
 					</Modal.Body>
 					<Modal.Footer>
 						<Button variant="secondary" onClick={this.props.onHide}>Close</Button>
