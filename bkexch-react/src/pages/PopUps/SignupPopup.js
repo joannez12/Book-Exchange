@@ -61,7 +61,7 @@ class Input extends React.Component {
 			this.state.passwordMsg === "" && this.state.password === this.state.confirmPassword) {
 			this.setState({success: "account created"})
 
-			/* Sends a user to the server, requires server call */
+			/* Gets users from server, requires server call */
 			const user = {"id": users.length+1, "name": this.state.name, "email": this.state.email, "password": this.state.password}
 			users.push(user)
 

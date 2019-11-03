@@ -11,20 +11,23 @@ import HistoryTable from "../../components/HistoryBrowse/HistoryTable";
 
 class HistoryBrowse extends React.Component {
     state = {
-        account:this.props.user,
-        exchanges: exchanges,
-        posts: posts,
+        account:this.props.user,   
+        exchanges: exchanges,  
+        posts: posts,          
     }
 
     getMyPosts(account, posts){
+        // gets textbooks from server, requires server call
         return posts.filter(post => post.seller === account.name);
     }
 
     getMyExchange(account, exchanges){
+        // get exchanges from server, requires server call
         return exchanges.filter(exchange => exchange.seller === account.name);
     }
 
     deletePost(post){
+        // gets textbooks from server, requires server call
         for(let i = 0; i<posts.length; i++){
             if(posts[i] === post){
                 posts.splice(i,1);
@@ -34,6 +37,7 @@ class HistoryBrowse extends React.Component {
     }
 
     deleteHistory(exchange){
+        // gets exchanges from server, requires server call
         for(let i = 0; i<exchanges.length; i++){
             if(exchanges[i] === exchange){
                 exchanges.splice(i,1);
@@ -55,11 +59,12 @@ class HistoryBrowse extends React.Component {
                     deletePost={this.deletePost.bind(this)}
                 />
                 <h4>History</h4>
+
                 <HistoryTable
                     exchanges={this.getMyExchange(this.state.account, this.state.exchanges)}
                     deleteHistory={this.deleteHistory.bind(this)}
                 /> </> : <div className="page">
-                			<h2 style={{marginTop: "20vh"}}>Sign up / Log in to view history</h2>
+                			<h2 className="error">Sign up / Log in to view history</h2>
             			</div> }
             </div>
         )

@@ -25,3 +25,11 @@
     height: auto;
     min-height: 330px;
 }
+
+.buttonMenu {
+    display: flex;
+}
+
+.error {
+    margin-top: 20vh;
+}
