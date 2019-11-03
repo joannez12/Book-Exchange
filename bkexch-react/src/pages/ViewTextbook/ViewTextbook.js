@@ -24,7 +24,7 @@ function ViewTextbook(props) {
                         <div className="description">{textbook[0].description}</div>
                     </div>
                 </div>
-                <Button onClick={()=>{props.handleSendMessage(textbook[0])}}>Contact</Button>
+                <Button onClick={()=>{props.handleSendMessage(textbook[0], props.user)}}>Contact</Button>
             </div>
         )
     } else {
