@@ -45,5 +45,7 @@ const textbooks = [
         price: 21
     }
 ]
-
+export const getTextbookById = (id) =>{
+    return textbooks.find((textbook) => textbook.id === id);
+}
 export default textbooks;

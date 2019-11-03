@@ -7,7 +7,7 @@ function HistoryTableHepler(exchange, deleteHistory){
         <tr key={exchange.id}>
             <td>{exchange.title}</td>
             <td>{exchange.author}</td>
-            <td>{exchange.buyer}</td>
+            <td>{exchange.date}</td>
             <td>{exchange.price}</td>
             <td>
                 <Button
@@ -27,7 +27,7 @@ class HistoryTable extends React.Component {
                         <tr key={0}>
                             <th>Book</th>
                             <th>Author</th>
-                            <th>Buyer</th>
+                            <th>Date</th>
                             <th>Price</th>
                             <th>Option</th>
                         </tr>

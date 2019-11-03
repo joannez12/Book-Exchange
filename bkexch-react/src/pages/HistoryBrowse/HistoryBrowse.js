@@ -50,6 +50,7 @@ class HistoryBrowse extends React.Component {
                 <h4>My Posts</h4>
 
                 <MyPostTable
+                    user={this.props.user}
                     posts={this.getMyPosts(this.state.account, this.state.posts)}
                     deletePost={this.deletePost.bind(this)}
                 />

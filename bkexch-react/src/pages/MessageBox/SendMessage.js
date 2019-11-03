@@ -6,9 +6,8 @@ import Row from "react-bootstrap/Row";
 class SendMessage extends React.Component{
     state = {
         user: this.props.user,
-        subject: "",
         text: "",
-        category: "",
+        message: null,
     }
     handleClose = () => {
         this.props.closeSendMessagePopUp();
@@ -22,6 +21,7 @@ class SendMessage extends React.Component{
             to: this.props.selectedBook.seller,
             email: this.props.user.email,
             text: this.state.text,
+            textbook:this.props.selectedBook,
             date: d.toLocaleTimeString(),
         }
         this.props.handleMessage(message);
@@ -54,22 +54,6 @@ class SendMessage extends React.Component{
                                 <Col sm="10">
                                     <Form.Control plaintext readOnly defaultValue={selectedBook.seller} />
                                 </Col>
-                            </Form.Group>
-                            <Form.Group controlId="exampleForm.ControlInput1">
-                                <Form.Label>Subject</Form.Label>
-                                <Form.Control
-                                    type="subject"
-                                    value={this.state.subject}
-                                    onChange={e => this.setState({subject:e.target.value})}
-                                />
-                            </Form.Group>
-                            <Form.Group controlId="exampleForm.ControlSelect1">
-                                <Form.Label>Category</Form.Label>
-                                <Form.Control as="select">
-                                    <option>Buy</option>
-                                    <option>Negotiation</option>
-                                    <option>Exchange</option>
-                                </Form.Control>
                             </Form.Group>
                             <Form.Group controlId="exampleForm.ControlTextarea1">
                                 <Form.Control

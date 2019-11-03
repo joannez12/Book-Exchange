@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../pages/HistoryBrowse/HistoryBrowse.css';
 import {Table, ButtonGroup, DropdownButton, Dropdown} from "react-bootstrap";
-
-function MyPostTableHepler(post,deletePost, onEditButtonPress){
+import exchanges from "../../pages/HistoryBrowse/exchange";
+function MyPostTableHepler(post,deletePost, onEditButtonPress, onSoldButtonPress){
     return(
         <tr key={post.id} >
             <td>{post.title}</td>
@@ -13,6 +13,7 @@ function MyPostTableHepler(post,deletePost, onEditButtonPress){
                 <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-1">
                     <Dropdown.Item eventKey="1" onClick={() => {deletePost(post)}}>Delete</Dropdown.Item>
                     <Dropdown.Item eventKey="2" onClick={() => onEditButtonPress(post)}>Edit</Dropdown.Item>
+                    <Dropdown.Item eventKey="3" onClick={() => onSoldButtonPress(post)}>Sold</Dropdown.Item>
                 </DropdownButton>
 
             </td>
@@ -113,7 +114,6 @@ class MyPostTable extends React.Component {
     };
 
     onSubmitButtonPress = (newPost) => {
-        console.log(newPost);
         this.setState({editingPost: null});
     };
 
@@ -121,11 +121,25 @@ class MyPostTable extends React.Component {
         this.setState({editingPost: null});
     };
 
-    handlePost = (post, editingPost, deletePost, onEditButtonPress, onSubmitButtonPress, onEditCancelButtonPress) => {
+    onSoldButtonPress = (textbook) => {
+        const d = new Date();
+        this.props.deletePost(textbook);
+        const newExchange = {
+            id: d.getTime(),
+            title: textbook.title,
+            author: textbook.author,
+            seller: this.props.user.name,
+            date: d.toLocaleTimeString(),
+            price: textbook.price,
+        };
+        exchanges.push(newExchange);
+    };
+
+    handlePost = (post, editingPost, deletePost, onEditButtonPress, onSubmitButtonPress, onEditCancelButtonPress, onSoldButtonPress) => {
         if(editingPost && post === editingPost){
             return <EditingPost key={post.id} post={post} onSubmitButtonPress={onSubmitButtonPress} onEditCancelButtonPress={onEditCancelButtonPress} />;
         }else{
-            return MyPostTableHepler(post, deletePost, onEditButtonPress);
+            return MyPostTableHepler(post, deletePost, onEditButtonPress, onSoldButtonPress);
         }
     };
 
@@ -152,6 +166,7 @@ class MyPostTable extends React.Component {
                                     this.onEditButtonPress.bind(this),
                                     this.onSubmitButtonPress.bind(this),
                                     this.onEditCancelButtonPress.bind(this),
+                                    this.onSoldButtonPress.bind(this)
                                 )
                             )
                         }

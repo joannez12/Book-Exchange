@@ -1,16 +1,22 @@
 import React from 'react';
-import {Table} from "react-bootstrap";
+import {ButtonGroup, Dropdown, DropdownButton, Table} from "react-bootstrap";
+
+
 
 class InboxMessage extends React.Component {
     render(){
-        const {message} = this.props;
+        const {user, message,handleReplyMessage} = this.props;
         return(
             <tr key={message.id} >
                 <td>{message.from}</td>
                 <td>{message.email}</td>
                 <td>{message.text}</td>
                 <td>{message.date}</td>
-                <td>Option</td>
+                <td>
+                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-1">
+                        <Dropdown.Item eventKey="1" onClick={()=>handleReplyMessage(user, message)} >Reply</Dropdown.Item>
+                    </DropdownButton>
+                </td>
             </tr>
         )
     }
@@ -19,7 +25,7 @@ class InboxMessage extends React.Component {
 class Inbox extends React.Component {
 
     render(){
-        const {inboxMessages} = this.props;
+        const {user, inboxMessages, handleReplyMessage} = this.props;
         return(
             <div>
                 <Table striped bordered hover>
@@ -34,7 +40,7 @@ class Inbox extends React.Component {
                     </thead>
                     <tbody>
                         {
-                            inboxMessages.map((message) => <InboxMessage key={message.id} message = {message} />)
+                            inboxMessages.map((message) => <InboxMessage key={message.id} message = {message} handleReplyMessage={handleReplyMessage} user={user} />)
                         }
                     </tbody>
 

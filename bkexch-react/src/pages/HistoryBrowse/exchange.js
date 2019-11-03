@@ -4,7 +4,7 @@ const exchanges = [
         title: 'Physics 200',
         author: 'Santo Mckinney',
         seller: 'Bonnie Cruz',
-        buyer: 'Jeannette Mcneil',
+        date: '2019-03-12',
         price: 2300
     },
     {
@@ -12,8 +12,7 @@ const exchanges = [
         title: 'Psych 1240',
         author: 'Marie Fitzgerald',
         seller: 'Bonnie Cruz',
-        buyer: 'Jeannette Mcneil',
-
+        date: '2019-03-12',
         price: 264
     },
     {
@@ -21,8 +20,7 @@ const exchanges = [
         title: 'Modern OS',
         author: 'Jeffrey Costa',
         seller: 'Bonnie Cruz',
-        buyer: 'Jeannette Mcneil',
-
+        date: '2019-03-12',
         price: 67
     },
     {
@@ -30,8 +28,7 @@ const exchanges = [
         title: 'Basket Weaving',
         author: 'Violet Ritter',
         seller: 'Connie Rangel',
-        buyer: 'Jeannette Mcneil',
-
+        date: '2019-03-12',
         price: 89
     },
     {
@@ -39,8 +36,7 @@ const exchanges = [
         title: 'Ai For Dummies',
         author: 'Brenda Hanson',
         seller: 'Aaron Calhoun',
-        buyer: 'Jeannette Mcneil',
-
+        date: '2019-03-12',
         price: 21
     }
 ]
