@@ -12,6 +12,7 @@
 
 .page {
   max-width: 1500px;
+  min-width: 1000px;
   padding-top: 30px;
   display: flex;
   flex-direction: column;

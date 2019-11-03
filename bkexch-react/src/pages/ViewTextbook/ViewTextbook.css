@@ -8,7 +8,7 @@
 
 .infocontainer {
     width: 70%;
-    padding-left: 20px;
+    padding-left: 50px;
     padding-top: 30px;
 }
 
@@ -16,11 +16,12 @@
     margin-top: 30px;
 }
 
-img {
+.textbookimage {
     box-sizing: border-box;
     margin: 15px;
     padding: 5px;
     box-shadow: 0 5px 10px 3px rgb(199, 199, 199);
     max-width: 90%;
     height: auto;
+    min-height: 330px;
 }

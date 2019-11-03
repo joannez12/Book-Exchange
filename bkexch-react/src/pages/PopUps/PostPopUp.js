@@ -10,6 +10,8 @@ class PostPopUp extends React.Component {
         title: "",
         author: "",
         price: "",
+        description: "",
+        imgUrl: "",
         titleMsg: "",
         authorMsg: "",
         priceMsg: ""
@@ -39,7 +41,7 @@ class PostPopUp extends React.Component {
         
 
         if (this.state.title !== "" && this.state.author !== "" && this.state.price !== "" && (this.state.price === parseInt(this.state.price).toString() || this.state.price === parseFloat(this.state.price).toString())) {
-            textbooks.push({id: textbooks[this.state.textbooks.length - 1].id + 1, title: this.state.title, author: this.state.author, seller: this.props.user.name, price: this.state.price})
+            textbooks.push({id: textbooks[this.state.textbooks.length - 1].id + 1, title: this.state.title, author: this.state.author, seller: this.props.user.name, price: this.state.price, description: this.state.description, imgUrl: this.state.imgUrl})
             console.log(textbooks)
 
             this.setState({
@@ -47,6 +49,8 @@ class PostPopUp extends React.Component {
                 title: "",
                 author: "",
                 price: "",
+                imgUrl: "",
+                description: "",
                 titleMsg: "",
                 authorMsg: "",
                 priceMsg: ""
@@ -88,6 +92,20 @@ class PostPopUp extends React.Component {
                         name="price"
                         placeholder = "Enter Price" />
                     <p id="priceMsg">{this.state.priceMsg}</p>
+
+                    <label>Picture url:</label>
+                    <input className="input" type="text"
+                        value={this.state.imgUrl}
+                        onChange={this.handleInputChange}
+                        name="imgUrl"
+                        placeholder = "" />
+
+                    <label>Description:</label>
+                    <input className="input" type="text"
+                        value={this.state.description}
+                        onChange={this.handleInputChange}
+                        name="description"
+                        placeholder = "" />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={this.props.onHide}>Close</Button>

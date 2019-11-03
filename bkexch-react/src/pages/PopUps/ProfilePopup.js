@@ -40,11 +40,11 @@ class ProfilePopup extends React.Component {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                	<Image src="/profile_img.png" width={100}/>
+                	<img className="profilePic" src="/profile_img.png"/>
 
                     <label>Email: {this.state.account.email}</label>
 
-                    <div>
+                    <div className="profileButtons">
                     	<Button variant="secondary" onClick={this.handleChangeEmailPopup}>Change Email</Button>
                     	<Button variant="secondary" onClick={this.handleChangePasswordPopup}>Change Password</Button>
                     	<Button variant="danger" onClick={this.handleDeleteAccountPopup}>Delete Account</Button>

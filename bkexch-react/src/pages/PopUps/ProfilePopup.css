@@ -5,3 +5,12 @@
   	display: inline-block;
 }
 
+.profilePic {
+	max-width: 35%;
+	height: auto;
+	padding: 20px;
+}
+
+.profileButtons {
+	margin-top: 10px;
+}
