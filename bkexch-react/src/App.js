@@ -25,7 +25,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={SearchBrowse} />
             {this.state.user ? <Route exact path="/messagebox" component={ () => <MessageBox />} /> : null }
-            {this.state.user ? <Route exact path="/history" component={ () => <HistoryBrowse user={this.state.user} />} /> : null }
+            <Route exact path="/history" component={ () => <HistoryBrowse user={this.state.user} />} />
             <Route path="/textbooks/:id" children={<ViewTextbook/>} />
           </Switch>
         </Router>

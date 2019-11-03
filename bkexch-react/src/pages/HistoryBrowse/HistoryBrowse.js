@@ -46,7 +46,7 @@ class HistoryBrowse extends React.Component {
     render() {
         return(
             <div>
-                <h4>User Name: {this.state.account.name}</h4>
+                { this.state.account ? <> <h4>User Name: {this.state.account.name}</h4>
                 <h4>My Posts</h4>
 
                 <MyPostTable
@@ -57,7 +57,9 @@ class HistoryBrowse extends React.Component {
                 <HistoryTable
                     exchanges={this.getMyExchange(this.state.account, this.state.exchanges)}
                     deleteHistory={this.deleteHistory.bind(this)}
-                />
+                /> </> : <div className="page">
+                			<h2 style={{marginTop: "20vh"}}>Sign up / Log in to view history</h2>
+            			</div> }
             </div>
         )
     }

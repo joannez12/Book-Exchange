@@ -14,7 +14,8 @@ class SignupPopup extends React.Component {
 		password: "",
 		confirmPassword: "",
 		emailMsg: "",
-		passwordMsg: ""
+		passwordMsg: "",
+		success: ""
 	}
 
 	handleInputChange = (event) => {
@@ -23,6 +24,7 @@ class SignupPopup extends React.Component {
 		const value = target.value
 		
 		this.setState({[name]: value}, () => { this.checkInput(value, name) })
+		this.setState({success: ""})
 		
 	}
 
@@ -60,7 +62,7 @@ class SignupPopup extends React.Component {
 
 		if (this.state.name !== "" && this.state.nameMsg === "" && this.state.email !== "" && this.state.emailMsg=== "" && this.state.password !== "" && 
 			this.state.passwordMsg === "" && this.state.password === this.state.confirmPassword) {
-			
+			this.setState({success: "account created"})
 			/* Sends a user to the server, requires server call */
 			const user = {"id": users.length+1, "name": this.state.name, "email": this.state.email, "password": this.state.password}
 			users.push(user)
@@ -121,6 +123,7 @@ class SignupPopup extends React.Component {
 				 	<p id="passwordMsg"> { this.state.passwordMsg } </p>
 				</Modal.Body>
 				<Modal.Footer>
+					<p id="success"> { this.state.success } </p>
 					<Button variant="secondary" onClick={this.props.onHide}>Close</Button>
 					<Button variant="primary" onClick={this.submitChange}>Sign Up</Button>
 				</Modal.Footer>

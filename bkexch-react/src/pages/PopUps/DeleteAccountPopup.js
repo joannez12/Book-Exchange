@@ -3,8 +3,6 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import users from '../../users';
 import posts from '../../textbooks';
-import textbooks from '../../textbooks';
-
 
 class DeleteAccountPopup extends React.Component {
     state = {
@@ -19,19 +17,8 @@ class DeleteAccountPopup extends React.Component {
         }
     }
 
-    deleteTextbooks(){
-        console.log(textbooks)
-        for(let i = 0; i < textbooks.length; i++){
-            if(textbooks[i].seller === this.state.user.name){
-                textbooks.splice(i,1);
-            }
-        }
-        console.log(textbooks)
-    }
-
     handleDeleteAccount = () => {
         this.deletePosts();
-        this.deleteTextbooks();
         users.splice(this.state.user.id - 1, 1)
 
         this.props.hideProfile();
