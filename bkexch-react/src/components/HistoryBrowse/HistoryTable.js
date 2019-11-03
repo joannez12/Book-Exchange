@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../pages/HistoryBrowse/HistoryBrowse.css';
+import {Table} from "react-bootstrap";
 
 function HistoryTableHepler(exchange, deleteHistory){
     return(
@@ -21,7 +22,7 @@ class HistoryTable extends React.Component {
     render(){
         return(
             <div>
-                <table className='table'>
+                <Table striped bordered hover>
                     <thead>
                         <tr key={0}>
                             <th>Book</th>
@@ -43,7 +44,7 @@ class HistoryTable extends React.Component {
 
 
 
-                </table>
+                </Table>
             </div>
         )
     }

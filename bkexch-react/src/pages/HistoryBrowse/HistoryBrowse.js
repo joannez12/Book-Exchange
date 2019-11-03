@@ -42,6 +42,7 @@ class HistoryBrowse extends React.Component {
         this.setState({exchanges: exchanges});
     }
 
+
     render() {
         return(
             <div>
