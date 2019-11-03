@@ -1,7 +1,7 @@
 import React from 'react';
 import './HistoryBrowse.css';
 
-import posts from "../../post";
+import posts from "../../textbooks";
 import exchanges from "./exchange";
 
 import MyPostTable from "../../components/HistoryBrowse/MyPostTable";

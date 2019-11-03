@@ -3,12 +3,10 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import './PostPopUp.css';
 import textbooks from '../../textbooks';
-import posts from "../../post";
 
 class PostPopUp extends React.Component {
     state = {
     	textbooks: textbooks,
-    	posts: posts,
         title: "",
         author: "",
         price: "",
@@ -43,11 +41,9 @@ class PostPopUp extends React.Component {
         if (this.state.title !== "" && this.state.author !== "" && this.state.price !== "" && (this.state.price === parseInt(this.state.price).toString() || this.state.price === parseFloat(this.state.price).toString())) {
             textbooks.push({id: textbooks[this.state.textbooks.length - 1].id + 1, title: this.state.title, author: this.state.author, seller: this.props.user.name, price: this.state.price})
             console.log(textbooks)
-            posts.push({id: posts[this.state.posts.length - 1].id + 1, title: this.state.title, author: this.state.author, seller: this.props.user.name, price: this.state.price})
 
             this.setState({
             	textbooks: textbooks,
-            	posts: posts,
                 title: "",
                 author: "",
                 price: "",
@@ -55,8 +51,6 @@ class PostPopUp extends React.Component {
                 authorMsg: "",
                 priceMsg: ""
             })
-
-            this.props.addPost();
             this.props.onHide();
         }
     }

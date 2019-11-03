@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import users from '../../users';
-import posts from '../../post';
+import posts from '../../textbooks';
 import textbooks from '../../textbooks';
 
 
