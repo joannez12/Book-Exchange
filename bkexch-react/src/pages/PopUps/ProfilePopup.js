@@ -1,7 +1,6 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import Image from 'react-bootstrap/Image';
 import ChangeEmailPopup from "../../pages/PopUps/ChangeEmailPopup";
 import ChangePasswordPopup from "../../pages/PopUps/ChangePasswordPopup";
 import DeleteAccountPopup from "../../pages/PopUps/DeleteAccountPopup";
@@ -40,7 +39,7 @@ class ProfilePopup extends React.Component {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                	<img className="profilePic" src="/profile_img.png"/>
+                	<img className="profilePic" src="/profile_img.png" alt="Profile"/>
 
                     <label>Email: {this.state.account.email}</label>
 

@@ -15,7 +15,7 @@ function ViewTextbook() {
                 <h3>{textbook[0].author}</h3>
                 <div className="bookdisplay">
                     <div className="imgcontainer">
-                        <img className="textbookimage" src={imageUrl}/>
+                        <img className="textbookimage" src={imageUrl} alt="Book"/>
                     </div>
                     <div className="infocontainer">
                         <h5>Price: <span className="red">${textbook[0].price}</span></h5>
