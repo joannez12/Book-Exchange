@@ -4,17 +4,16 @@ import Button from 'react-bootstrap/Button';
 import './SignupPopup.css';
 import users from '../../users';
 
-
-class SignupPopup extends React.Component {
+class Input extends React.Component {
 	state = {
-		users: users,
 		name: "",
 		nameMsg: "",
 		email: "",
 		password: "",
 		confirmPassword: "",
 		emailMsg: "",
-		passwordMsg: ""
+		passwordMsg: "",
+		success: ""
 	}
 
 	handleInputChange = (event) => {
@@ -23,7 +22,7 @@ class SignupPopup extends React.Component {
 		const value = target.value
 		
 		this.setState({[name]: value}, () => { this.checkInput(value, name) })
-		
+		this.setState({success: ""})
 	}
 
 	checkInput = (input, type) => {
@@ -60,7 +59,8 @@ class SignupPopup extends React.Component {
 
 		if (this.state.name !== "" && this.state.nameMsg === "" && this.state.email !== "" && this.state.emailMsg=== "" && this.state.password !== "" && 
 			this.state.passwordMsg === "" && this.state.password === this.state.confirmPassword) {
-			
+			this.setState({success: "account created"})
+
 			/* Sends a user to the server, requires server call */
 			const user = {"id": users.length+1, "name": this.state.name, "email": this.state.email, "password": this.state.password}
 			users.push(user)
@@ -79,16 +79,9 @@ class SignupPopup extends React.Component {
 	}
 
 	render() {
-		const { ...other } = this.props;
 		return (
-			<Modal {...other} animation={false}>
-				<Modal.Header closeButton>
-					<Modal.Title>
-						Sign Up
-					</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<label>Name:</label>
+			<>
+			<label>Name:</label>
 					<input className="input" type="text" 
 						value = { this.state.name }
 						onChange = { this.handleInputChange }
@@ -119,6 +112,28 @@ class SignupPopup extends React.Component {
 				 		name = "confirmPassword"
 				 		placeholder = "Confirm Password" /> 
 				 	<p id="passwordMsg"> { this.state.passwordMsg } </p>
+				 	<p id="success"> { this.state.success } </p>
+			</>
+		)
+	}
+}
+
+class SignupPopup extends React.Component {
+	submitChange = () => {
+		this.refs.child.submitChange();
+	}
+
+	render() {
+		const { ...other } = this.props;
+		return (
+			<Modal {...other} animation={false} >
+				<Modal.Header closeButton>
+					<Modal.Title>
+						Sign Up
+					</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<Input ref="child" />
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={this.props.onHide}>Close</Button>

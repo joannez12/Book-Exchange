@@ -12,7 +12,9 @@ function TextbookListing({ textbook }) {
                     <Card.Title>{title}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{author}</Card.Subtitle>
                 </Card.Body>
-                <Card.Footer className="text-muted"><small>${price} - {seller}</small></Card.Footer>
+                <Card.Footer className="text-muted">
+                    <small>${price} - {seller}</small>
+                </Card.Footer>
             </Card>
     )
 }
