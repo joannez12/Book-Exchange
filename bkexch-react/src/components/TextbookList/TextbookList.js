@@ -6,6 +6,7 @@ function TextbookList({textbooks}) {
     return(
         <div className="bookList">
             {
+            	/* gets textbooks from server, requires server call */
                 textbooks.map(textbook => (
                     <TextbookListing key={textbook.id} textbook={textbook}/>
                 ))

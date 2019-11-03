@@ -15,11 +15,13 @@ class MessageBox extends React.Component{
     }
 
     getSentMessage = (messages) => {
+        {/* gets messages from server, requires server call */}
         const sentMessages = messages.filter(message=> message.from === this.props.user.name);
         this.setState({sentMessages: sentMessages});
     }
 
     getInboxMessage = (messages) => {
+         {/* gets messages from server, requires server call */}
         const inboxMessages = messages.filter(message=> message.to === this.props.user.name);
         this.setState({inboxMessages: inboxMessages});
     }
