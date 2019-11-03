@@ -8,6 +8,7 @@ function MyPostTableHepler(post,deletePost, onEditButtonPress){
             <td>{post.title}</td>
             <td>{post.author}</td>
             <td>{post.price}</td>
+            <td>{post.description}</td>
             <td>
                 <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-1">
                     <Dropdown.Item eventKey="1" onClick={() => {deletePost(post)}}>Delete</Dropdown.Item>
@@ -26,6 +27,8 @@ class EditingPost extends React.Component{
         title: this.props.post.title,
         author: this.props.post.author,
         price: this.props.post.price,
+        description: this.props.post.description,
+
     }
 
     handleInputChange = (event) => {
@@ -41,6 +44,8 @@ class EditingPost extends React.Component{
         newPost.title = this.state.title;
         newPost.author = this.state.author;
         newPost.price = this.state.price;
+        newPost.description = this.state.description;
+
         this.props.onSubmitButtonPress(newPost);
     }
 
@@ -76,6 +81,15 @@ class EditingPost extends React.Component{
                     onChange={this.handleInputChange}
 
                 /></td>
+                <td><input
+                    className="input"
+                    type="text"
+                    placeholder={post.description}
+                    value={this.state.description}
+                    name="description"
+                    onChange={this.handleInputChange}
+                /></td>
+
                 <td>
                     <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-1">
                         <Dropdown.Item eventKey="1" onClick={() => {this.submitEditedPost()}}>Submit</Dropdown.Item>
@@ -124,6 +138,7 @@ class MyPostTable extends React.Component {
                             <th>Book</th>
                             <th>Author</th>
                             <th>Price</th>
+                            <th>Description</th>
                             <th>Option</th>
                         </tr>
                     </thead>

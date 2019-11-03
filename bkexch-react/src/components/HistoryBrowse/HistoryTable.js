@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../pages/HistoryBrowse/HistoryBrowse.css';
-import {Table} from "react-bootstrap";
+import {Table, Button} from "react-bootstrap";
 
 function HistoryTableHepler(exchange, deleteHistory){
     return(
@@ -10,9 +10,9 @@ function HistoryTableHepler(exchange, deleteHistory){
             <td>{exchange.buyer}</td>
             <td>{exchange.price}</td>
             <td>
-                <button type="button"
+                <Button
                         onClick={() => {deleteHistory(exchange)}}
-                >Delete</button>
+                >Delete</Button>
             </td>
         </tr>
     )
