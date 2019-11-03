@@ -30,7 +30,6 @@ class SendMessage extends React.Component{
     render(){
 
         const { user, selectedBook, closeSendMessagePopUp, handleMessage, ...other} = this.props;
-        console.log(this.state.subject, this.state.text);
         return (
             <>
                 <Modal {...other} >
