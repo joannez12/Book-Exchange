@@ -1,9 +1,26 @@
 import React from 'react';
 import {Table} from "react-bootstrap";
 
+class SentMessage extends React.Component {
+    render(){
+        const {message} = this.props;
+        return(
+            <tr key={message.id} >
+                <td>{message.to}</td>
+                <td>{message.email}</td>
+                <td>{message.text}</td>
+                <td>{message.date}</td>
+                <td>Option</td>
+            </tr>
+        )
+    }
+}
+
+
 class SentBox extends React.Component {
 
     render(){
+        const {sentMessages} = this.props;
         return(
             <div>
                 <Table striped bordered hover>
@@ -18,28 +35,9 @@ class SentBox extends React.Component {
                     </thead>
 
                     <tbody>
-                    <tr key={1} >
-                        <td>Jeffrey Costa</td>
-                        <td>mcneil@gmail.com</td>
-                        <td>my messag sentsentsent</td>
-                        <td>2019-09-23</td>
-                        <td>Option</td>
-                    </tr>
-                    <tr key={2} >
-                        <td>Jeannette Mcneil</td>
-                        <td>mymymymym@gmail.com</td>
-                        <td>my messagasfsfasdfsfsafse</td>
-                        <td>2019-09-23</td>
-                        <td>Option</td>
-                    </tr>
-                    <tr key={3} >
-                        <td>Jeffrey Costa</td>
-                        <td>mcneil@gmail.com</td>
-                        <td>my messsafsafsfafsafdage</td>
-                        <td>2019-09-23</td>
-                        <td>Option</td>
-                    </tr>
-
+                    {
+                        sentMessages.map(message => <SentMessage key={message.id} message={message} />)
+                    }
                     </tbody>
 
 

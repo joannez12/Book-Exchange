@@ -48,7 +48,13 @@ class MainHeader extends React.Component {
                     <Navbar sticky="top" bg="dark" variant="dark">
                         <Link to="/"><Navbar.Brand>Toronto Book Exchange</Navbar.Brand></Link>
                         <ButtonToolbar className="ml-auto">
-                            {this.props.user ? <> <Button variant="secondary" onClick={this.handlePostPopUp}>Post</Button>, <DropdownButton title={this.props.user.name}><Dropdown.Item onClick={this.handleProfilePopup}>Profile</Dropdown.Item><Dropdown.Item as={ Link } to='/history'>History</Dropdown.Item><Dropdown.Item as={ Link } to='/messagebox'>Message</Dropdown.Item></DropdownButton> </>
+                            {this.props.user ?
+                                <> <Button variant="secondary" onClick={this.handlePostPopUp}>Post</Button>,
+                                    <DropdownButton title={this.props.user.name}>
+                                        <Dropdown.Item onClick={this.handleProfilePopup}>Profile</Dropdown.Item>
+                                        <Dropdown.Item as={ Link } to='/history'>History</Dropdown.Item>
+                                        <Dropdown.Item as={ Link } to='/messagebox'>Message</Dropdown.Item></DropdownButton>
+                                </>
                                 : <Button variant="primary" onClick={this.handleSignup}>Register</Button>}
                             <Button variant="primary" onClick={this.handleSigninButton}>{this.props.user ? "Sign Out" : "Sign In"}</Button>
                         </ButtonToolbar>
