@@ -11,13 +11,12 @@ import PostPopUp from "../../pages/PopUps/PostPopUp";
 import LoginPopup from "../../pages/PopUps/LoginPopup";
 import ProfilePopup from "../../pages/PopUps/ProfilePopup";
 import "./MainHeader.css";
-
 class MainHeader extends React.Component {
     state = {
         signup: false,
         addpost: false,
         signin: false,
-        profile: false
+        profile: false,
     }
 
     handleSignup = () => {

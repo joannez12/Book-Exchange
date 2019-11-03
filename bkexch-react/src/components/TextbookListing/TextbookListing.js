@@ -2,7 +2,6 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import { useHistory} from 'react-router-dom';
 import './TextbookListing.css';
-import {Col, Row} from "react-bootstrap";
 
 function TextbookListing({ textbook }) {
     const { id, title, author, seller, price} = textbook;
@@ -14,10 +13,7 @@ function TextbookListing({ textbook }) {
                     <Card.Subtitle className="mb-2 text-muted">{author}</Card.Subtitle>
                 </Card.Body>
                 <Card.Footer className="text-muted">
-                    <Row>
-                        <Col xs={8}><small>${price} - {seller}</small></Col>
-                        <Col><Card.Link href="#">Contact</Card.Link></Col>
-                    </Row>
+                    <small>${price} - {seller}</small>
                 </Card.Footer>
             </Card>
     )

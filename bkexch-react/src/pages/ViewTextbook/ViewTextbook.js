@@ -2,8 +2,9 @@ import React from 'react';
 import {useParams} from 'react-router-dom';
 import textbooks from '../../textbooks';
 import './ViewTextbook.css';
+import {Button} from "react-bootstrap";
 
-function ViewTextbook() {
+function ViewTextbook(props) {
     let { id } = useParams();
     //Get textbook from server
     const textbook = textbooks.filter((book) => {return parseInt(book.id) === parseInt(id)})
@@ -23,6 +24,7 @@ function ViewTextbook() {
                         <div className="description">{textbook[0].description}</div>
                     </div>
                 </div>
+                <Button onClick={()=>{props.handleSendMessage(textbook[0])}}>Contact</Button>
             </div>
         )
     } else {
