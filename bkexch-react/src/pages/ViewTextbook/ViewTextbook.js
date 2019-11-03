@@ -9,7 +9,8 @@ import {useHistory} from 'react-router-dom';
 function ViewTextbook(props) {
     let {id} = useParams();
     let history = useHistory();
-    //Get textbook from server
+    
+    //Get textbook from server, requires server call
     const textbook = textbooks.filter((book) => {return parseInt(book.id) === parseInt(id)})
 
     let isAdmin;
@@ -50,7 +51,7 @@ function ViewTextbook(props) {
     } else {
         return(
             <div className="page">
-                <h1 style={{marginTop: "20vh"}}>Sorry</h1>
+                <h1 className="error">Sorry</h1>
                 <h2>The listing you are looking for doesn't exist.</h2>
             </div>
         )

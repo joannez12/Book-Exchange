@@ -26,6 +26,7 @@ class SearchBrowse extends React.Component {
 
     render() {
         const {textbooks, searchfield} = this.state;
+        {/* gets textbooks from server, requires server call */}
         const filteredTextbooks = textbooks.filter(textbook => {
             return textbook.title.toLowerCase().includes(searchfield.toLowerCase())
         })

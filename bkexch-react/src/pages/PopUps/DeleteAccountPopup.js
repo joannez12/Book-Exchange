@@ -10,6 +10,7 @@ class DeleteAccountPopup extends React.Component {
    }
 
     deletePosts(){
+        {/* gets textbooks from server, requires server call */}
         for(let i = 0; i < posts.length; i++){
             if(posts[i].seller === this.state.user.name){
                 posts.splice(i,1);
@@ -19,6 +20,7 @@ class DeleteAccountPopup extends React.Component {
 
     handleDeleteAccount = () => {
         this.deletePosts();
+        {/* gets users from server, requires server call */}
         users.splice(this.state.user.id - 1, 1)
 
         this.props.hideProfile();

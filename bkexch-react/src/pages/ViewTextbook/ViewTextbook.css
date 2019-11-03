@@ -29,3 +29,7 @@
 .buttonMenu {
     display: flex;
 }
+
+.error {
+    margin-top: 20vh;
+}
