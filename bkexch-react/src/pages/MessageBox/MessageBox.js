@@ -9,7 +9,6 @@ class MessageBox extends React.Component{
         user: this.props.user,
         showInbox: true,
         showSentBox: false,
-        showTrash: false,
         sentMessages: [],
         inboxMessages: [],
     }
@@ -47,11 +46,9 @@ class MessageBox extends React.Component{
 
     handleShow = () => {
         if(this.state.showInbox){
-            return <Inbox user={this.props.user} inboxMessages={this.state.inboxMessages} handleReplyMessage={this.props.handleReplyMessage} />
+            return <Inbox user={this.props.user} inboxMessages={this.state.inboxMessages} handleReplyMessage={this.props.handleReplyMessage} handleDeletedMessage={this.props.handleDeletedMessage} />
         }else if(this.state.showSentBox){
             return <SentBox sentMessages={this.state.sentMessages} />
-        }else if(this.state.showTrash){
-            return <Inbox user={this.props.user} inboxMessages={this.state.inboxMessages} handleReplyMessage={this.props.handleReplyMessage} />
         }
     }
 

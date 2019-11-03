@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SendMessage from "./pages/MessageBox/SendMessage";
 import ReplyMessage from "./pages/MessageBox/ReplyMessage";
-import messages from "./messages";
+import messages, {deleteMessage} from "./messages";
 class App extends React.Component {
   state =  {
     user: null,
@@ -17,6 +17,12 @@ class App extends React.Component {
     selectedBook: null,
     message: null,
     replyMessage: false,
+    deletedMessage: null,
+  }
+
+  handleDeletedMessage = (message) => {
+    deleteMessage(message);
+    this.setState({deletedMessage: message});
   }
 
   handleSignin = (user) => {
@@ -61,7 +67,7 @@ class App extends React.Component {
           <MainHeader user={this.state.user} handleSignin={this.handleSignin} deleted={()=>this.setState({user: null})} />
           <Switch>
             <Route exact path="/" component={SearchBrowse} />
-            {this.state.user ? <Route exact path="/messagebox" component={ () => <MessageBox user={this.state.user} handleReplyMessage={this.handleReplyMessage.bind(this)} />} /> : null }
+            {this.state.user ? <Route exact path="/messagebox" component={ () => <MessageBox user={this.state.user} handleReplyMessage={this.handleReplyMessage.bind(this)} handleDeletedMessage={this.handleDeletedMessage.bind(this)} />}  /> : null }
             <Route exact path="/" component={() => <SearchBrowse user={this.state.user} />}/>
             <Route exact path="/history" component={ () => <HistoryBrowse user={this.state.user} />} />
             <Route path="/textbooks/:id" children={<ViewTextbook user={this.state.user} handleSendMessage={this.handleSendMessage.bind(this)} />} />

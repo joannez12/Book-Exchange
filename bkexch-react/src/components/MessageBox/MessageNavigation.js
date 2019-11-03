@@ -13,10 +13,6 @@ class MessageNavigation extends React.Component{
                 <Nav.Item>
                     <Nav.Link eventKey="link-3" onSelect={() => handleShowHelper('SentBox')} >Sent</Nav.Link>
                 </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="link-4">Trash</Nav.Link>
-                </Nav.Item>
-
             </Nav>
         )
     }

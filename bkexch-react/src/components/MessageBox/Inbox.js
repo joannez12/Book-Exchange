@@ -1,11 +1,9 @@
 import React from 'react';
 import {ButtonGroup, Dropdown, DropdownButton, Table} from "react-bootstrap";
 
-
-
 class InboxMessage extends React.Component {
     render(){
-        const {user, message,handleReplyMessage} = this.props;
+        const {user, message,handleReplyMessage, handleDeletedMessage} = this.props;
         return(
             <tr key={message.id} >
                 <td>{message.from}</td>
@@ -15,6 +13,7 @@ class InboxMessage extends React.Component {
                 <td>
                     <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-1">
                         <Dropdown.Item eventKey="1" onClick={()=>handleReplyMessage(user, message)} >Reply</Dropdown.Item>
+                        <Dropdown.Item eventKey="2" onClick={()=>handleDeletedMessage(message)} >Delete</Dropdown.Item>
                     </DropdownButton>
                 </td>
             </tr>
@@ -23,9 +22,8 @@ class InboxMessage extends React.Component {
 }
 
 class Inbox extends React.Component {
-
     render(){
-        const {user, inboxMessages, handleReplyMessage} = this.props;
+        const {user, inboxMessages, handleReplyMessage, handleDeletedMessage} = this.props;
         return(
             <div>
                 <Table striped bordered hover>
@@ -40,7 +38,7 @@ class Inbox extends React.Component {
                     </thead>
                     <tbody>
                         {
-                            inboxMessages.map((message) => <InboxMessage key={message.id} message = {message} handleReplyMessage={handleReplyMessage} user={user} />)
+                            inboxMessages.map((message) => <InboxMessage key={message.id} message = {message} handleReplyMessage={handleReplyMessage} user={user} handleDeletedMessage={handleDeletedMessage} />)
                         }
                     </tbody>
 
