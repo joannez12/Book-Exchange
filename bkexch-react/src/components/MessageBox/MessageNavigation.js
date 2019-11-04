@@ -6,7 +6,7 @@ class MessageNavigation extends React.Component{
     render() {
         const {handleShowHelper} = this.props;
         return(
-            <Nav variant="pills" defaultActiveKey="/home">
+            <Nav variant="pills" defaultActiveKey="link-2">
                 <Nav.Item >
                     <Nav.Link eventKey="link-2" onSelect={() => handleShowHelper('Inbox')} >Inbox</Nav.Link>
                 </Nav.Item>

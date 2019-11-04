@@ -32,7 +32,7 @@ class ChangePasswordPopup extends React.Component {
         } else if (this.state.password !== this.state.confirmPassword) {
             this.setState({error: "passwords don't match"})
         } else {
-             {/* gets users from server, requires server call */}
+            /* gets users from server, requires server call */
             users[this.state.user.id - 1].password = this.state.password
             this.setState({success: "password changed"})
 

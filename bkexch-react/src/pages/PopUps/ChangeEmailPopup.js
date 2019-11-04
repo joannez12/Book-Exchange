@@ -32,12 +32,12 @@ class ChangeEmailPopup extends React.Component {
         } else if (this.state.email !== this.state.confirmEmail) {
             this.setState({error: "emails don't match"})
         } else {
-             {/* gets users from server, requires server call */}
+            /* gets users from server, requires server call */
             if (users.filter((user) => this.state.email === user.email).length >=1) {
 
                 this.setState({error: "email exist"})
             } else {
-                 {/* gets users from server, requires server call */}
+                /* gets users from server, requires server call */
                 users[this.state.user.id - 1].email = this.state.email
                 this.setState({success: "success"})
 

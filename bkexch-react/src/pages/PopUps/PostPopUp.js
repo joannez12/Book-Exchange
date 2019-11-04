@@ -42,7 +42,7 @@ class PostPopUp extends React.Component {
         
 
         if (this.state.title !== "" && this.state.author !== "" && this.state.price !== "" && (this.state.price === parseInt(this.state.price).toString() || this.state.price === parseFloat(this.state.price).toString())) {
-            {/* gets textbooks from server, requires server call */}
+            /* gets textbooks from server, requires server call */
             textbooks.push({id: textbooks[this.state.textbooks.length - 1].id + 1, title: this.state.title, author: this.state.author, seller: this.props.user.name, price: this.state.price, description: this.state.description, imgUrl: this.state.imgUrl})
 
             this.setState({

@@ -49,7 +49,7 @@ class HistoryBrowse extends React.Component {
 
     render() {
         return(
-            <div>
+            <div className="page">
                 { this.state.account ? <> <h4>User Name: {this.state.account.name}</h4>
                 <h4>My Posts</h4>
 
