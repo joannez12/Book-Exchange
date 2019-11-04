@@ -7,7 +7,6 @@ class InboxMessage extends React.Component {
         return(
             <tr key={message.id} >
                 <td>{message.from}</td>
-                <td>{message.email}</td>
                 <td>{message.text}</td>
                 <td>{message.date}</td>
                 <td>
@@ -30,7 +29,6 @@ class Inbox extends React.Component {
                     <thead>
                     <tr key={0}>
                         <th>From</th>
-                        <th>Email</th>
                         <th>Message</th>
                         <th>Date</th>
                         <th>Option</th>

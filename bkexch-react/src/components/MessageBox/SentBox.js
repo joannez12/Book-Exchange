@@ -7,7 +7,6 @@ class SentMessage extends React.Component {
         return(
             <tr key={message.id} >
                 <td>{message.to}</td>
-                <td>{message.email}</td>
                 <td>{message.text}</td>
                 <td>{message.date}</td>
                 <td>Option</td>
@@ -27,7 +26,6 @@ class SentBox extends React.Component {
                     <thead>
                     <tr key={0}>
                         <th>To</th>
-                        <th>Email</th>
                         <th>Message</th>
                         <th>Date</th>
                         <th>Option</th>

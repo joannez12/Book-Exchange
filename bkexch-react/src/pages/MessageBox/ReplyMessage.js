@@ -19,7 +19,7 @@ class ReplyMessage extends React.Component{
             id: d.getTime(),
             from: this.props.message.to,
             to: this.props.message.from,
-            email: this.props.user.email,
+            email: this.props.user.name,
             text: this.state.text,
             textbook: this.props.message.textbook,
             date: d.toLocaleTimeString(),

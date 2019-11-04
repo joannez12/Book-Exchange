@@ -8,9 +8,9 @@ import users from '../../users';
 class Input extends React.Component {
 	state = {
 		users: users,
-		email: "",
+		name: "",
 		password: "",
-		emailMsg: "",
+		nameMsg: "",
 		passwordMsg: ""
 	}
 
@@ -19,19 +19,19 @@ class Input extends React.Component {
 		const name = target.name
 		const value = target.value
 
-		if (name === "email") {
-			this.setState({ [name]: value }, () => { this.checkEmail() })
+		if (name === "name") {
+			this.setState({ [name]: value }, () => { this.checkName() })
 		} else if (name === "password") {
 			this.setState({ [name]: value }, () => { this.checkPassword() })
 		}
 	}
 
 
-	checkEmail = () => {
-		if (this.state.email === "") {
-			this.setState({ emailMsg: "email required" })
+	checkName = () => {
+		if (this.state.name === "") {
+			this.setState({ nameMsg: "username required" })
 		} else {
-			this.setState({ emailMsg: "" })
+			this.setState({ nameMsg: "" })
 		}
 	}
 
@@ -44,49 +44,46 @@ class Input extends React.Component {
 	}
 
 	submitChange = (event) => {
-		if (this.state.email === "") {
-			this.setState({ emailMsg: "email required" })
+		if (this.state.name === "") {
+			this.setState({ nameMsg: "username required" })
 		}
 		if (this.state.password === "") {
 			this.setState({ passwordMsg: "password required" })
 		}
-		if (this.state.email !== "" && this.state.password !== "") {
-			if (users.length === 0) {
-				this.setState({emailMsg: "email does not exist"})
-			}
-			for (let i = 0; i < users.length; i++) {
-				/* Gets users from server and compares it to user email, password, requires server call */
-				if (users[i].email === this.state.email) {
-					if (users[i].password === this.state.password) {
+		if (this.state.name !== "" && this.state.password !== "") {
+			{ /*  get users from server, requires server call */}
+			const user = users.filter(user=>user.name === this.state.name)
+			if (user.length === 0) {
+				this.setState({ nameMsg: "username does not exist" })
+			} else {
+				if (user[0].password === this.state.password) {
 						this.setState({
 							users: users,
-							email: "",
+							name: "",
 							password: "",
-							emailMsg: "",
+							nameMsg: "",
 							passwordMsg: ""
 						})
-						this.props.handleSignin(users[i]);
+						this.props.handleSignin(user[0]);
 						this.props.onHide();
-					} else {
-						this.setState({ passwordMsg: "incorrect password" })
-					}
 				} else {
-					this.setState({ emailMsg: "email does not exist" })
+					this.setState({ passwordMsg: "incorrect password" })
 				}
 			}
+
 		}
 	}
 
 	render() {
 		return (
 			<>
-			<label>Email:</label>
+			<label>Username:</label>
 				<input className="input" type="text"
-					value={this.state.email}
+					value={this.state.name}
 					onChange={this.handleInputChange}
-					name="email"
-					placeholder="Enter Email" />
-				<p id="emailMsg"> {this.state.emailMsg} </p>
+					name="name"
+					placeholder="Enter username" />
+				<p id="nameMsg"> {this.state.nameMsg} </p>
 
 			<label>Password:</label>
 				<input className="input" type="password"

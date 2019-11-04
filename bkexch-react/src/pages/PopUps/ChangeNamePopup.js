@@ -3,15 +3,15 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import users from '../../users';
 
-import './ChangeEmailPopup.css';
+import './ChangeNamePopup.css';
 
 
-class ChangeEmailPopup extends React.Component {
+class ChangeNamePopup extends React.Component {
     state = {
         user: this.props.user,
         users: users,
-        email: "",
-        confirmEmail: "",
+        name: "",
+        confirmName: "",
         error: "",
         success: ""
     }
@@ -27,25 +27,25 @@ class ChangeEmailPopup extends React.Component {
 
     submitChange = (event) => {
 
-        if (this.state.email === "" || this.state.confirmEmail === "") {
-            this.setState({ error: "email required" })
-        } else if (this.state.email !== this.state.confirmEmail) {
-            this.setState({error: "emails don't match"})
+        if (this.state.name === "" || this.state.confirmName === "") {
+            this.setState({ error: "name required" })
+        } else if (this.state.name !== this.state.confirmName) {
+            this.setState({error: "names don't match"})
         } else {
              {/* gets users from server, requires server call */}
-            if (users.filter((user) => this.state.email === user.email).length >=1) {
+            if (users.filter((user) => this.state.name === user.name).length >=1) {
 
-                this.setState({error: "email exist"})
+                this.setState({error: "name exist"})
             } else {
                  {/* gets users from server, requires server call */}
-                users[this.state.user.id - 1].email = this.state.email
+                users[this.state.user.id - 1].name = this.state.name
                 this.setState({success: "success"})
 
                 this.setState({
                     user: this.props.user,
                     users: users,
-                    email: "",
-                    confirmEmail: "",
+                    name: "",
+                    confirmName: "",
                     error: "",
                 })
             }
@@ -58,25 +58,25 @@ class ChangeEmailPopup extends React.Component {
             <Modal {...other} animation={false}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Change Email
+                        Change Username
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
 
-                    <label>New Email:</label>
+                    <label>New Username:</label>
                     <input className="input" type="text"
-                        value={this.state.email}
+                        value={this.state.name}
                         onChange={this.handleInputChange}
-                        name="email"
-                        placeholder = "Enter New Email" />
+                        name="name"
+                        placeholder = "Enter New Username" />
                     <p></p>
 
-                    <label>Confirm Email:</label>
+                    <label>Confirm Username:</label>
                     <input className="input" type="text"
-                        value={this.state.confirmEmail}
+                        value={this.state.confirmName}
                         onChange={this.handleInputChange}
-                        name="confirmEmail"
-                        placeholder = "Confirm New Email" />
+                        name="confirmName"
+                        placeholder = "Confirm New Username" />
 
                     <p id="error">{this.state.error}</p>
 
@@ -91,4 +91,4 @@ class ChangeEmailPopup extends React.Component {
     }
 }
 
-export default ChangeEmailPopup;
+export default ChangeNamePopup;

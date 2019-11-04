@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import ChangeEmailPopup from "../../pages/PopUps/ChangeEmailPopup";
+import ChangeNamePopup from "../../pages/PopUps/ChangeNamePopup";
 import ChangePasswordPopup from "../../pages/PopUps/ChangePasswordPopup";
 import DeleteAccountPopup from "../../pages/PopUps/DeleteAccountPopup";
 
@@ -11,13 +11,13 @@ import './ProfilePopup.css';
 class ProfilePopup extends React.Component {
     state = {
         account: this.props.user,
-        changeEmail: false,
+        changeName: false,
         changePassword: false,
         deleteAccount: false
     }
 
-    handleChangeEmailPopup = () => {
-        this.setState(prevState => ({ changeEmail: !prevState.changeEmail}))
+    handleChangeNamePopup = () => {
+        this.setState(prevState => ({ changeName: !prevState.changeName}))
     }
 
     handleChangePasswordPopup = () => {
@@ -41,10 +41,10 @@ class ProfilePopup extends React.Component {
                 <Modal.Body>
                 	<img className="profilePic" src="/profile_img.png" alt="Profile"/>
 
-                    <label>Email: {this.state.account.email}</label>
+                    <label>Username: {this.state.account.name}</label>
 
                     <div className="profileButtons">
-                    	<Button variant="secondary" onClick={this.handleChangeEmailPopup}>Change Email</Button>
+                    	<Button variant="secondary" onClick={this.handleChangeNamePopup}>Change Name</Button>
                     	<Button variant="secondary" onClick={this.handleChangePasswordPopup}>Change Password</Button>
                     	<Button variant="danger" onClick={this.handleDeleteAccountPopup}>Delete Account</Button>
                     </div>
@@ -54,7 +54,7 @@ class ProfilePopup extends React.Component {
                     <Button variant="secondary" onClick={this.props.onHide}>Close</Button>
                 </Modal.Footer>
             </Modal>
-            {this.state.changeEmail ? <ChangeEmailPopup show={this.state.changeEmail} onHide={() => this.setState({ changeEmail: false })} user={this.state.account} /> : null }
+            {this.state.changeName ? <ChangeNamePopup show={this.state.changeName} onHide={() => this.setState({ changeName: false })} user={this.state.account} /> : null }
             {this.state.changePassword ? <ChangePasswordPopup show={this.state.changePassword} onHide={() => this.setState({ changePassword: false })} user={this.state.account} /> : null }
             {this.state.deleteAccount ? <DeleteAccountPopup show={this.state.deleteAccount} hideProfile={this.props.onHide} onHide={()=>this.setState({deleteAccount: false})} user={this.state.account} deleted={this.props.deleted}/> : null }
             </>

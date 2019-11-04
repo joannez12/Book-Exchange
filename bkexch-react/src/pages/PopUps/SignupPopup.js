@@ -8,10 +8,8 @@ class Input extends React.Component {
 	state = {
 		name: "",
 		nameMsg: "",
-		email: "",
 		password: "",
 		confirmPassword: "",
-		emailMsg: "",
 		passwordMsg: "",
 		success: ""
 	}
@@ -30,9 +28,9 @@ class Input extends React.Component {
 	 			this.setState({[type.concat("Msg")]: type.concat(" required")})
 	 			return
 		}
-		if (type === "email") {
+		if (type === "name") {
 			 /* Gets users from server and compares it to user email to see if email exist already, requires server call */
-			users.filter((user) => user.email === input).length >= 1 ? this.setState({emailMsg: "email exists"}) : this.setState({emailMsg: ""})
+			users.filter((user) => user.name === input).length >= 1 ? this.setState({nameMsg: "username exists"}) : this.setState({nameMsg: ""})
 			return
 		}
 		if (type  === "password" || type === "confirmPassword") {
@@ -44,11 +42,8 @@ class Input extends React.Component {
 
 	submitChange = (event) => {
 		if (this.state.name === "") {
-			this.setState({nameMsg: "name required"})
+			this.setState({nameMsg: "username required"})
 		} 
-		if (this.state.email === "") {
-			this.setState({emailMsg: "email required"})
-		}
 		if (this.state.password === "") {
 			this.setState({passwordMsg: "password required"})
 		}
@@ -57,22 +52,20 @@ class Input extends React.Component {
 			this.setState({passwordMsg: "passwords don't match"})
 		}
 
-		if (this.state.name !== "" && this.state.nameMsg === "" && this.state.email !== "" && this.state.emailMsg=== "" && this.state.password !== "" && 
+		if (this.state.name !== "" && this.state.nameMsg === "" && this.state.password !== "" && 
 			this.state.passwordMsg === "" && this.state.password === this.state.confirmPassword) {
 			this.setState({success: "account created"})
 
 			/* Gets users from server, requires server call */
-			const user = {"id": users.length+1, "name": this.state.name, "email": this.state.email, "password": this.state.password, "isAdmin": false}
+			const user = {"id": users.length+1, "name": this.state.name, "password": this.state.password, "isAdmin": false}
 			users.push(user)
 
 			this.setState({
 				users: users,
 				name: "",
 				nameMsg: "",
-				email: "",
 				password: "",
 				confirmPassword: "",
-				emailMsg: "",
 				passwordMsg: ""
 			})
 		} 
@@ -81,21 +74,13 @@ class Input extends React.Component {
 	render() {
 		return (
 			<>
-			<label>Name:</label>
+			<label>Username:</label>
 					<input className="input" type="text" 
 						value = { this.state.name }
 						onChange = { this.handleInputChange }
 						name = "name"
-						placeholder = "Enter Name" />
+						placeholder = "Enter username" />
 					<p id="nameMsg"> { this.state.nameMsg } </p>
-
-					<label>Email:</label>
-					<input className="input" type="text" 
-						value = { this.state.email }
-						onChange = { this.handleInputChange }
-						name = "email"
-						placeholder = "Enter Email" />
-					<p id="emailMsg"> { this.state.emailMsg } </p>
 						
 				 	<label>Password:</label>
 				 	<input className="input" type="password" 
