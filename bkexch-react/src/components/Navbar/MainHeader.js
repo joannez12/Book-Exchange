@@ -61,7 +61,7 @@ class MainHeader extends React.Component {
                 </div>
                 <LoginPopup show={this.state.signin} onHide={() => this.setState({ signin: false })} handleSignin={this.props.handleSignin}/>
                 <SignupPopup show={this.state.signup} onHide={() => this.setState({ signup: false })}  />
-                <PostPopUp show={this.state.addpost} onHide={() => this.setState({ addpost: false })} user={this.props.user}/>
+                <PostPopUp show={this.state.addpost} onHide={() => this.setState({ addpost: false })} addPost={this.props.addPost} user={this.props.user}/>
                 {this.props.user ? <ProfilePopup show={this.state.profile} onHide={() => this.setState({ profile: false })} user={this.props.user} deleted={this.props.deleted} /> : null }
             </>
         )

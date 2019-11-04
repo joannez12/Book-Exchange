@@ -13,6 +13,7 @@ import messages, {deleteMessage} from "./messages";
 class App extends React.Component {
   state =  {
     user: null,
+    addPost: false,
     sendMessage: false,
     selectedBook: null,
     message: null,
@@ -64,7 +65,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Router>
-          <MainHeader user={this.state.user} handleSignin={this.handleSignin} deleted={()=>this.setState({user: null})} />
+          <MainHeader user={this.state.user} handleSignin={this.handleSignin} addPost={()=>this.setState({addPost: !this.state.addPost})} deleted={()=>this.setState({user: null})} />
           <Switch>
             <Route exact path="/" component={SearchBrowse} />
             {this.state.user ? <Route exact path="/messagebox" component={ () => <MessageBox user={this.state.user} handleReplyMessage={this.handleReplyMessage.bind(this)} handleDeletedMessage={this.handleDeletedMessage.bind(this)} />}  /> : null }

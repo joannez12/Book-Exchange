@@ -23,6 +23,7 @@ class PostPopUp extends React.Component {
         const value = target.value
 
         this.setState({[name]: value})
+        this.setState({[name.concat("Msg")]: ""})
     }
 
 
@@ -55,6 +56,7 @@ class PostPopUp extends React.Component {
                 authorMsg: "",
                 priceMsg: ""
             })
+            this.props.addPost();
             this.props.onHide();
         }
     }
