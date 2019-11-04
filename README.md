@@ -16,6 +16,13 @@ Password: admin
 ## Usage
 The descriptions below describe website usage for a regular user. Admins will have access to the same features as a regular user in addition to being able to delete posts.
 
+SIGN UP:
+- Sign up by clicking on register button on header
+- Once signed up, log in by clicking on sign in button 
+
+SIGN IN:
+- Log in by clicking on sign in button on header
+
 HOME PAGE:
 - Landing page of the website, can also click on the navbar logo to navigate here
 - View and search for textbook listings

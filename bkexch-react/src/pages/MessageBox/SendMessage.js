@@ -19,7 +19,7 @@ class SendMessage extends React.Component{
             id: d.getTime(),
             from: this.props.user.name,
             to: this.props.selectedBook.seller,
-            email: this.props.user.email,
+            email: this.props.user.name,
             text: this.state.text,
             textbook:this.props.selectedBook,
             date: d.toLocaleTimeString(),
