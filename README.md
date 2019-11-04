@@ -36,8 +36,8 @@ TEXTBOOK PAGE:
 PROFILE POPUP:
 - Must be signed in
 - Get to profile by clicking on user dropdown on header and selecting profile
-- Displays Name, profile image, and email 
-- Can change email, password or delete account by selecting button accordingly 
+- Displays username and profile image
+- Can change username, password or delete account by selecting button accordingly 
 
 HISTORY PAGE:
 - Must be signed in
@@ -48,7 +48,7 @@ HISTORY PAGE:
 MESSAGES PAGE:
 - Must be signed in
 - Get to messages page by clicking on user dropdown on header and selecting messages
-- Displays messages received, sent or deleted by clicking on option accordingly
+- Displays messages received or sent by clicking on option accordingly, has option to reply or delete a message
 
 POST POPUP
 - Must be signed in
