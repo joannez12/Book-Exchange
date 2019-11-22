@@ -29,8 +29,21 @@ class Input extends React.Component {
 	 			return
 		}
 		if (type === "name") {
+    		fetch('/users')
+    		.then((res) => { 
+        		if (res.status === 200) {
+           			return res.json() 
+       			} else {
+            		alert('Could not get users')
+       			}                
+    		})
+    		.then((json) => {  
+        		json.users.filter((u) => u.username === input).length >= 1 ? this.setState({nameMsg: "username exists"}) : this.setState({nameMsg: ""})
+    		}).catch((error) => {
+        		console.log(error)
+    		})
 			 /* Gets users from server and compares it to user email to see if email exist already, requires server call */
-			users.filter((user) => user.name === input).length >= 1 ? this.setState({nameMsg: "username exists"}) : this.setState({nameMsg: ""})
+			//users.filter((user) => user.name === input).length >= 1 ? this.setState({nameMsg: "username exists"}) : this.setState({nameMsg: ""})
 			return
 		}
 		if (type  === "password" || type === "confirmPassword") {
@@ -54,20 +67,39 @@ class Input extends React.Component {
 
 		if (this.state.name !== "" && this.state.nameMsg === "" && this.state.password !== "" && 
 			this.state.passwordMsg === "" && this.state.password === this.state.confirmPassword) {
-			this.setState({success: "account created"})
+			//this.setState({success: "account created"})
+	    	const request = new Request('/signup', {
+        		method: 'post', 
+        		body: JSON.stringify({username: this.state.name, password: this.state.password}),
+        		headers: {
+            		'Accept': 'application/json, text/plain, */*',
+            		'Content-Type': 'application/json'
+        		},
+    		});
 
-			/* Gets users from server, requires server call */
-			const user = {"id": users.length+1, "name": this.state.name, "password": this.state.password, "isAdmin": false}
-			users.push(user)
+			fetch(request)
+			.then(function(res) {
+				if (res.status === 200) {
+					this.setState({success: "account created"})
 
-			this.setState({
-				users: users,
-				name: "",
-				nameMsg: "",
-				password: "",
-				confirmPassword: "",
-				passwordMsg: ""
+					this.setState({
+						users: users,
+						name: "",
+						nameMsg: "",
+						password: "",
+						confirmPassword: "",
+						passwordMsg: ""
+					})
+				} else {
+					this.setState({success: "username needs to be min 1 character, password needs to be min 3"})
+				}
+			}.bind(this)).catch((error) => {
+				console.log(error)
 			})
+			/* Gets users from server, requires server call */
+			//const user = {"id": users.length+1, "name": this.state.name, "password": this.state.password, "isAdmin": false}
+			//users.push(user)
+
 		} 
 	}
 
@@ -97,7 +129,7 @@ class Input extends React.Component {
 				 		name = "confirmPassword"
 				 		placeholder = "Confirm Password" /> 
 				 	<p id="passwordMsg"> { this.state.passwordMsg } </p>
-				 	<p id="success"> { this.state.success } </p>
+				    {this.state.success !== "account created" ? <p id="success" style={{color: 'red'}}> { this.state.success } </p> :  <p id="success"> { this.state.success } </p> }
 			</>
 		)
 	}
