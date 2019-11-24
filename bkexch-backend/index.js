@@ -11,7 +11,8 @@ app.use(express.json())
 
 app.post('/user', (req, res) => {
     const newUser = new User({
-        name: req.body.name
+        username: req.body.username,
+        password: req.body.password
     })
 
     newUser.save().then((result) => {
@@ -21,6 +22,101 @@ app.post('/user', (req, res) => {
     })
 })
 
+app.post('/user/login', (req, res) => {
+    const username = req.body.username
+    const password = req.body.password
+
+    User.findByUsernamePassword(username, password).then((user) => {
+        if (!user) {
+        	res.status(401).send()
+        } else {
+        	res.send(user)
+        }
+    }).catch((error) => {
+    	res.status(400).send(error)
+    })
+})
+
+app.get('/users', (req, res) => {
+	User.find().then((users) => {
+		res.send({ users }) 
+	}, (error) => {
+		res.status(500).send(error) 
+	})
+})
+
+
+app.get('/users/:id', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()  
+	}
+
+	User.findById(id).then((user) => {
+		if (!user) {
+			res.status(404).send()  
+		} else {
+			res.send({user})
+		}
+	}).catch((error) => {
+		res.status(500).send()  
+	})
+})
+
+app.patch('/users/:id/change-username', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+	}
+
+	User.findByIdAndUpdate(id, {$set: {"username": req.body.username}}, {new: true}).then((user) => {
+		if (!user) {
+			res.status(404).send()
+		} else {   
+			res.send(user)
+		}
+	}).catch((error) => {
+		res.status(400).send() 
+	})
+})
+
+app.patch('/users/:id/change-password', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+	}
+
+	User.findByIdAndUpdate(id, {$set: {"password": req.body.password}}, {new: true}).then((user) => {
+		if (!user) {
+			res.status(404).send()
+		} else {   
+			res.send(user)
+		}
+	}).catch((error) => {
+		res.status(400).send() 
+	})
+})
+
+app.delete('/users/:id/delete', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+	}
+
+	Student.findByIdAndRemove(id).then((user) => {
+		if (!user) {
+			res.status(404).send()
+		} else {   
+			res.send(user)
+		}
+	}).catch((error) => {
+		res.status(500).send() 
+	})
+})
 
 
 const port = process.env.PORT || 3001
