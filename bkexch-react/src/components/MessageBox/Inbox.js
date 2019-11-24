@@ -10,7 +10,7 @@ class InboxMessage extends React.Component {
                 <td>{message.text}</td>
                 <td>{message.date}</td>
                 <td>
-                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-1">
+                    <DropdownButton as={ButtonGroup} title="Reply or Delete" id="bg-vertical-dropdown-1">
                         <Dropdown.Item eventKey="1" onClick={()=>handleReplyMessage(user, message)} >Reply</Dropdown.Item>
                         <Dropdown.Item eventKey="2" onClick={()=>handleDeletedMessage(message)} >Delete</Dropdown.Item>
                     </DropdownButton>

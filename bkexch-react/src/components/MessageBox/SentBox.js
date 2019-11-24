@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table} from "react-bootstrap";
+import {ButtonGroup, Dropdown, DropdownButton, Table} from "react-bootstrap";
 
 class SentMessage extends React.Component {
     render(){
@@ -9,7 +9,6 @@ class SentMessage extends React.Component {
                 <td>{message.to}</td>
                 <td>{message.text}</td>
                 <td>{message.date}</td>
-                <td>Option</td>
             </tr>
         )
     }
@@ -28,7 +27,6 @@ class SentBox extends React.Component {
                         <th>To</th>
                         <th>Message</th>
                         <th>Date</th>
-                        <th>Option</th>
                     </tr>
                     </thead>
 

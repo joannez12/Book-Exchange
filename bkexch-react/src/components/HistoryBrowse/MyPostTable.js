@@ -10,7 +10,7 @@ function MyPostTableHepler(post,deletePost, onEditButtonPress, onSoldButtonPress
             <td>{post.price}</td>
             <td>{post.description}</td>
             <td>
-                <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-1">
+                <DropdownButton as={ButtonGroup} title="Actions" id="bg-vertical-dropdown-1">
                     <Dropdown.Item eventKey="1" onClick={() => {deletePost(post)}}>Delete</Dropdown.Item>
                     <Dropdown.Item eventKey="2" onClick={() => onEditButtonPress(post)}>Edit</Dropdown.Item>
                     <Dropdown.Item eventKey="3" onClick={() => onSoldButtonPress(post)}>Sold</Dropdown.Item>
