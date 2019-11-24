@@ -11,8 +11,10 @@ app.use(express.json())
 // Routers
 const messageRouter = require('./routes/messages')
 const exchangeRouter = require('./routes/exchanges')
+const textbookRouter = require('./routes/textbooks')
 app.use('/messages', messageRouter)
 app.use('/exchanges', exchangeRouter)
+app.use('/textbooks', textbookRouter)
 
 app.post('/user', (req, res) => {
     const newUser = new User({
