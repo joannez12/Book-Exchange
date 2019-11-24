@@ -8,6 +8,9 @@ const { ObjectID } = require('mongodb')
 
 app.use(express.json())
 
+// Routers
+const messageRouter = require('./routes/messages')
+app.use('/messages', messageRouter)
 
 app.post('/user', (req, res) => {
     const newUser = new User({
