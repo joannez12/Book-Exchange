@@ -3,7 +3,7 @@ let User = require('../mongodb/models/user')
 const bcrypt = require('bcryptjs')
 const { ObjectID } = require('mongodb')
 
-router.route('/add').post((req, res) => {
+router.route('/').post((req, res) => {
     const newUser = new User({
         username: req.body.username,
 		password: req.body.password,
