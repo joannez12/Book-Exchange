@@ -10,6 +10,10 @@ const UserSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 		minlength: 3
+	},
+	isAdmin: {
+		type: Boolean,
+		required: true
 	}
 })
 

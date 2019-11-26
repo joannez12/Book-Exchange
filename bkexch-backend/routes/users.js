@@ -6,7 +6,8 @@ const { ObjectID } = require('mongodb')
 router.route('/add').post((req, res) => {
     const newUser = new User({
         username: req.body.username,
-        password: req.body.password
+		password: req.body.password,
+		isAdmin: false
     })
 
     User.findOne({ username: req.body.username }).then((user) => {
