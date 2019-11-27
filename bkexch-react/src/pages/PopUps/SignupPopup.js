@@ -6,8 +6,8 @@ import users from '../../users';
 
 class Input extends React.Component {
 	state = {
-		name: "",
-		nameMsg: "",
+		username: "",
+		usernameMsg: "",
 		password: "",
 		confirmPassword: "",
 		passwordMsg: "",
@@ -19,56 +19,54 @@ class Input extends React.Component {
 		const name = target.name
 		const value = target.value
 		
-		this.setState({[name]: value}, () => { this.checkInput(value, name) })
+		this.setState({[name]: value}, () => { this.requiredInput(value, name) })
 		this.setState({success: ""})
 	}
 
-	checkInput = (input, type) => {
+	requiredInput = (input, type) => {
 		if (input === "") {
 	 			this.setState({[type.concat("Msg")]: type.concat(" required")})
 	 			return
-		}
-		if (type === "name") {
-			 /* Gets users from server and compares it to user email to see if email exist already, requires server call */
-			users.filter((user) => user.name === input).length >= 1 ? this.setState({nameMsg: "username exists"}) : this.setState({nameMsg: ""})
-			return
-		}
-		if (type  === "password" || type === "confirmPassword") {
-			this.setState({passwordMsg: ""})
-			return
 		}
 		this.setState({[type.concat("Msg")]: ""})
 	}
 
 	submitChange = (event) => {
-		if (this.state.name === "") {
-			this.setState({nameMsg: "username required"})
-		} 
-		if (this.state.password === "") {
-			this.setState({passwordMsg: "password required"})
-		}
-
 		if (this.state.password !== this.state.confirmPassword) {
 			this.setState({passwordMsg: "passwords don't match"})
-		}
-
-		if (this.state.name !== "" && this.state.nameMsg === "" && this.state.password !== "" && 
-			this.state.passwordMsg === "" && this.state.password === this.state.confirmPassword) {
-			this.setState({success: "account created"})
-
-			/* Gets users from server, requires server call */
-			const user = {"id": users.length+1, "name": this.state.name, "password": this.state.password, "isAdmin": false}
-			users.push(user)
-
-			this.setState({
-				users: users,
-				name: "",
-				nameMsg: "",
-				password: "",
-				confirmPassword: "",
-				passwordMsg: ""
+		} else {
+			const request = new Request('http://localhost:3001/users/', {
+				method: 'post',
+				body: JSON.stringify({username: this.state.username, password: this.state.password}),
+				headers: {
+					'Accept': 'application/json, text/plain, */*',
+            		'Content-Type': 'application/json'
+				}
 			})
-		} 
+
+			fetch(request)
+			.then(function(res) {
+				return res.json()
+			}).then((json) => {
+				if (json.success === true) {
+					this.setState({success: json.message})
+					this.setState({
+						users: users,
+						username: "",
+						usernameMsg: "",
+						password: "",
+						confirmPassword: "",
+						passwordMsg: ""
+					})
+				} else {
+					this.setState({usernameMsg: json.message[0]})
+					this.setState({passwordMsg: json.message[1]})
+				}
+			}).catch((error) => {
+				console.log(error)
+			})
+		 
+		}
 	}
 
 	render() {
@@ -76,11 +74,11 @@ class Input extends React.Component {
 			<>
 			<label>Username:</label>
 					<input className="input" type="text" 
-						value = { this.state.name }
+						value = { this.state.username }
 						onChange = { this.handleInputChange }
-						name = "name"
+						name = "username"
 						placeholder = "Enter username" />
-					<p id="nameMsg"> { this.state.nameMsg } </p>
+					<p id="usernameMsg"> { this.state.usernameMsg } </p>
 						
 				 	<label>Password:</label>
 				 	<input className="input" type="password" 

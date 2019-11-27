@@ -12,11 +12,24 @@ router.route('/').post((req, res) => {
 
     User.findOne({ username: req.body.username }).then((user) => {
     	if (!user) {
-    		newUser.save().then(() => res.json('new user added')).catch((error) => res.status(400).json('Error: ' + error))
-    	} else {
-    		res.status(409).json('username already exists')
+    		newUser.save().then(() => res.json({success: true, message: 'new user added'}))
+    		.catch((error) => {
+    			const message = [];
+    			if (error.errors['username']) {
+    				message.push(error.errors['username'].message)
+    			} else {
+    				message.push("")
+    			}
+    			if (error.errors['password']) {
+    				message.push(error.errors['password'].message)
+    			} else {
+    				message.push("")
+    			}
+    			res.status(400).json({success: false, message: message})
+    	})} else {
+    		res.status(409).json({success: false, message: ['username already exists', '']})
     	}
-    }).catch((error) => res.status(400).json('Error: ' + error))
+    }).catch((error) => res.status(400).json('Error: ' + 'error'))
 })
 
 router.route('/login').post((req, res) => {
