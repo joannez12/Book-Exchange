@@ -44,34 +44,38 @@ class Input extends React.Component {
 	}
 
 	submitChange = (event) => {
-		if (this.state.name === "") {
-			this.setState({ nameMsg: "username required" })
-		}
-		if (this.state.password === "") {
-			this.setState({ passwordMsg: "password required" })
-		}
-		if (this.state.name !== "" && this.state.password !== "") {
 			/*  get users from server, requires server call */
-			const user = users.filter(user=>user.name === this.state.name)
-			if (user.length === 0) {
-				this.setState({ nameMsg: "username does not exist" })
-			} else {
-				if (user[0].password === this.state.password) {
-						this.setState({
-							users: users,
-							name: "",
-							password: "",
-							nameMsg: "",
-							passwordMsg: ""
-						})
-						this.props.handleSignin(user[0]);
-						this.props.onHide();
-				} else {
-					this.setState({ passwordMsg: "incorrect password" })
-				}
+		const request = new Request('http://localhost:3001/users/login', {
+			method: 'post',
+			body: JSON.stringify({username: this.state.name, password: this.state.password}),
+			headers: {
+				'Accept': 'application/json, text/plain, */*',
+            	'Content-Type': 'application/json'
 			}
+		})
 
-		}
+		fetch(request)
+		.then(function(res) {
+			return res.json()
+		}).then((json) => {
+			if (json.usernameMsg) {
+				this.setState({nameMsg: json.usernameMsg})
+			} else if (json.passwordMsg) {
+				this.setState({passwordMsg: json.passwordMsg})
+			} else if (json.currentUser) {
+				this.setState({
+					users: users,
+					name: "",
+					nameMsg: "",
+					password: "",
+					passwordMsg: ""
+				})
+				this.props.handleSignin(json.currentUser)
+				this.props.onHide()
+			}
+		}).catch((error) => {
+			console.log(error)
+		})	
 	}
 
 	render() {
@@ -90,7 +94,7 @@ class Input extends React.Component {
 					value={this.state.password}
 					onChange={this.handleInputChange}
 					name="password"
-					placeholder="Password" />
+					placeholder="Enter password" />
 				<p id="passwordMsg"> {this.state.passwordMsg} </p>
 			</>
 		)

@@ -35,13 +35,13 @@ class ProfilePopup extends React.Component {
             <Modal {...other} animation={false}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        {this.state.account.name}
+                        {this.state.account.username}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 	<img className="profilePic" src="/profile_img.png" alt="Profile"/>
 
-                    <label>Username: {this.state.account.name}</label>
+                    <label>Username: {this.state.account.username}</label>
 
                     <div className="profileButtons">
                     	<Button variant="secondary" onClick={this.handleChangeNamePopup}>Change Name</Button>

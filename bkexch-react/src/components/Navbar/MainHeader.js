@@ -49,7 +49,7 @@ class MainHeader extends React.Component {
                         <ButtonToolbar className="ml-auto">
                             {this.props.user ?
                                 <> <Button variant="secondary" onClick={this.handlePostPopUp}>Post</Button>,
-                                    <DropdownButton title={this.props.user.name}>
+                                    <DropdownButton title={this.props.user.username}>
                                         <Dropdown.Item onClick={this.handleProfilePopup}>Profile</Dropdown.Item>
                                         <Dropdown.Item as={ Link } to='/history'>History</Dropdown.Item>
                                         <Dropdown.Item as={ Link } to='/messagebox'>Message</Dropdown.Item></DropdownButton>

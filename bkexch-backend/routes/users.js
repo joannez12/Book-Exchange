@@ -38,13 +38,13 @@ router.route('/login').post((req, res) => {
 
     User.findOne({ username: username }).then((user) => {
         if (!user) {
-        	res.status(401).json('incorrect login creds')
+        	res.status(401).json({usernameMsg: 'username does not exist'})
         } else {
         	bcrypt.compare(password, user.password, (err, result) => {
         		if (result) {
-        			res.json('logged in')
+        			res.json({currentUser: user})
         		} else {
-        			res.status(401).json('incorrect login creds')
+        			res.status(401).json({passwordMsg: 'incorrect password'})
         		}
         	})
         }
@@ -83,12 +83,15 @@ router.route('/:id/change-username').patch((req, res) => {
 	} else {
 		User.findByIdAndUpdate(id, {$set: {"username": req.body.username}}, {new: true, runValidators: true, useFindAndModify: false}).then((user) => {
 			if (!user) {
-				res.status(404).json('user not found')
+				res.status(404).json({error: 'user not found'})
 			} else {   
-				res.json('username updated')
+				res.json({success: 'username updated'})
 			}
-		}).catch((error) => res.status(400).json('Error: ' + error))
+		}).catch((error) => {
+			res.status(400).json('Error: ' + error)
+		})
 	}
+		
 })
 
 router.route('/:id/change-password').patch((req, res) => {

@@ -5,7 +5,7 @@
   	display: inline-block;
 }
 
-#emailMsg, #passwordMsg {
+#nameMsg, #passwordMsg {
 	font-size: 12px;
 	color: red;
 }

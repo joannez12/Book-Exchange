@@ -58,7 +58,7 @@ class Input extends React.Component {
 						confirmPassword: "",
 						passwordMsg: ""
 					})
-				} else {
+				} else if (json.success === false) {
 					this.setState({usernameMsg: json.message[0]})
 					this.setState({passwordMsg: json.message[1]})
 				}
