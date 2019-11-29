@@ -5,6 +5,7 @@ import users from '../../users';
 
 import './ChangeNamePopup.css';
 
+import {changeName} from '../../actions/user';
 
 class ChangeNamePopup extends React.Component {
     state = {
@@ -26,29 +27,10 @@ class ChangeNamePopup extends React.Component {
 
 
     submitChange = (event) => {
-
-        if (this.state.name === "" || this.state.confirmName === "") {
-            this.setState({ error: "name required" })
-        } else if (this.state.name !== this.state.confirmName) {
+        if (this.state.name !== this.state.confirmName) {
             this.setState({error: "names don't match"})
         } else {
-            /* gets users from server, requires server call */
-            if (users.filter((user) => this.state.name === user.name).length >=1) {
-
-                this.setState({error: "name exist"})
-            } else {
-                /* gets users from server, requires server call */
-                users[this.state.user.id - 1].name = this.state.name
-                this.setState({success: "success"})
-
-                this.setState({
-                    user: this.props.user,
-                    users: users,
-                    name: "",
-                    confirmName: "",
-                    error: "",
-                })
-            }
+            changeName(this)
         }
     }
 

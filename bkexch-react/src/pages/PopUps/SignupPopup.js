@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import './SignupPopup.css';
 import users from '../../users';
 
+import {signup} from '../../actions/user';
+
 class Input extends React.Component {
 	state = {
 		username: "",
@@ -35,37 +37,7 @@ class Input extends React.Component {
 		if (this.state.password !== this.state.confirmPassword) {
 			this.setState({passwordMsg: "passwords don't match"})
 		} else {
-			const request = new Request('http://localhost:3001/users/', {
-				method: 'post',
-				body: JSON.stringify({username: this.state.username, password: this.state.password}),
-				headers: {
-					'Accept': 'application/json, text/plain, */*',
-            		'Content-Type': 'application/json'
-				}
-			})
-
-			fetch(request)
-			.then(function(res) {
-				return res.json()
-			}).then((json) => {
-				if (json.success === true) {
-					this.setState({success: json.message})
-					this.setState({
-						users: users,
-						username: "",
-						usernameMsg: "",
-						password: "",
-						confirmPassword: "",
-						passwordMsg: ""
-					})
-				} else if (json.success === false) {
-					this.setState({usernameMsg: json.message[0]})
-					this.setState({passwordMsg: json.message[1]})
-				}
-			}).catch((error) => {
-				console.log(error)
-			})
-		 
+		 	signup(this)
 		}
 	}
 

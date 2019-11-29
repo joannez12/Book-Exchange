@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import users from '../../users';
 import posts from '../../textbooks';
 
+import {deleteAccount} from '../../actions/user';
+
 class DeleteAccountPopup extends React.Component {
     state = {
         user: this.props.user
@@ -21,10 +23,9 @@ class DeleteAccountPopup extends React.Component {
     handleDeleteAccount = () => {
         this.deletePosts();
         /* gets users from server, requires server call */
-        users.splice(this.state.user.id - 1, 1)
+        //users.splice(this.state.user.id - 1, 1)
 
-        this.props.hideProfile();
-        this.props.deleted();
+        deleteAccount(this)
 
     }
 

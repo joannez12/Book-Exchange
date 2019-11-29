@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import './LoginPopup.css';
 import users from '../../users';
 
+import {login} from '../../actions/user';
+
 
 class Input extends React.Component {
 	state = {
@@ -44,38 +46,7 @@ class Input extends React.Component {
 	}
 
 	submitChange = (event) => {
-			/*  get users from server, requires server call */
-		const request = new Request('http://localhost:3001/users/login', {
-			method: 'post',
-			body: JSON.stringify({username: this.state.name, password: this.state.password}),
-			headers: {
-				'Accept': 'application/json, text/plain, */*',
-            	'Content-Type': 'application/json'
-			}
-		})
-
-		fetch(request)
-		.then(function(res) {
-			return res.json()
-		}).then((json) => {
-			if (json.usernameMsg) {
-				this.setState({nameMsg: json.usernameMsg})
-			} else if (json.passwordMsg) {
-				this.setState({passwordMsg: json.passwordMsg})
-			} else if (json.currentUser) {
-				this.setState({
-					users: users,
-					name: "",
-					nameMsg: "",
-					password: "",
-					passwordMsg: ""
-				})
-				this.props.handleSignin(json.currentUser)
-				this.props.onHide()
-			}
-		}).catch((error) => {
-			console.log(error)
-		})	
+		login(this)
 	}
 
 	render() {

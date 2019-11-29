@@ -42,7 +42,6 @@ class ProfilePopup extends React.Component {
                 	<img className="profilePic" src="/profile_img.png" alt="Profile"/>
 
                     <label>Username: {this.state.account.username}</label>
-
                     <div className="profileButtons">
                     	<Button variant="secondary" onClick={this.handleChangeNamePopup}>Change Name</Button>
                     	<Button variant="secondary" onClick={this.handleChangePasswordPopup}>Change Password</Button>

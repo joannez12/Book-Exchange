@@ -81,15 +81,28 @@ router.route('/:id/change-username').patch((req, res) => {
 	if (!ObjectID.isValid(id)) {
 		res.status(404).json('invalid id')
 	} else {
-		User.findByIdAndUpdate(id, {$set: {"username": req.body.username}}, {new: true, runValidators: true, useFindAndModify: false}).then((user) => {
+		User.findOne({username: req.body.username}).then((user) => {
 			if (!user) {
-				res.status(404).json({error: 'user not found'})
-			} else {   
-				res.json({success: 'username updated'})
+				User.findByIdAndUpdate(id, {$set: {"username": req.body.username}}, {new: true, runValidators: true, useFindAndModify: false}).then((user) => {
+					if (!user) {
+						res.status(404).json({error: 'user not found'})
+					} else {   
+						res.json({success: 'username updated'})
+					}
+				}).catch((error) => {
+					if (error.errors['username']) {
+						res.status(400).json({error: error.errors['username'].message})
+					} else{
+						res.status(400).json('Error: ' + error)
+					}
+				})
+			} else {
+				res.status(400).json({error: 'username already exists'})
 			}
 		}).catch((error) => {
 			res.status(400).json('Error: ' + error)
 		})
+
 	}
 		
 })
@@ -100,14 +113,28 @@ router.route('/:id/change-password').patch((req, res) => {
 	if (!ObjectID.isValid(id)) {
 		res.status(404).json('invalid id')
 	} else {
-		User.findByIdAndUpdate(id, {$set: {"password": req.body.password}}, {new: true, runValidators: true, useFindAndModify: false}).then((user) => {
-			if (!user) {
-				res.status(404).json('user not found')
-			} else {   
-				res.json('password updated')
-			}
-		}).catch((error) => res.status(400).json('Error: ' + error))
+		let pass = req.body.password
+		if (pass.length >= 3) {
+			bcrypt.genSalt(10, (err, salt) => {
+				bcrypt.hash(pass, salt, (err, hash) => {
+					pass = hash
+
+					User.findByIdAndUpdate(id, {$set: {"password": pass}}, {new: true, useFindAndModify: false}).then((user) => {
+						if (!user) {
+							res.status(404).json({error: 'user not found'})
+						} else {   
+							res.json({success: 'password updated'})
+						}
+					}).catch((error) => {
+						res.status(400).json('Error: ' + error)
+					})
+				})
+			})
+		} else {
+			res.status(400).json({error: 'password needs to be min 3 characters'})
+		}
 	}
+
 })
 
 router.route('/:id').delete((req, res) => {

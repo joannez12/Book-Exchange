@@ -5,6 +5,8 @@ import users from '../../users';
 
 import './ChangePasswordPopup.css';
 
+import {changePassword} from '../../actions/user';
+
 
 class ChangePasswordPopup extends React.Component {
     state = {
@@ -26,24 +28,11 @@ class ChangePasswordPopup extends React.Component {
 
 
     submitChange = (event) => {
-
-        if (this.state.password === "" || this.state.confirmPassword === "") {
-            this.setState({ error: "password required" })
-        } else if (this.state.password !== this.state.confirmPassword) {
+        if (this.state.password !== this.state.confirmPassword) {
             this.setState({error: "passwords don't match"})
         } else {
-            /* gets users from server, requires server call */
-            users[this.state.user.id - 1].password = this.state.password
-            this.setState({success: "password changed"})
-
-            this.setState({
-                user: this.props.user,
-                users: users,
-                password: "",
-                confirmPassword: "",
-                error: ""
-            })
-        } 
+            changePassword(this) 
+        }
     }
 
     render() {
