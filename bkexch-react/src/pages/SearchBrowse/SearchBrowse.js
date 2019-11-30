@@ -3,7 +3,7 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import TextbookList from '../../components/TextbookList/TextbookList';
 import './SearchBrowse.css';
 import axios from 'axios';
-
+import {getTextbooks} from '../../actions/textbook'
 //Textbooks will be received from a server but is harded coded for part 1
 // import textbooks from '../../textbooks';
 

@@ -5,32 +5,11 @@ import {deletePost} from '../../helper';
 import './ViewTextbook.css';
 import {Button} from "react-bootstrap";
 import {useHistory} from 'react-router-dom';
-import axios from 'axios';
-
-function getPost(id) {
-    // this.setState({textbooks: textbooks})
-    console.log("getting textbooks from server!", id)
-    axios.get(`http://localhost:3001/textbooks/${id}`)
-    .then(response => {
-      if (response.data) {
-          console.log("From server: textbook ", response.data)
-          return [response.data]
-      }
-    })
-    .catch((error) => {
-      console.log("   error!!")  
-      console.log(error);
-      return []
-    })
-}
 
 function ViewTextbook(props) {
     let {id} = useParams();
     let history = useHistory();
-    console.log("viewtestbook: id", useParams())
     const textbook = textbooks.filter((book) => {return parseInt(book.id) === parseInt(id)})
-    // const textbook = getPost(id)
-    console.log(textbook)
     let isAdmin;
     if (props.user) {
         isAdmin = props.user.isAdmin

@@ -6,24 +6,24 @@ import exchanges from "./exchange";
 
 import MyPostTable from "../../components/HistoryBrowse/MyPostTable";
 import HistoryTable from "../../components/HistoryBrowse/HistoryTable";
-
+import axios from 'axios';
 
 
 class HistoryBrowse extends React.Component {
     state = {
         account:this.props.user,   
         exchanges: exchanges,  
-        posts: posts,          
+        posts: [],          
     }
 
     getMyPosts(account, posts){
         // gets textbooks from server, requires server call
-        return posts.filter(post => post.seller === account.name);
+        return posts.filter(post => post.seller === this.props.user.username);
     }
 
     getMyExchange(account, exchanges){
         // get exchanges from server, requires server call
-        return exchanges.filter(exchange => exchange.seller === account.name);
+        return exchanges.filter(exchange => exchange.seller === this.props.user.name);
     }
 
     deletePost(post){
@@ -44,6 +44,20 @@ class HistoryBrowse extends React.Component {
             }
         }
         this.setState({exchanges: exchanges});
+    }
+
+    componentDidMount(){
+        console.log("history browse")
+        axios.get('http://localhost:3001/textbooks/')
+        .then(response => {
+          if (response.data.length > 0) {
+              console.log(response.data)
+              this.setState({posts: response.data})
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        })
     }
 
 

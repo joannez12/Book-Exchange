@@ -31,6 +31,8 @@ class App extends React.Component {
 
   handleSignin = (user) => {
     user === -1 ? this.setState({user: null}) : this.setState({user: user})
+    console.log("handleSigin:", this.state.user)
+
   }
 
   handleSendMessage = (selectedBook, user) => {

@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const postTextbook = (textbook, postTextbook) => {
 	const request = new Request('http://localhost:3001/textbooks', {
     	method: 'post',
@@ -31,4 +33,18 @@ export const postTextbook = (textbook, postTextbook) => {
     	console.log(error)
     })  
 
+}
+
+export const getTextbooks = () => {
+    console.log("getting textbooks from server!")
+        axios.get('http://localhost:3001/textbooks/')
+        .then(response => {
+          if (response.data.length > 0) {
+              console.log(response.data)
+              return response.data
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        })
 }

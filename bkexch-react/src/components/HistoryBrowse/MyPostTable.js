@@ -4,7 +4,7 @@ import {Table, ButtonGroup, DropdownButton, Dropdown} from "react-bootstrap";
 import exchanges from "../../pages/HistoryBrowse/exchange";
 function MyPostTableHepler(post,deletePost, onEditButtonPress, onSoldButtonPress){
     return(
-        <tr key={post.id} >
+        <tr key={post._id} >
             <td>{post.title}</td>
             <td>{post.author}</td>
             <td>{post.price}</td>
@@ -137,7 +137,7 @@ class MyPostTable extends React.Component {
 
     handlePost = (post, editingPost, deletePost, onEditButtonPress, onSubmitButtonPress, onEditCancelButtonPress, onSoldButtonPress) => {
         if(editingPost && post === editingPost){
-            return <EditingPost key={post.id} post={post} onSubmitButtonPress={onSubmitButtonPress} onEditCancelButtonPress={onEditCancelButtonPress} />;
+            return <EditingPost key={post._id} post={post} onSubmitButtonPress={onSubmitButtonPress} onEditCancelButtonPress={onEditCancelButtonPress} />;
         }else{
             return MyPostTableHepler(post, deletePost, onEditButtonPress, onSoldButtonPress);
         }
