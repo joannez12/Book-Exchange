@@ -2,25 +2,45 @@ import React from 'react';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import TextbookList from '../../components/TextbookList/TextbookList';
 import './SearchBrowse.css';
+import axios from 'axios';
 
 //Textbooks will be received from a server but is harded coded for part 1
-import textbooks from '../../textbooks';
+// import textbooks from '../../textbooks';
 
 class SearchBrowse extends React.Component {
-    state = {
-        textbooks: textbooks,
-        searchfield: ''
-    }
+    constructor(props) {
+        super(props);    
+        this.state = {
+            textbooks: [],
+            searchfield: ''
+        };
+      }
+    // state = {
+    //     textbooks: textbooks,
+    //     searchfield: ''
+    // }
+
 
     handleSearch = (searchfield) => {
         this.setState({searchfield: searchfield})
     }
 
     updatePosts = () => {
-        this.setState({textbooks: textbooks})
+        // this.setState({textbooks: textbooks})
+        console.log("getting textbooks from server!")
+        axios.get('http://localhost:3001/textbooks/')
+        .then(response => {
+          if (response.data.length > 0) {
+              this.setState({textbooks: response.data})
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        })
     }
 
     componentDidMount() {
+        console.log("search Browse mounted")
         this.updatePosts()
     }
 

@@ -14,7 +14,7 @@ function TextbookList({textbooks, updatePosts, user}) {
             {
             	/* gets textbooks from server, requires server call */
                 textbooks.map(textbook => (
-                    <TextbookListing key={textbook.id} textbook={textbook} updatePosts={updatePosts} isAdmin={isAdmin}/>
+                    <TextbookListing key={textbook._id} textbook={textbook} updatePosts={updatePosts} isAdmin={isAdmin}/>
                 ))
             }
         </div>

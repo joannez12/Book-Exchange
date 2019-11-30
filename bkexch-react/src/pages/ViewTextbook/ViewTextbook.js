@@ -9,8 +9,7 @@ import {useHistory} from 'react-router-dom';
 function ViewTextbook(props) {
     let {id} = useParams();
     let history = useHistory();
-    
-    //Get textbook from server, requires server call
+
     const textbook = textbooks.filter((book) => {return parseInt(book.id) === parseInt(id)})
 
     let isAdmin;
