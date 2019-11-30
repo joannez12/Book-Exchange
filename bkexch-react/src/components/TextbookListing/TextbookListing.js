@@ -6,7 +6,9 @@ import {useHistory} from 'react-router-dom';
 import './TextbookListing.css';
 
 function TextbookListing({ textbook, updatePosts, isAdmin }) {
-    const { id, title, author, seller, price} = textbook;
+    // const { id, title, author, seller, price} = textbook;
+    const { _id, title, author, seller, price} = textbook;
+    const id = _id;
     let history = useHistory();
     return (
             <Card className='listing' onClick={() => history.push(`/textbooks/${id}`)}>
