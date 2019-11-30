@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import './PostPopUp.css';
 import textbooks from '../../textbooks';
 
+import {postTextbook} from '../../actions/textbook'
+
 class PostPopUp extends React.Component {
     state = {
     	textbooks: textbooks,
@@ -14,7 +16,9 @@ class PostPopUp extends React.Component {
         imgUrl: "",
         titleMsg: "",
         authorMsg: "",
-        priceMsg: ""
+        priceMsg: "",
+        descriptionMsg: "",
+        imgUrlMsg: ""
     }
 
     handleInputChange = (event) => {
@@ -39,26 +43,19 @@ class PostPopUp extends React.Component {
         } else if (this.state.price !== parseInt(this.state.price).toString() || this.state.price !== parseFloat(this.state.price).toString()) {
         	this.setState({ priceMsg: "invalid price"})
         }
-        
-
-        if (this.state.title !== "" && this.state.author !== "" && this.state.price !== "" && (this.state.price === parseInt(this.state.price).toString() || this.state.price === parseFloat(this.state.price).toString())) {
-            /* gets textbooks from server, requires server call */
-            textbooks.push({id: textbooks[this.state.textbooks.length - 1].id + 1, title: this.state.title, author: this.state.author, seller: this.props.user.name, price: this.state.price, description: this.state.description, imgUrl: this.state.imgUrl})
-
-            this.setState({
-            	textbooks: textbooks,
-                title: "",
-                author: "",
-                price: "",
-                imgUrl: "",
-                description: "",
-                titleMsg: "",
-                authorMsg: "",
-                priceMsg: ""
-            })
-            this.props.addPost();
-            this.props.onHide();
+        if (this.state.description === "") {
+            this.setState({ descriptionMsg: "description required" })
         }
+        if (this.state.imgUrl === "") {
+            this.setState({ imgUrlMsg: "image url required" })
+        }
+        
+        if (this.state.title !== "" && this.state.author !== "" && this.state.price !== "" && (this.state.price === parseInt(this.state.price).toString() || this.state.price === parseFloat(this.state.price).toString()) 
+            && this.state.description !== "" && this.state.imgUrl) {
+            const textbook = {title: this.state.title, author: this.state.author, seller: this.props.user.username, description: this.state.description, imgUrl: this.state.imgUrl, price: this.state.price }
+            postTextbook(textbook, this)
+        }
+
     }
 
     render() {
@@ -101,6 +98,7 @@ class PostPopUp extends React.Component {
                         onChange={this.handleInputChange}
                         name="imgUrl"
                         placeholder = "" />
+                    <p id="imgUrlMsg">{this.state.imgUrlMsg}</p>
 
                     <label>Description:</label>
                     <input className="input" type="text"
@@ -108,6 +106,7 @@ class PostPopUp extends React.Component {
                         onChange={this.handleInputChange}
                         name="description"
                         placeholder = "" />
+                    <p id="descriptionMsg">{this.state.descriptionMsg}</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={this.props.onHide}>Close</Button>

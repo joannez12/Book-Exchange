@@ -35,13 +35,13 @@ class ProfilePopup extends React.Component {
             <Modal {...other} animation={false}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        {this.state.account.username}
+                        {this.props.user.username}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 	<img className="profilePic" src="/profile_img.png" alt="Profile"/>
 
-                    <label>Username: {this.state.account.username}</label>
+                    <label>Username: {this.props.user.username}</label>
                     <div className="profileButtons">
                     	<Button variant="secondary" onClick={this.handleChangeNamePopup}>Change Name</Button>
                     	<Button variant="secondary" onClick={this.handleChangePasswordPopup}>Change Password</Button>
@@ -53,9 +53,9 @@ class ProfilePopup extends React.Component {
                     <Button variant="secondary" onClick={this.props.onHide}>Close</Button>
                 </Modal.Footer>
             </Modal>
-            {this.state.changeName ? <ChangeNamePopup show={this.state.changeName} onHide={() => this.setState({ changeName: false })} user={this.state.account} /> : null }
-            {this.state.changePassword ? <ChangePasswordPopup show={this.state.changePassword} onHide={() => this.setState({ changePassword: false })} user={this.state.account} /> : null }
-            {this.state.deleteAccount ? <DeleteAccountPopup show={this.state.deleteAccount} hideProfile={this.props.onHide} onHide={()=>this.setState({deleteAccount: false})} user={this.state.account} deleted={this.props.deleted}/> : null }
+            {this.state.changeName ? <ChangeNamePopup show={this.state.changeName} onHide={() => this.setState({ changeName: false })} user={this.props.user} /> : null }
+            {this.state.changePassword ? <ChangePasswordPopup show={this.state.changePassword} onHide={() => this.setState({ changePassword: false })} user={this.props.user} /> : null }
+            {this.state.deleteAccount ? <DeleteAccountPopup show={this.state.deleteAccount} hideProfile={this.props.onHide} onHide={()=>this.setState({deleteAccount: false})} user={this.props.user} deleted={this.props.deleted}/> : null }
             </>
         )
     }

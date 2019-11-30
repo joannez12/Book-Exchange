@@ -5,7 +5,7 @@
   	display: inline-block;
 }
 
-#titleMsg, #authorMsg, #priceMsg {
+#titleMsg, #authorMsg, #priceMsg, #descriptionMsg, #imgUrlMsg {
 	font-size: 12px;
 	color: red;
 }

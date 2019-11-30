@@ -9,7 +9,10 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SendMessage from "./pages/MessageBox/SendMessage";
 import ReplyMessage from "./pages/MessageBox/ReplyMessage";
-import messages, {deleteMessage} from "./messages";
+//import messages, {deleteMessage} from "./messages";
+import messages from "./messages"
+import {sendMessage, deleteMessage} from './actions/message';
+
 class App extends React.Component {
   state =  {
     user: null,
@@ -22,8 +25,8 @@ class App extends React.Component {
   }
 
   handleDeletedMessage = (message) => {
-    deleteMessage(message);
-    this.setState({deletedMessage: message});
+    deleteMessage(message, this);
+    //this.setState({deletedMessage: message});
   }
 
   handleSignin = (user) => {
@@ -57,8 +60,10 @@ class App extends React.Component {
   }
 
   handleMessage = (message) => {
-    messages.unshift(message);
-    this.setState(prevState => ({message: message, replyMessage: false, sendMessage: false}))
+    //messages.unshift(message);
+    //this.setState(prevState => ({message: message, replyMessage: false, sendMessage: false}))
+    sendMessage(message, this)
+
   }
 
   render() {

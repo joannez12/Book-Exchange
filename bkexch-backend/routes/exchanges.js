@@ -7,8 +7,8 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err))
 })
 
-router.route('/add').post((req, res) => {
-    console.log("       adding exchange!")
+router.route('/').post((req, res) => {
+    console.log("adding exchange!")
 
     const from = req.body.from;
     const to = req.body.to;

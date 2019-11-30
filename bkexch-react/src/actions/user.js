@@ -64,7 +64,7 @@ export const login = (login) => {
 }
 
 export const changeName = (changeName) => {
-	const request = new Request(`http://localhost:3001/users/${changeName.state.user._id}/change-username`, {
+	const request = new Request(`http://localhost:3001/users/${changeName.props.user._id}/change-username`, {
     	method: 'PATCH',
         body: JSON.stringify({username: changeName.state.name}),
         headers: {
@@ -130,11 +130,11 @@ export const deleteAccount = (deleteAccount) => {
 
 	fetch(request)
 	.then(function(res) {
-		console.log(res)
+		if (res.status === 200) {
+			deleteAccount.props.hideProfile();
+			deleteAccount.props.deleted();
+		}
 	}).catch((error) => {
 		console.log(error)
 	})  
-
-	deleteAccount.props.hideProfile();
-	deleteAccount.props.deleted();
 }
