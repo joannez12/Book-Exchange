@@ -15,7 +15,7 @@ export const postTextbook = (textbook) => {
     .then(function(res) {
     	return res
     }).catch((error) => {
-    	console.log(error)
+    	return error.response
     })  
 
 }

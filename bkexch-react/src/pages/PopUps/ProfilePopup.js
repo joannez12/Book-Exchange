@@ -16,6 +16,7 @@ class ProfilePopup extends React.Component {
         deleteAccount: false
     }
 
+
     handleChangeNamePopup = () => {
         this.setState(prevState => ({ changeName: !prevState.changeName}))
     }
@@ -29,7 +30,7 @@ class ProfilePopup extends React.Component {
     }
 
     render() {
-        const { deleted, ...other } = this.props;
+        const { updateUser, deleted, ...other } = this.props;
         return (
         	<>
             <Modal {...other} animation={false}>
@@ -53,7 +54,7 @@ class ProfilePopup extends React.Component {
                     <Button variant="secondary" onClick={this.props.onHide}>Close</Button>
                 </Modal.Footer>
             </Modal>
-            {this.state.changeName ? <ChangeNamePopup show={this.state.changeName} onHide={() => this.setState({ changeName: false })} user={this.props.user} /> : null }
+            {this.state.changeName ? <ChangeNamePopup show={this.state.changeName} onHide={() => this.setState({ changeName: false })} user={this.props.user} updateUser = {this.props.updateUser}/> : null }
             {this.state.changePassword ? <ChangePasswordPopup show={this.state.changePassword} onHide={() => this.setState({ changePassword: false })} user={this.props.user} /> : null }
             {this.state.deleteAccount ? <DeleteAccountPopup show={this.state.deleteAccount} hideProfile={this.props.onHide} onHide={()=>this.setState({deleteAccount: false})} user={this.props.user} deleted={this.props.deleted}/> : null }
             </>

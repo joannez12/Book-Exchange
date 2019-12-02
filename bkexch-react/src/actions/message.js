@@ -5,7 +5,7 @@ export const getMessages = (messages) => {
 	.then(function(res) {
 		return res
 	}).catch((error) => {
-		console.log(error)
+		return error.response
 	})
 }
 
@@ -24,7 +24,7 @@ export const sendMessage = (message) => {
 	.then(function(res) {
 		return res
 	}).catch((error) => {
-		console.log(error)
+		return error.response
 	})
 }
 
@@ -33,6 +33,6 @@ export const deleteMessage = (message) => {
 	.then(function(res) {
 		return res
 	}).catch((error) => {
-		console.log(error)
+		return error.response
 	})
 }

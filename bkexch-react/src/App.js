@@ -12,6 +12,7 @@ import ReplyMessage from "./pages/MessageBox/ReplyMessage";
 //import messages, {deleteMessage} from "./messages";
 //import messages from "./messages"
 import {sendMessage, deleteMessage} from './actions/message';
+import {getUser} from './actions/user'
 
 class App extends React.Component {
   state =  {
@@ -76,11 +77,20 @@ class App extends React.Component {
 
   }
 
+  updateUser = () => {
+    getUser(this.state.user._id)
+    .then((res) => {
+      if (res.status === 200) {
+        this.setState({user: res.data})
+      }
+    }).catch((error) => console.log(error))
+  }
+
   render() {
     return (
       <div className="App">
         <Router>
-          <MainHeader user={this.state.user} handleSignin={this.handleSignin} addPost={()=>this.setState({addPost: !this.state.addPost})} deleted={()=>this.setState({user: null})} />
+          <MainHeader updateUser={this.updateUser} user={this.state.user} handleSignin={this.handleSignin} addPost={()=>this.setState({addPost: !this.state.addPost})} deleted={()=>this.setState({user: null})} />
           <Switch>
             <Route exact path="/" component={SearchBrowse} />
             {this.state.user ? <Route exact path="/messagebox" component={ () => <MessageBox user={this.state.user} handleReplyMessage={this.handleReplyMessage.bind(this)} handleDeletedMessage={this.handleDeletedMessage.bind(this)} />}  /> : null }

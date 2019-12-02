@@ -43,6 +43,8 @@ class ChangeNamePopup extends React.Component {
                         confirmName: "",
                         error: "",
                     })
+
+                    this.props.updateUser()
                 } else {
                     if (res.data.error) {
                         this.setState({error: res.data.error})
@@ -53,7 +55,7 @@ class ChangeNamePopup extends React.Component {
     }
 
     render() {
-        const { update,...other } = this.props;
+        const { updateUser,...other } = this.props;
         return (
             <Modal {...other} animation={false}>
                 <Modal.Header closeButton>

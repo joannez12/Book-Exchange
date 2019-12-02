@@ -5,8 +5,16 @@ export const getUsers = () => {
     .then(res => {
     	return res
     }).catch((error) => {
-    	console.log(error)
+    	return error.response
     })
+}
+
+export const getUser = (id) => {
+	return axios(`http://localhost:3001/users/${id}`)
+    .then((res) => {
+      console.log(res.data)
+      return res
+    }).catch((error) => {return error.response})
 }
 
 export const signup = (signupData) => {
@@ -24,7 +32,7 @@ export const signup = (signupData) => {
     .then(function(res) {
     	return res
     }).catch((error) => {
-    	console.log(error)
+    	return error.response
     })  
 }
 
@@ -81,7 +89,7 @@ export const changePassword = (id, newPassword) => {
     .then(function(res) {
     	return res
     }).catch((error) => {
-    	console.log(error)
+    	return error.response
     })  
 }
 
@@ -90,6 +98,6 @@ export const deleteAccount = (id) => {
 	.then(function(res) {
 		return res
 	}).catch((error) => {
-		console.log(error)
+		return error.response
 	})  
 }
