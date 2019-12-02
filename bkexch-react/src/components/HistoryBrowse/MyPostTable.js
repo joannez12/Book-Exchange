@@ -2,6 +2,7 @@ import React from 'react';
 import '../../pages/HistoryBrowse/HistoryBrowse.css';
 import {Table, ButtonGroup, DropdownButton, Dropdown} from "react-bootstrap";
 import exchanges from "../../pages/HistoryBrowse/exchange";
+import {updateTextbook} from "../../actions/textbook"
 function MyPostTableHepler(post,deletePost, onEditButtonPress, onSoldButtonPress){
     return(
         <tr key={post._id} >
@@ -114,7 +115,15 @@ class MyPostTable extends React.Component {
     };
 
     onSubmitButtonPress = (newPost) => {
-        this.setState({editingPost: null});
+        updateTextbook(newPost).then(res=>{
+            if(res.status === 200){
+                console.log("updating textbook done")
+                this.setState({editingPost: null});
+            }else{
+                console.log("fail to update textbook")
+            }
+        })
+        // this.setState({editingPost: null});
     };
 
     onEditCancelButtonPress = () => {

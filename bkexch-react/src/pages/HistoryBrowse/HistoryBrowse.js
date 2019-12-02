@@ -7,13 +7,14 @@ import exchanges from "./exchange";
 import MyPostTable from "../../components/HistoryBrowse/MyPostTable";
 import HistoryTable from "../../components/HistoryBrowse/HistoryTable";
 import axios from 'axios';
-
+import {getTextbooks, deleteTextbook} from "../../actions/textbook";
 
 class HistoryBrowse extends React.Component {
     state = {
         account:this.props.user,   
         exchanges: exchanges,  
-        posts: [],          
+        posts: [],
+        deletedPost: null
     }
 
     getMyPosts(account, posts){
@@ -28,12 +29,15 @@ class HistoryBrowse extends React.Component {
 
     deletePost(post){
         // gets textbooks from server, requires server call
-        for(let i = 0; i<posts.length; i++){
-            if(posts[i] === post){
-                posts.splice(i,1);
+        deleteTextbook(post).then(res=>{
+            if(res.status === 200){
+                console.log("deletion done!")
+                this.setState({deletedPost: res.data})
+            }else{
+                console.log("fail to delete post")
             }
         }
-        this.setState({posts: posts});
+        )
     }
 
     deleteHistory(exchange){
@@ -48,16 +52,26 @@ class HistoryBrowse extends React.Component {
 
     componentDidMount(){
         console.log("history browse")
-        axios.get('http://localhost:3001/textbooks/')
-        .then(response => {
-          if (response.data.length > 0) {
-              console.log(response.data)
-              this.setState({posts: response.data})
-          }
+        getTextbooks().then(res => {
+            if(res.status === 200){
+                console.log(res)
+                this.setState({posts:res.data})
+            }
+            else{
+                console.log("error found!")
+                this.setState({posts: []})
+            }
         })
-        .catch((error) => {
-          console.log(error);
-        })
+        console.log("here", this.state.posts)
+        // axios.get('http://localhost:3001/textbooks/')
+        // .then(response => {
+        //   if (response.data.length > 0) {
+        //       this.setState({posts: response.data})
+        //   }
+        // })
+        // .catch((error) => {
+        //   console.log(error);
+        // })
     }
 
 

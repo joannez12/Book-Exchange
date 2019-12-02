@@ -32,6 +32,7 @@ router.route('/').post((req, res) => {
 })
 
 router.route('/:id').get((req, res) => {
+    console.log("getting textbook id:", req.params.id)
     Textbook.findById(req.params.id)
         .then(textbook => res.json(textbook))
         .catch(err => res.status(400).json('Error: ' + err));
