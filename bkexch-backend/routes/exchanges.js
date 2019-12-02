@@ -10,14 +10,23 @@ router.route('/').get((req, res) => {
 router.route('/').post((req, res) => {
     console.log("adding exchange!")
 
-    const from = req.body.from;
-    const to = req.body.to;
-    const textbookID = req.body.textbookID;
+    const book = req.body.book;
+    const author = req.body.author;
+    const price = Number(req.body.price);
     const newExchange = new Exchange({
-        from,
-        to,
-        textbookID,
-    });
+        book,
+        author,
+        price
+    })
+
+    // const from = req.body.from;
+    // const to = req.body.to;
+    // const textbookID = req.body.textbookID;
+    // const newExchange = new Exchange({
+    //     from,
+    //     to,
+    //     textbookID,
+    // });
 
     newExchange.save()
         .then(() => res.json('Exchange added!'))
@@ -39,9 +48,9 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
     Exchange.findById(req.params.id)
         .then(exchange => {
-            exchange.from = req.body.from;
-            exchange.to = req.body.to;
-            exchange.textbookID = req.body.textbookID;
+            exchange.book = req.body.book;
+            exchange.author = req.body.author;
+            exchange.price = Number(req.body.price);
             exchange.save()
                 .then(() => res.json('Exchange updated!'))
                 .catch(err => res.status(400).json('Error: ' + err));

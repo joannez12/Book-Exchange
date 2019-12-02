@@ -2,7 +2,10 @@ import React from 'react';
 import '../../pages/HistoryBrowse/HistoryBrowse.css';
 import {Table, ButtonGroup, DropdownButton, Dropdown} from "react-bootstrap";
 import exchanges from "../../pages/HistoryBrowse/exchange";
-import {updateTextbook} from "../../actions/textbook"
+import {updateTextbook, deleteTextbook} from "../../actions/textbook"
+import {postExchange} from "../../actions/exchange";
+import textbooks from '../../textbooks';
+
 function MyPostTableHepler(post,deletePost, onEditButtonPress, onSoldButtonPress){
     return(
         <tr key={post._id} >
@@ -93,7 +96,7 @@ class EditingPost extends React.Component{
                 /></td>
 
                 <td>
-                    <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-vertical-dropdown-1">
+                    <DropdownButton as={ButtonGroup} title="Actions" id="bg-vertical-dropdown-1">
                         <Dropdown.Item eventKey="1" onClick={() => {this.submitEditedPost()}}>Submit</Dropdown.Item>
                         <Dropdown.Item eventKey="2" onClick={() => {onEditCancelButtonPress()}}>Cancel</Dropdown.Item>
                     </DropdownButton>
@@ -133,15 +136,27 @@ class MyPostTable extends React.Component {
     onSoldButtonPress = (textbook) => {
         const d = new Date();
         this.props.deletePost(textbook);
+        // const newExchange = {
+        //     // id: d.getTime(),
+        //     title: textbook.title,
+        //     author: textbook.author,
+        //     seller: this.props.user.name,
+        //     date: d.toLocaleTimeString(),
+        //     price: textbook.price,
+        // };
         const newExchange = {
-            id: d.getTime(),
-            title: textbook.title,
-            author: textbook.author,
-            seller: this.props.user.name,
-            date: d.toLocaleTimeString(),
-            price: textbook.price,
-        };
-        exchanges.push(newExchange);
+            from: textbook.seller,
+            to: "unknown",
+            textbookID: textbook._id,
+        }
+        postExchange(newExchange).then(res=>{
+            if(res.status === 200){
+                console.log("posting exchange done")
+            }else{
+                console.log("fail to post exchange")
+            }
+        })
+        // exchanges.push(newExchange);
     };
 
     handlePost = (post, editingPost, deletePost, onEditButtonPress, onSubmitButtonPress, onEditCancelButtonPress, onSoldButtonPress) => {
