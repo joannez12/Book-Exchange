@@ -145,10 +145,12 @@ class MyPostTable extends React.Component {
         //     price: textbook.price,
         // };
         const newExchange = {
-            from: textbook.seller,
-            to: "unknown",
-            textbookID: textbook._id,
+            from: this.props.user.username,
+            book: textbook.title,
+            author: textbook.author,
+            price: textbook.price,
         }
+        console.log(newExchange)
         postExchange(newExchange).then(res=>{
             if(res.status === 200){
                 console.log("posting exchange done")

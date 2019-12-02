@@ -8,13 +8,14 @@ import MyPostTable from "../../components/HistoryBrowse/MyPostTable";
 import HistoryTable from "../../components/HistoryBrowse/HistoryTable";
 import axios from 'axios';
 import {getTextbooks, deleteTextbook} from "../../actions/textbook";
-
+import {getExchanges, deleteExchange} from "../../actions/exchange";
 class HistoryBrowse extends React.Component {
     state = {
         account:this.props.user,   
         exchanges: exchanges,  
         posts: [],
-        deletedPost: null
+        deletedPost: null,
+        deletedExchange: null,
     }
 
     getMyPosts(account, posts){
@@ -24,7 +25,7 @@ class HistoryBrowse extends React.Component {
 
     getMyExchange(account, exchanges){
         // get exchanges from server, requires server call
-        return exchanges.filter(exchange => exchange.seller === this.props.user.name);
+        return exchanges.filter(exchange => exchange.from === this.props.user.username);
     }
 
     deletePost(post){
@@ -33,6 +34,7 @@ class HistoryBrowse extends React.Component {
             if(res.status === 200){
                 console.log("deletion done!")
                 this.setState({deletedPost: res.data})
+                
             }else{
                 console.log("fail to delete post")
             }
@@ -42,12 +44,24 @@ class HistoryBrowse extends React.Component {
 
     deleteHistory(exchange){
         // gets exchanges from server, requires server call
-        for(let i = 0; i<exchanges.length; i++){
-            if(exchanges[i] === exchange){
-                exchanges.splice(i,1);
+        // for(let i = 0; i<exchanges.length; i++){
+        //     if(exchanges[i] === exchange){
+        //         exchanges.splice(i,1);
+        //     }
+        // }
+        // this.setState({exchanges: exchanges});
+        deleteExchange(exchange).then(
+            res=>{
+                if(res.status === 200){
+                    console.log(res)
+                    this.setState({deletedExchange: res.data})
+                }
+                else{
+                    console.log("error found!")
+                }
             }
-        }
-        this.setState({exchanges: exchanges});
+        )
+
     }
 
     componentDidMount(){
@@ -56,6 +70,16 @@ class HistoryBrowse extends React.Component {
             if(res.status === 200){
                 console.log(res)
                 this.setState({posts:res.data})
+            }
+            else{
+                console.log("error found!")
+                this.setState({posts: []})
+            }
+        })
+        getExchanges().then(res => {
+            if(res.status === 200){
+                console.log(res.data)
+                this.setState({exchanges:res.data})
             }
             else{
                 console.log("error found!")
@@ -78,7 +102,7 @@ class HistoryBrowse extends React.Component {
     render() {
         return(
             <div className="page">
-                { this.state.account ? <> <h4>User Name: {this.state.account.name}</h4>
+                { this.state.account ? <> <h4>User Name: {this.state.account.username}</h4>
                 <h4>My Posts</h4>
 
                 <MyPostTable

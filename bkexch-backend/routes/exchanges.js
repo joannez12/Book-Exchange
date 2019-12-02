@@ -9,11 +9,12 @@ router.route('/').get((req, res) => {
 
 router.route('/').post((req, res) => {
     console.log("adding exchange!")
-
+    const from = req.body.from;
     const book = req.body.book;
     const author = req.body.author;
     const price = Number(req.body.price);
     const newExchange = new Exchange({
+        from,
         book,
         author,
         price
@@ -48,6 +49,7 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
     Exchange.findById(req.params.id)
         .then(exchange => {
+            exchange.from = req.body.from;
             exchange.book = req.body.book;
             exchange.author = req.body.author;
             exchange.price = Number(req.body.price);

@@ -4,10 +4,10 @@ import {Table, Button} from "react-bootstrap";
 
 function HistoryTableHepler(exchange, deleteHistory){
     return(
-        <tr key={exchange.id}>
-            <td>{exchange.title}</td>
+        <tr key={exchange._id}>
+            <td>{exchange.book}</td>
             <td>{exchange.author}</td>
-            <td>{exchange.date}</td>
+            <td>{exchange.createdAt}</td>
             <td>{exchange.price}</td>
             <td>
                 <Button
