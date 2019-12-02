@@ -19,17 +19,18 @@ class MessageBox extends React.Component{
 
     // getSentMessage = (messages) => {
     //     /* gets messages from server, requires server call */
-    //     const sentMessages = messages.filter(message=> message.from === this.props.user.name);
+    //     const sentMessages = messages.filter(message=> message.from === this.props.user.username);
     //     this.setState({sentMessages: sentMessages});
     // }
 
     // getInboxMessage = (messages) => {
-    //      gets messages from server, requires server call 
-    //     const inboxMessages = messages.filter(message=> message.to === this.props.user.name);
+    //      //gets messages from server, requires server call 
+    //     const inboxMessages = messages.filter(message=> message.to === this.props.user.username);
     //     this.setState({inboxMessages: inboxMessages});
     // }
 
     // componentDidMount() {
+    //     console.log(messages)
     //     this.getInboxMessage(messages);
     //     this.getSentMessage(messages);
     // }
@@ -45,7 +46,13 @@ class MessageBox extends React.Component{
     }
 
     componentDidMount() {
-        getMessages(this)
+        getMessages(this).then((res) => {
+            if (res.status === 200) {
+                this.setState({messages: res.data.reverse()})
+                this.getSentMessage()
+                this.getInboxMessage()
+            }
+        }).catch((error) => console.log(error))
     }
 
 

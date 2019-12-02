@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SendMessage from "./pages/MessageBox/SendMessage";
 import ReplyMessage from "./pages/MessageBox/ReplyMessage";
 //import messages, {deleteMessage} from "./messages";
-import messages from "./messages"
+//import messages from "./messages"
 import {sendMessage, deleteMessage} from './actions/message';
 
 class App extends React.Component {
@@ -24,15 +24,19 @@ class App extends React.Component {
     deletedMessage: null,
   }
 
+
   handleDeletedMessage = (message) => {
-    deleteMessage(message, this);
+    deleteMessage(message).then((res) => {
+      if (res.status === 200) {
+        this.setState({deletedMessage: message})
+      }
+    }).catch((error) => console.log(error))
+    //deleteMessage(message)
     //this.setState({deletedMessage: message});
   }
 
   handleSignin = (user) => {
     user === -1 ? this.setState({user: null}) : this.setState({user: user})
-    console.log("handleSigin:", this.state.user)
-
   }
 
   handleSendMessage = (selectedBook, user) => {
@@ -64,7 +68,11 @@ class App extends React.Component {
   handleMessage = (message) => {
     //messages.unshift(message);
     //this.setState(prevState => ({message: message, replyMessage: false, sendMessage: false}))
-    sendMessage(message, this)
+    sendMessage(message).then((res) => {
+      if (res.status === 200) {
+        this.setState(prevState => ({message: message, replyMessage: false, sendMessage: false}))
+      }
+    }).catch((error)=> alert("error occured"))
 
   }
 

@@ -53,7 +53,25 @@ class PostPopUp extends React.Component {
         if (this.state.title !== "" && this.state.author !== "" && this.state.price !== "" && (this.state.price === parseInt(this.state.price).toString() || this.state.price === parseFloat(this.state.price).toString()) 
             && this.state.description !== "" && this.state.imgUrl) {
             const textbook = {title: this.state.title, author: this.state.author, seller: this.props.user.username, description: this.state.description, imgUrl: this.state.imgUrl, price: this.state.price }
-            postTextbook(textbook, this)
+            
+            postTextbook(textbook).then((res) =>  {  
+                if (res.status === 200) {     
+                    this.setState({
+                        title: "",
+                        author: "",
+                        price: "",
+                        imgUrl: "",
+                        description: "",
+                        titleMsg: "",
+                        authorMsg: "",
+                        priceMsg: "",
+                        descriptionMsg: "",
+                        imgUrlMsg: ""
+                    })
+                    this.props.addPost()
+                    this.props.onHide()
+                }
+            }).catch((error) => console.log(error))
         }
 
     }
@@ -107,6 +125,7 @@ class PostPopUp extends React.Component {
                         name="description"
                         placeholder = "" />
                     <p id="descriptionMsg">{this.state.descriptionMsg}</p>
+
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={this.props.onHide}>Close</Button>

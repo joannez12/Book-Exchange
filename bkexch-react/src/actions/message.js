@@ -1,41 +1,37 @@
+import axios from 'axios';
+
 export const getMessages = (messages) => {
-	fetch('http://localhost:3001/messages')
+	return axios('http://localhost:3001/messages')
 	.then(function(res) {
-		return res.json()
-	}).then((json) => {
-		messages.setState({messages: json})
-		messages.getSentMessage()
-		messages.getInboxMessage()
-		
+		return res
 	}).catch((error) => {
 		console.log(error)
 	})
 }
 
-export const sendMessage = (message, instance) => {
-	const request = new Request('http://localhost:3001/messages', {
-		method: 'post',
-		body: JSON.stringify({from: message.from, to: message.to, text: message.text}),
-		headers: {
-			'Accept': 'application/json, text/plain, */*',
+export const sendMessage = (message) => {
+	const request = {
+    	method: 'post',
+        url: 'http://localhost:3001/messages/', 
+        data: message,
+        headers: {
+        	'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json'
-		}
-	})
+       }
+    }
 
-	fetch(request)
+	return axios(request)
 	.then(function(res) {
-		instance.setState(prevState => ({message: message, replyMessage: false, sendMessage: false}))
+		return res
 	}).catch((error) => {
 		console.log(error)
 	})
 }
 
-export const deleteMessage = (message, instance) => {
-	const request = new Request(`http://localhost:3001/messages/${message._id}`, {method: 'DELETE'})
-
-	fetch(request)
+export const deleteMessage = (message) => {
+	return axios.delete(`http://localhost:3001/messages/${message._id}`)
 	.then(function(res) {
-		instance.setState({deletedMessage: message})
+		return res
 	}).catch((error) => {
 		console.log(error)
 	})

@@ -27,15 +27,33 @@ class ChangeNamePopup extends React.Component {
 
 
     submitChange = (event) => {
-        if (this.state.name !== this.state.confirmName) {
-            this.setState({error: "names don't match"})
+        if (this.state.name === "" && this.state.confirmName === "") {
+            this.setState({error: "username required"})
+        } else if (this.state.name !== this.state.confirmName) {
+            this.setState({error: "usernames don't match"})
         } else {
-            changeName(this)
+            const newName = {username: this.state.name}
+            changeName(this.props.user._id, newName).then((res) => {
+                if (res.status === 200) {
+                    this.setState({success: res.data})
+
+                    this.setState({
+                        user: this.props.user,
+                        name: "",
+                        confirmName: "",
+                        error: "",
+                    })
+                } else {
+                    if (res.data.error) {
+                        this.setState({error: res.data.error})
+                    }
+                }
+            }).catch((error) => console.log(error))
         }
     }
 
     render() {
-        const { ...other } = this.props;
+        const { update,...other } = this.props;
         return (
             <Modal {...other} animation={false}>
                 <Modal.Header closeButton>

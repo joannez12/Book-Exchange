@@ -25,7 +25,12 @@ class DeleteAccountPopup extends React.Component {
         /* gets users from server, requires server call */
         //users.splice(this.state.user.id - 1, 1)
 
-        deleteAccount(this)
+        deleteAccount(this.props.user._id).then((res) => {
+            if (res.status === 200) {
+                this.props.hideProfile();
+                this.props.deleted();
+            }
+        }).catch((error) => console.log(error))
 
     }
 

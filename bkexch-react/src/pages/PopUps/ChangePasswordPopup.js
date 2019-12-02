@@ -28,10 +28,26 @@ class ChangePasswordPopup extends React.Component {
 
 
     submitChange = (event) => {
-        if (this.state.password !== this.state.confirmPassword) {
+        if (this.state.password === "" && this.state.confirmPassword === "") {
+            this.setState({error: "password required"})
+        } else if (this.state.password !== this.state.confirmPassword) {
             this.setState({error: "passwords don't match"})
+        } else if (this.state.confirmPassword.length < 3) {
+            this.setState({error: "password needs to be min 3 characters"})
         } else {
-            changePassword(this) 
+            const newPassword = {password: this.state.password}
+            changePassword(this.props.user._id, newPassword).then((res) => {
+                if (res.status === 200) {
+                    this.setState({success: res.data})
+
+                    this.setState({
+                        user: this.props.user,
+                        password: "",
+                        confirmPassword: "",
+                        error: ""
+                    })
+                }
+            }).catch((error) => console.log(error))
         }
     }
 

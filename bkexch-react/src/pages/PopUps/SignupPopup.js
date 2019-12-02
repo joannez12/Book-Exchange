@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import './SignupPopup.css';
 import users from '../../users';
 
-import {signup} from '../../actions/user';
+import {getUsers, signup} from '../../actions/user';
 
 class Input extends React.Component {
 	state = {
@@ -29,15 +29,50 @@ class Input extends React.Component {
 		if (input === "") {
 	 			this.setState({[type.concat("Msg")]: type.concat(" required")})
 	 			return
+		} else if (type === "username") {
+			getUsers().then((res) => {
+				if (res.status === 200) {
+					if (res.data.filter((user) => user.username === input).length > 0) {
+						this.setState({usernameMsg: "username already exist"})
+					} else {
+						this.setState({usernameMsg: ""})
+					}
+				} else {
+					this.setState({success: 'error occurred'})
+				}
+			}).catch((error) => console.log(error))
+			return
 		}
 		this.setState({[type.concat("Msg")]: ""})
 	}
 
 	submitChange = (event) => {
-		if (this.state.password !== this.state.confirmPassword) {
+		if (this.state.username === "") {
+			this.setState({usernameMsg: "username required"})
+		} else if (this.state.password === "" || this.state.confirmPassword === "") {
+			this.setState({passwordMsg: "password required"})
+		} else if (this.state.password !== this.state.confirmPassword) {
 			this.setState({passwordMsg: "passwords don't match"})
-		} else {
-		 	signup(this)
+		} else if (this.state.password.length < 3 || this.state.confirmPassword.length < 3) {
+			this.setState({passwordMsg: "password needs to be min 3 characters"})
+		} else if (this.state.usernameMsg === ""){
+			const signupData = {username: this.state.username, password: this.state.password}
+		 	signup(signupData).then((res) => {
+		 		if (res.status === 200) {
+		 			console.log(res)
+					this.setState({success: res.data})
+					this.setState({
+						username: "",
+						usernameMsg: "",
+						password: "",
+						confirmPassword: "",
+						passwordMsg: ""
+					})
+				} else  {
+					this.setState({success: 'error occurred'})
+				}
+
+			}).catch((error) => console.log(error))
 		}
 	}
 

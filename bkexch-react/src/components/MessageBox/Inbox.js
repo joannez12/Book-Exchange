@@ -4,11 +4,12 @@ import {ButtonGroup, Dropdown, DropdownButton, Table} from "react-bootstrap";
 class InboxMessage extends React.Component {
     render(){
         const {user, message,handleReplyMessage, handleDeletedMessage} = this.props;
+        const date = new Date(message.createdAt).toLocaleString()
         return(
             <tr key={message.id} >
                 <td>{message.from}</td>
                 <td>{message.text}</td>
-                <td>{message.date}</td>
+                <td>{date}</td>
                 <td>
                     <DropdownButton as={ButtonGroup} title="Reply or Delete" id="bg-vertical-dropdown-1">
                         <Dropdown.Item eventKey="1" onClick={()=>handleReplyMessage(user, message)} >Reply</Dropdown.Item>

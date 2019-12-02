@@ -46,7 +46,30 @@ class Input extends React.Component {
 	}
 
 	submitChange = (event) => {
-		login(this)
+		if (this.state.name === "") {
+			this.setState({nameMsg: "username required"})
+			return
+		} 
+		const loginData = {username: this.state.name, password: this.state.password}
+		login(loginData).then((res) => {
+			if (res.status === 200) {
+				console.log(res)
+				this.setState({
+					name: "",
+					nameMsg: "",
+					password: "",
+					passwordMsg: ""
+				})
+				this.props.handleSignin(res.data)
+				this.props.onHide()
+			} else {
+				if (res.data.usernameMsg) {
+					this.setState({nameMsg: res.data.usernameMsg})
+				} else if (res.data.passwordMsg) {
+					this.setState({passwordMsg: res.data.passwordMsg})
+				}
+			}
+		})
 	}
 
 	render() {

@@ -10,26 +10,9 @@ router.route('/').post((req, res) => {
 		isAdmin: false
     })
 
-    User.findOne({ username: req.body.username }).then((user) => {
-    	if (!user) {
-    		newUser.save().then(() => res.json({success: true, message: 'new user added'}))
-    		.catch((error) => {
-    			const message = [];
-    			if (error.errors['username']) {
-    				message.push(error.errors['username'].message)
-    			} else {
-    				message.push("")
-    			}
-    			if (error.errors['password']) {
-    				message.push(error.errors['password'].message)
-    			} else {
-    				message.push("")
-    			}
-    			res.status(400).json({success: false, message: message})
-    	})} else {
-    		res.status(409).json({success: false, message: ['username already exists', '']})
-    	}
-    }).catch((error) => res.status(400).json('Error: ' + 'error'))
+    newUser.save()
+        .then(() => res.json('new user created'))
+        .catch(err => res.status(400).json('Error: ' + err))
 })
 
 router.route('/login').post((req, res) => {
@@ -42,7 +25,7 @@ router.route('/login').post((req, res) => {
         } else {
         	bcrypt.compare(password, user.password, (err, result) => {
         		if (result) {
-        			res.json({currentUser: user})
+        			res.json(user)
         		} else {
         			res.status(401).json({passwordMsg: 'incorrect password'})
         		}
@@ -68,6 +51,7 @@ router.route('/:id').get((req, res) => {
 			if (!user) {
 				res.status(404).json('user not found')  
 			} else {
+				console.log(user)
 				res.json(user)
 			}
 		}).catch((error) => res.status(400).json('Error: ' + error))
@@ -83,18 +67,14 @@ router.route('/:id/change-username').patch((req, res) => {
 	} else {
 		User.findOne({username: req.body.username}).then((user) => {
 			if (!user) {
-				User.findByIdAndUpdate(id, {$set: {"username": req.body.username}}, {new: true, runValidators: true, useFindAndModify: false}).then((user) => {
+				User.findByIdAndUpdate(id, {$set: {"username": req.body.username}}, {new: true, useFindAndModify: false}).then((user) => {
 					if (!user) {
-						res.status(404).json({error: 'user not found'})
+						res.status(404).json('user not found')
 					} else {   
-						res.json({success: 'username updated'})
+						res.json('username updated')
 					}
 				}).catch((error) => {
-					if (error.errors['username']) {
-						res.status(400).json({error: error.errors['username'].message})
-					} else{
-						res.status(400).json('Error: ' + error)
-					}
+					res.status(400).json('Error: ' + error)
 				})
 			} else {
 				res.status(400).json({error: 'username already exists'})
@@ -102,7 +82,6 @@ router.route('/:id/change-username').patch((req, res) => {
 		}).catch((error) => {
 			res.status(400).json('Error: ' + error)
 		})
-
 	}
 		
 })
@@ -114,25 +93,21 @@ router.route('/:id/change-password').patch((req, res) => {
 		res.status(404).json('invalid id')
 	} else {
 		let pass = req.body.password
-		if (pass.length >= 3) {
-			bcrypt.genSalt(10, (err, salt) => {
-				bcrypt.hash(pass, salt, (err, hash) => {
-					pass = hash
+		bcrypt.genSalt(10, (err, salt) => {
+			bcrypt.hash(pass, salt, (err, hash) => {
+				pass = hash
 
-					User.findByIdAndUpdate(id, {$set: {"password": pass}}, {new: true, useFindAndModify: false}).then((user) => {
-						if (!user) {
-							res.status(404).json({error: 'user not found'})
-						} else {   
-							res.json({success: 'password updated'})
-						}
-					}).catch((error) => {
-						res.status(400).json('Error: ' + error)
-					})
+				User.findByIdAndUpdate(id, {$set: {"password": pass}}, {new: true, useFindAndModify: false}).then((user) => {
+					if (!user) {
+						res.status(404).json('user not found')
+					} else {   
+						res.json('password updated')
+					}
+				}).catch((error) => {
+					res.status(400).json('Error: ' + error)
 				})
 			})
-		} else {
-			res.status(400).json({error: 'password needs to be min 3 characters'})
-		}
+		})
 	}
 
 })

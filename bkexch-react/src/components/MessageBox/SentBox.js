@@ -4,11 +4,12 @@ import {ButtonGroup, Dropdown, DropdownButton, Table} from "react-bootstrap";
 class SentMessage extends React.Component {
     render(){
         const {message} = this.props;
+        const date = new Date(message.createdAt).toLocaleString()
         return(
             <tr key={message.id} >
                 <td>{message.to}</td>
                 <td>{message.text}</td>
-                <td>{message.date}</td>
+                <td>{date}</td>
             </tr>
         )
     }

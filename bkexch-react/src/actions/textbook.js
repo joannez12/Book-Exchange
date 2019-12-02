@@ -1,34 +1,19 @@
 import axios from 'axios';
 
-export const postTextbook = (textbook, postTextbook) => {
-	const request = new Request('http://localhost:3001/textbooks', {
+export const postTextbook = (textbook) => {
+	const request = {
     	method: 'post',
-        body: JSON.stringify(textbook),
+        url: 'http://localhost:3001/textbooks', 
+        data: textbook,
         headers: {
         	'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json'
         }
-    })
+    }
 
-    fetch(request)
+     return axios(request)
     .then(function(res) {
-    	if (res.status === 200) {
-    		postTextbook.setState({
-                title: "",
-                author: "",
-                price: "",
-                imgUrl: "",
-                description: "",
-                titleMsg: "",
-                authorMsg: "",
-                priceMsg: "",
-                descriptionMsg: "",
-        		imgUrlMsg: ""
-            })
-
-            postTextbook.props.addPost();
-            postTextbook.props.onHide();
-    	}
+    	return res
     }).catch((error) => {
     	console.log(error)
     })  
