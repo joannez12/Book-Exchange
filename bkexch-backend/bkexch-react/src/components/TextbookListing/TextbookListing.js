@@ -12,7 +12,7 @@ function TextbookListing({ textbook, isAdmin, updatePosts }) {
     let history = useHistory();
 
     return (
-            <Card className='listing' onClick={() => history.push(`/textbooks/${_id}`)}>
+            <Card className='listing' onClick={() => history.push(`/viewtextbook/${_id}`)}>
                 <Card.Body>
                     <Card.Title>{title}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{author}</Card.Subtitle>

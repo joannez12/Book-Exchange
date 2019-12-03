@@ -28,6 +28,9 @@ app.use('/users', usersRouter)
 
 app.use(express.static(__dirname + '/bkexch-react/build'))
 
+app.get("*", (req, res) => {
+    res.sendFile(__dirname + "/bkexch-react/build/index.html");
+});
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {

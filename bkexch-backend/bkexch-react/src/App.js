@@ -90,9 +90,9 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={SearchBrowse} />
             {this.state.user ? <Route exact path="/messagebox" component={ () => <MessageBox user={this.state.user} handleReplyMessage={this.handleReplyMessage.bind(this)} handleDeletedMessage={this.handleDeletedMessage.bind(this)} />}  /> : null }
-            <Route exact path="/" component={() => <SearchBrowse user={this.state.user} />}/>
+            <Route exact path="/" component={() => <SearchBrowse/>}/>
             <Route exact path="/history" component={ () => <HistoryBrowse user={this.state.user} />} />
-            <Route path="/textbooks/:id" children={<ViewTextbook user={this.state.user} handleSendMessage={this.handleSendMessage.bind(this)} />} />
+            <Route path="/viewtextbook/:id" children={<ViewTextbook handleSendMessage={this.handleSendMessage.bind(this)} />} />
           </Switch>
         </Router>
         {this.state.user && this.state.selectedBook?
