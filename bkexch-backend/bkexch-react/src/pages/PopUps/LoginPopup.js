@@ -26,7 +26,6 @@ class Input extends React.Component {
 		}
 	}
 
-
 	checkName = () => {
 		if (this.state.name === "") {
 			this.setState({ nameMsg: "username required" })
