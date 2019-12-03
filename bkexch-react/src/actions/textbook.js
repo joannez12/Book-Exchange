@@ -1,5 +1,4 @@
 import axios from 'axios';
-import textbooks from '../textbooks';
 
 export const postTextbook = (textbook) => {
 	const request = {
@@ -62,16 +61,4 @@ export const updateTextbook = (textbook) => {
     }).catch((error) => {
     	return error.response
     }) 
-}
-
-export const soldTextbook = (textbook) => {
-    //delete textbook and create an exchange 
-    console.log("deleting textbook!")
-    return axios.delete(`http://localhost:3001/textbooks/${textbook._id}`)
-            .then(response => {
-                return response
-            })
-            .catch((error) => {
-                return error.response
-            })
 }

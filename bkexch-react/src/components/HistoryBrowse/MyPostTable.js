@@ -1,10 +1,8 @@
 import React from 'react';
 import '../../pages/HistoryBrowse/HistoryBrowse.css';
 import {Table, ButtonGroup, DropdownButton, Dropdown} from "react-bootstrap";
-import exchanges from "../../pages/HistoryBrowse/exchange";
-import {updateTextbook, deleteTextbook} from "../../actions/textbook"
+import {updateTextbook} from "../../actions/textbook"
 import {postExchange} from "../../actions/exchange";
-import textbooks from '../../textbooks';
 
 function MyPostTableHepler(post,deletePost, onEditButtonPress, onSoldButtonPress){
     return(
@@ -134,7 +132,7 @@ class MyPostTable extends React.Component {
     };
 
     onSoldButtonPress = (textbook) => {
-        const d = new Date();
+        // const d = new Date();
         this.props.deletePost(textbook);
         // const newExchange = {
         //     // id: d.getTime(),

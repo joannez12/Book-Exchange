@@ -1,12 +1,10 @@
 import React from 'react';
 import './HistoryBrowse.css';
 
-import posts from "../../textbooks";
 import exchanges from "./exchange";
 
 import MyPostTable from "../../components/HistoryBrowse/MyPostTable";
 import HistoryTable from "../../components/HistoryBrowse/HistoryTable";
-import axios from 'axios';
 import {getTextbooks, deleteTextbook} from "../../actions/textbook";
 import {getExchanges, deleteExchange} from "../../actions/exchange";
 class HistoryBrowse extends React.Component {

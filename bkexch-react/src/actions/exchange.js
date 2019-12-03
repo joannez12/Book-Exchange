@@ -1,5 +1,4 @@
 import axios from 'axios';
-import textbooks from '../textbooks';
 
 export const postExchange = (exchange) => {
 	const request = {
