@@ -4,12 +4,17 @@ import './TextbookList.css';
 
 import {currentUser} from '../../actions/user';
 
-function TextbookList({textbooks, updatePosts}) {
-    const [isAdmin, setisAdmin] = useState(false)
+function TextbookList({textbooks, updatePosts, user}) {
+    // const [isAdmin, setisAdmin] = useState(false)
 
-    currentUser().then(response => {
-        setisAdmin(response.data.isAdmin)
-    }).catch(() => setisAdmin(false))
+    // currentUser().then(response => {
+    //     setisAdmin(response.data.isAdmin)
+    // }).catch(() => setisAdmin(false))
+
+    let isAdmin = false
+    if (user !== null) {
+        isAdmin = user.isAdmin
+    }
 
     return(
         <div className="bookList">

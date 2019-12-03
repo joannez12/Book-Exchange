@@ -21,7 +21,6 @@ export const postTextbook = (textbook) => {
 }
 
 export const getTextbooks = () => {
-    console.log("getting textbooks from server!")
     return axios.get('/textbooks/')
             .then(response => {
                 return response
