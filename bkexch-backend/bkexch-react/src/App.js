@@ -82,11 +82,16 @@ class App extends React.Component {
     }).catch((error) => console.log(error))
   }
 
+  handleSignin = (user) => {
+    console.log("handling sign at app.js :", user)
+    this.setState({user: user})
+  }
+
   render() {
     return (
       <div className="App">
         <Router>
-          <MainHeader updateUser={this.updateUser} user={this.state.user} handleSignin={this.handleSignin} addPost={()=>this.setState({addPost: !this.state.addPost})} deleted={()=>this.setState({user: null})} />
+          <MainHeader updateUser={this.updateUser} user={this.state.user} handleSignin={this.handleSignin.bind(this)} addPost={()=>this.setState({addPost: !this.state.addPost})} deleted={()=>this.setState({user: null})} />
           <Switch>
             <Route exact path="/" component={SearchBrowse} />
             {this.state.user ? <Route exact path="/messagebox" component={ () => <MessageBox user={this.state.user} handleReplyMessage={this.handleReplyMessage.bind(this)} handleDeletedMessage={this.handleDeletedMessage.bind(this)} />}  /> : null }
