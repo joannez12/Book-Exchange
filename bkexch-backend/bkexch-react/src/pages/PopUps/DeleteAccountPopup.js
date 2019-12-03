@@ -1,23 +1,11 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import users from '../../users';
-import posts from '../../textbooks';
 
 import {deleteAccount} from '../../actions/user';
 
 class DeleteAccountPopup extends React.Component {
-    state = {
-        user: this.props.user
-   }
-
     deletePosts(){
-        /* gets textbooks from server, requires server call */
-        for(let i = 0; i < posts.length; i++){
-            if(posts[i].seller === this.state.user.name){
-                posts.splice(i,1);
-            }
-        }
     }
 
     handleDeleteAccount = () => {

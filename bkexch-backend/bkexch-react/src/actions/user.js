@@ -63,10 +63,10 @@ export const logout = () => {
     return axios.post('/users/logout')
 }
 
-export const changePassword = (id, newPassword) => {
+export const changePassword = (newPassword) => {
  	const request = {
     	method: 'patch',
-        url: `/users/${id}/change-password`, 
+        url: `/users/change-password`, 
         data: newPassword,
         headers: {
         	'Accept': 'application/json, text/plain, */*',

@@ -79,11 +79,11 @@ router.route('/:id').get((req, res) => {
 
 })
 
-router.route('/:id/change-password').patch((req, res) => {
-	const id = req.params.id
+router.route('/change-password').patch((req, res) => {
+	const id = req.session.user
 
-	if (!ObjectID.isValid(id)) {
-		res.status(404).json('invalid id')
+	if (req.session.user === undefined) {
+		res.status(404).json('No session')
 	} else {
 		let pass = req.body.password
 		bcrypt.genSalt(10, (err, salt) => {
