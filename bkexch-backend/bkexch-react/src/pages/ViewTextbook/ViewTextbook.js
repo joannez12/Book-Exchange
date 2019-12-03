@@ -16,6 +16,7 @@ class ViewTextbook extends React.Component {
     }
     
     componentDidMount() {
+        
         currentUser().then(response => {
             this.setState({user: response.data, isAdmin: response.data.isAdmin})
         }).catch(() => {
@@ -24,10 +25,17 @@ class ViewTextbook extends React.Component {
     
         getTextbook(this.props.match.params.id).then(response => this.setState({textbook: response.data}))
             .catch(() => this.setState({textbook: null}))
+
+        console.log("this.state: ", this.state)
+        console.log("this.props: ", this.props)
+        console.log("user_id", this.props.match.params["id"])
     }
 
     render() {
         const {textbook, isAdmin, user} = this.state
+        console.log("render()")
+        console.log("this.state: ", this.state)
+        console.log("this.props: ", this.props)
         if (textbook !== null) {
             return(
                 <div className="page">

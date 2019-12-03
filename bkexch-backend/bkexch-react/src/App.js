@@ -38,6 +38,7 @@ class App extends React.Component {
 
   handleSendMessage = (selectedBook, user) => {
     if(user){
+      console.log("handling send message from viewtextbook: ", user, selectedBook)
       this.setState(prevState => ({sendMessage: !prevState.sendMessage, selectedBook: selectedBook}))
 
     }else{

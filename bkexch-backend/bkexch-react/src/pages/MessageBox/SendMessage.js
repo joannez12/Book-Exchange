@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Form, Modal} from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-
+import {sendMessage} from "../../actions/message"
 class SendMessage extends React.Component{
     state = {
         user: this.props.user,
@@ -14,21 +14,23 @@ class SendMessage extends React.Component{
     }
 
     onSendButton = () => {
-        const d = new Date();
         const message = {
-            id: d.getTime(),
-            from: this.props.user.name,
+            from: this.props.user.username,
             to: this.props.selectedBook.seller,
-            email: this.props.user.name,
             text: this.state.text,
-            textbook:this.props.selectedBook,
-            date: d.toLocaleTimeString(),
         }
-        this.props.handleMessage(message);
+        sendMessage(message).then(res=>{
+            if(res.status === 200){
+                console.log("message sent well: ")
+            }else{
+                console.log("error while sending message")
+            }
+        })
+        // this.props.handleMessage(message);
     }
 
     render(){
-
+        console.log("SendMessage component, this.props: ", this.props)
         const { user, selectedBook, closeSendMessagePopUp, handleMessage, ...other} = this.props;
         return (
             <>
@@ -43,7 +45,7 @@ class SendMessage extends React.Component{
                                     From
                                 </Form.Label>
                                 <Col sm="10">
-                                    <Form.Control plaintext readOnly defaultValue={user.name} />
+                                    <Form.Control plaintext readOnly defaultValue={user.username} />
                                 </Col>
                             </Form.Group>
 

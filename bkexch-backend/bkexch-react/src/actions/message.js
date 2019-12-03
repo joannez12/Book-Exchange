@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-export const getMessages = (messages) => {
+export const getMessages = () => {
+	console.log("getting messages")
+
 	return axios('/messages')
 	.then(function(res) {
 		return res
@@ -19,7 +21,7 @@ export const sendMessage = (message) => {
             'Content-Type': 'application/json'
        }
     }
-
+	console.log("sending message: ", message)
 	return axios(request)
 	.then(function(res) {
 		return res
@@ -29,6 +31,8 @@ export const sendMessage = (message) => {
 }
 
 export const deleteMessage = (message) => {
+	console.log("deleting message: ", message)
+
 	return axios.delete(`/messages/${message._id}`)
 	.then(function(res) {
 		return res
