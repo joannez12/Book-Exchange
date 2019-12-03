@@ -22,14 +22,18 @@ class MainHeader extends React.Component {
         user: null
     }
 
-    componentDidMount = () => {
+    componentDidMount() {
         this.updateUser()
     }
 
     updateUser = () => {
         getUsers().then((res) => {
-            console.log(res)
-        })
+            if (res.status === 200) {
+                this.setState({user: res.data})
+            } else {
+                this.setState({user: null})
+            }
+        }).catch((err) => console.log('Request error for retrieving user'))
     }
 
     handleSignIn = (user) => {

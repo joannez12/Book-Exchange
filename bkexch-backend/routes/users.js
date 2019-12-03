@@ -49,7 +49,7 @@ router.post('/logout', (req, res) => {
 router.route('/').get((req, res) => {
 	User.findById(req.session.user).then((user) => {
 		res.json( {"username": user.username, "isAdmin": user.isAdmin} ) 
-	}).catch((error) => res.status(400).send('No user'))
+	}).catch((error) => res.status(400).send("Couldn't retrieve user"))
 })
 
 
