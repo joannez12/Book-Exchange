@@ -10,7 +10,7 @@ import SignupPopup from "../../pages/PopUps/SignupPopup";
 import PostPopUp from "../../pages/PopUps/PostPopUp";
 import LoginPopup from "../../pages/PopUps/LoginPopup";
 import ProfilePopup from "../../pages/PopUps/ProfilePopup";
-import {updateUsers, getUsers} from '../../actions/user';
+import {getUsers} from '../../actions/user';
 import "./MainHeader.css";
 import users from '../../users';
 class MainHeader extends React.Component {

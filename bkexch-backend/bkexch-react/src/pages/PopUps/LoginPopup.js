@@ -2,14 +2,12 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import './LoginPopup.css';
-import users from '../../users';
 
 import {login} from '../../actions/user';
 
 
 class Input extends React.Component {
 	state = {
-		users: users,
 		name: "",
 		password: "",
 		nameMsg: "",
