@@ -63,25 +63,6 @@ export const logout = () => {
     return axios.post('/users/logout')
 }
 
-export const changeName = (id, newName) => {
- 	const request = {
-    	method: 'patch',
-        url: `/users/${id}/change-username`, 
-        data: newName,
-        headers: {
-        	'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-        }
-    }
-
-     return axios(request)
-    .then(function(res) {
-    	return res
-    }).catch((error) => {
-        return error.response
-    })  
-}
-
 export const changePassword = (id, newPassword) => {
  	const request = {
     	method: 'patch',

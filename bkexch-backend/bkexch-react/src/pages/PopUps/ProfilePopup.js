@@ -1,7 +1,6 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import ChangeNamePopup from "../../pages/PopUps/ChangeNamePopup";
 import ChangePasswordPopup from "../../pages/PopUps/ChangePasswordPopup";
 import DeleteAccountPopup from "../../pages/PopUps/DeleteAccountPopup";
 
@@ -11,14 +10,8 @@ import './ProfilePopup.css';
 class ProfilePopup extends React.Component {
     state = {
         account: this.props.user,
-        changeName: false,
         changePassword: false,
         deleteAccount: false
-    }
-
-
-    handleChangeNamePopup = () => {
-        this.setState(prevState => ({ changeName: !prevState.changeName}))
     }
 
     handleChangePasswordPopup = () => {
@@ -44,7 +37,6 @@ class ProfilePopup extends React.Component {
 
                     <label>Username: {this.props.user.username}</label>
                     <div className="profileButtons">
-                    	<Button variant="secondary" onClick={this.handleChangeNamePopup}>Change Name</Button>
                     	<Button variant="secondary" onClick={this.handleChangePasswordPopup}>Change Password</Button>
                     	<Button variant="danger" onClick={this.handleDeleteAccountPopup}>Delete Account</Button>
                     </div>
@@ -54,7 +46,6 @@ class ProfilePopup extends React.Component {
                     <Button variant="secondary" onClick={this.props.onHide}>Close</Button>
                 </Modal.Footer>
             </Modal>
-            {this.state.changeName ? <ChangeNamePopup show={this.state.changeName} onHide={() => this.setState({ changeName: false })} user={this.props.user} updateUser = {this.props.updateUser}/> : null }
             {this.state.changePassword ? <ChangePasswordPopup show={this.state.changePassword} onHide={() => this.setState({ changePassword: false })} user={this.props.user} /> : null }
             {this.state.deleteAccount ? <DeleteAccountPopup show={this.state.deleteAccount} hideProfile={this.props.onHide} onHide={()=>this.setState({deleteAccount: false})} user={this.props.user} deleted={this.props.deleted}/> : null }
             </>
