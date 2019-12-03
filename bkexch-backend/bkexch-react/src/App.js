@@ -100,7 +100,7 @@ class App extends React.Component {
             {this.state.user ? <Route exact path="/messagebox" component={ () => <MessageBox user={this.state.user} handleReplyMessage={this.handleReplyMessage.bind(this)} handleDeletedMessage={this.handleDeletedMessage.bind(this)} />}  /> : null }
             <Route exact path="/" render={(props) => (<SearchBrowse {...props} user={this.state.user}/>)}/>
             <Route exact path="/history" component={ () => <HistoryBrowse user={this.state.user} />} />
-            <Route path="/viewtextbook/:id" children={<ViewTextbook handleSendMessage={this.handleSendMessage.bind(this)} />} />
+            <Route path="/viewtextbook/:id" children={<ViewTextbook handleSendMessage={this.handleSendMessage.bind(this)} user={this.state.user}/>} />
           </Switch>
         </Router>
         {this.state.user && this.state.selectedBook?

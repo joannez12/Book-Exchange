@@ -3,31 +3,27 @@ import {withRouter} from 'react-router-dom';
 import './ViewTextbook.css';
 import {Button} from "react-bootstrap";
 import {getTextbook, deleteTextbook} from '../../actions/textbook';
-import {currentUser} from '../../actions/user';
 
 class ViewTextbook extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            user: null,
-            isAdmin: false,
             textbook: null
         }
     }
     
     componentDidMount() {
-        currentUser().then(response => {
-            this.setState({user: response.data, isAdmin: response.data.isAdmin})
-        }).catch(() => {
-            this.setState({user: null, isAdmin: false})
-        })
-    
         getTextbook(this.props.match.params.id).then(response => this.setState({textbook: response.data}))
             .catch(() => this.setState({textbook: null}))
     }
 
     render() {
-        const {textbook, isAdmin, user} = this.state
+        const {user} = this.props
+        let isAdmin = false
+        if (user !== null) {
+            isAdmin = user.isAdmin
+        }
+        const {textbook} = this.state
         if (textbook !== null) {
             return(
                 <div className="page">
@@ -47,8 +43,8 @@ class ViewTextbook extends React.Component {
                         <Button onClick={()=>{this.props.handleSendMessage(textbook, user)}}>Contact</Button>
                         {isAdmin ? <Button variant="danger" size="sm" onClick={(e) => {
                                 e.stopPropagation();
-                                deleteTextbook(this.props.match.params.id);
-                                this.props.history.push("/");
+                                deleteTextbook(this.props.match.params.id).then(() => this.props.history.push("/"))
+                                    .catch(() => console.log("Couldn't delete textbook"))
                                 }}>Delete Listing</Button> : null}
                     </div>
                 </div>

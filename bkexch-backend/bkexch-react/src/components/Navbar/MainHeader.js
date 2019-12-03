@@ -48,7 +48,6 @@ class MainHeader extends React.Component {
     }
 
     render() {
-        console.log('header', this.props)
         return (
             <>
                 <div className="navigationbar">
