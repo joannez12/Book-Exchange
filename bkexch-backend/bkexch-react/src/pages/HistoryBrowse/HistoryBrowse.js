@@ -64,6 +64,8 @@ class HistoryBrowse extends React.Component {
 
     componentDidMount(){
         console.log("history browse")
+        console.log("props hey", this.props)
+
         getTextbooks().then(res => {
             if(res.status === 200){
                 console.log(res)

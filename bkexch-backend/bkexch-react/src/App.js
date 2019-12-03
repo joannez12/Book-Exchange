@@ -38,6 +38,7 @@ class App extends React.Component {
 
   handleSendMessage = (selectedBook, user) => {
     if(user){
+      console.log("handling send message from viewtextbook: ", user, selectedBook)
       this.setState(prevState => ({sendMessage: !prevState.sendMessage, selectedBook: selectedBook}))
 
     }else{
@@ -89,6 +90,11 @@ class App extends React.Component {
     } else {
       this.setState({user: null})
     }
+  }
+
+  handleSignin = (user) => {
+    console.log("handling sign at app.js :", user)
+    this.setState({user: user})
   }
 
   render() {
