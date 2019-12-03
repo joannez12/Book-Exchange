@@ -59,7 +59,6 @@ class Input extends React.Component {
 			const signupData = {username: this.state.username, password: this.state.password}
 		 	signup(signupData).then((res) => {
 		 		if (res.status === 200) {
-		 			console.log(res)
 					this.setState({usernameMsg: "", passwordMsg: "", cpasswordMsg: ""})
 					this.setState({
 						username: "",
@@ -69,11 +68,10 @@ class Input extends React.Component {
 						passwordMsg: ""
 					})
 					this.props.handleSignin(res.data)
-					this.onHide()
+					window.location.reload()
 				} else  {
 					this.setState({error: 'error occurred'})
 				}
-
 			}).catch((error) => console.log(error))
 		}
 	}
@@ -126,7 +124,7 @@ class SignupPopup extends React.Component {
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<Input ref="child" />
+					<Input ref="child" handleSignin={this.props.handleSignin}/>
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={this.props.onHide}>Close</Button>
