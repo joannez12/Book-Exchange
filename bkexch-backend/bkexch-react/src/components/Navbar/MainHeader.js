@@ -10,7 +10,7 @@ import SignupPopup from "../../pages/PopUps/SignupPopup";
 import PostPopUp from "../../pages/PopUps/PostPopUp";
 import LoginPopup from "../../pages/PopUps/LoginPopup";
 import ProfilePopup from "../../pages/PopUps/ProfilePopup";
-import {currentUser} from '../../actions/user';
+import {currentUser, logout} from '../../actions/user';
 import "./MainHeader.css";
 
 class MainHeader extends React.Component {
@@ -56,6 +56,7 @@ class MainHeader extends React.Component {
 
     handleSigninButton = () => {
         if (this.state.user) {
+            logout()
             this.setState({user: null})
             this.props.history.push('/')
         } else {

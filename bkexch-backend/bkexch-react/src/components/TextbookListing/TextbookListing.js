@@ -1,11 +1,13 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
+
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import {deletePost} from '../../helper';
-import {useHistory} from 'react-router-dom';
+
+import {deleteTextbook} from '../../actions/textbook';
 import './TextbookListing.css';
 
-function TextbookListing({ textbook, isAdmin }) {
+function TextbookListing({ textbook, isAdmin, updatePosts }) {
     const { _id, title, author, seller, price} = textbook;
     let history = useHistory();
 
@@ -19,8 +21,8 @@ function TextbookListing({ textbook, isAdmin }) {
                     <small>${price} - {seller}</small>
                     {isAdmin ? <Button variant="danger" size="sm" onClick={(e) => {
                         e.stopPropagation();
-                        deletePost(_id);
-                        window.location.reload()
+                        deleteTextbook(_id);
+                        updatePosts()
                         }}>Delete</Button> : null}
                 </Card.Footer>
             </Card>

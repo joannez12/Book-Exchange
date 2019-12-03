@@ -59,6 +59,10 @@ export const login = (loginData) => {
     })  
 }
 
+export const logout = () => {
+    return axios.post('/users/logout')
+}
+
 export const changeName = (id, newName) => {
  	const request = {
     	method: 'patch',

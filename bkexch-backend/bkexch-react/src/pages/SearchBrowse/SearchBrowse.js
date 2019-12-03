@@ -42,7 +42,7 @@ class SearchBrowse extends React.Component {
             <div className='page'>
                 <h1 className="title"> - Textbooks For Sale - </h1>
                 <SearchBar handleSearch={this.handleSearch} placeholder='Search textbook titles'/>
-                {filteredTextbooks.length !== 0 ? <TextbookList textbooks={filteredTextbooks}/> : <h3>No textbooks found.</h3> }
+                {filteredTextbooks.length !== 0 ? <TextbookList textbooks={filteredTextbooks} updatePosts={this.updatePosts}/> : <h3>No textbooks found.</h3> }
             </div>
         )
     }

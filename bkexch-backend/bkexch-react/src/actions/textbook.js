@@ -36,15 +36,8 @@ export const getTextbook = (id) => {
     return axios.get(`/textbooks/${id}`)
 }
 
-export const deleteTextbook = (textbook) => {
-    console.log("deleting textbook!")
-    return axios.delete(`/textbooks/${textbook._id}`)
-            .then(response => {
-                return response
-            })
-            .catch((error) => {
-                return error.response
-            })
+export const deleteTextbook = (id) => {
+    return axios.delete(`/textbooks/${id}`)
 }
 
 export const updateTextbook = (textbook) => {
