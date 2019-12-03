@@ -32,6 +32,10 @@ export const getTextbooks = () => {
             })
 }
 
+export const getTextbook = (id) => {
+    return axios.get(`/textbooks/${id}`)
+}
+
 export const deleteTextbook = (textbook) => {
     console.log("deleting textbook!")
     return axios.delete(`/textbooks/${textbook._id}`)

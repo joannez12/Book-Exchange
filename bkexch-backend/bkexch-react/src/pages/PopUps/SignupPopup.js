@@ -69,7 +69,7 @@ class Input extends React.Component {
 						passwordMsg: ""
 					})
 					this.props.handleSignin(res.data)
-					this.props.onHide()
+					this.onHide()
 				} else  {
 					this.setState({error: 'error occurred'})
 				}

@@ -58,7 +58,7 @@ class Input extends React.Component {
 					passwordMsg: ""
 				})
 				this.props.handleSignin(res.data)
-				this.props.onHide()
+				window.location.reload()
 			} else {
 				if (res.data.usernameMsg) {
 					this.setState({nameMsg: res.data.usernameMsg})

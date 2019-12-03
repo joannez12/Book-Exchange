@@ -11,11 +11,6 @@ export const getUsers = () => {
 
 export const currentUser = () => {
     return axios.get('/users/current')
-    .then(res => {
-    	return res
-    }).catch((error) => {
-    	return error.response
-    })
 }
 
 export const getUser = (id) => {
