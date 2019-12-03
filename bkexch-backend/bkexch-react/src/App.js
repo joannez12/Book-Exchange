@@ -36,10 +36,6 @@ class App extends React.Component {
     //this.setState({deletedMessage: message});
   }
 
-  handleSignin = (user) => {
-    user === -1 ? this.setState({user: null}) : this.setState({user: user})
-  }
-
   handleSendMessage = (selectedBook, user) => {
     if(user){
       this.setState(prevState => ({sendMessage: !prevState.sendMessage, selectedBook: selectedBook}))

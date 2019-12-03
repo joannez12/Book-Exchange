@@ -1,14 +1,13 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import {withRouter} from 'react-router-dom'
 import './PostPopUp.css';
-import textbooks from '../../textbooks';
 
 import {postTextbook} from '../../actions/textbook'
 
 class PostPopUp extends React.Component {
     state = {
-    	textbooks: textbooks,
         title: "",
         author: "",
         price: "",
@@ -73,7 +72,6 @@ class PostPopUp extends React.Component {
                 }
             }).catch((error) => console.log(error))
         }
-
     }
 
     render() {
@@ -136,4 +134,4 @@ class PostPopUp extends React.Component {
     }
 }
 
-export default PostPopUp;
+export default withRouter(PostPopUp);
