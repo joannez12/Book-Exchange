@@ -28,7 +28,7 @@ class SearchBrowse extends React.Component {
     updatePosts = () => {
         // this.setState({textbooks: textbooks})
         console.log("getting textbooks from server!")
-        axios.get('http://localhost:3001/textbooks/')
+        getTextbooks()
         .then(response => {
           if (response.data.length > 0) {
               this.setState({textbooks: response.data})

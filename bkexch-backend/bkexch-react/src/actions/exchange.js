@@ -1,28 +1,27 @@
 import axios from 'axios';
 
-export const postTextbook = (textbook) => {
+export const postExchange = (exchange) => {
 	const request = {
     	method: 'post',
-        url: 'http://localhost:3001/textbooks', 
-        data: textbook,
+        url: '/exchanges', 
+        data: exchange,
         headers: {
         	'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json'
         }
     }
-
      return axios(request)
-    .then(function(res) {
-    	return res
-    }).catch((error) => {
-    	return error.response
-    })  
+            .then(function(res) {
+                return res
+            }).catch((error) => {
+                return error.response
+            })  
 
 }
 
-export const getTextbooks = () => {
-    console.log("getting textbooks from server!")
-    return axios.get('http://localhost:3001/textbooks/')
+export const getExchanges = () => {
+    console.log("getting exchanges from server!")
+    return axios.get('/exchanges/')
             .then(response => {
                 return response
             })
@@ -32,9 +31,9 @@ export const getTextbooks = () => {
             })
 }
 
-export const deleteTextbook = (textbook) => {
-    console.log("deleting textbook!")
-    return axios.delete(`http://localhost:3001/textbooks/${textbook._id}`)
+export const deleteExchange = (exchange) => {
+    console.log("deleting exchange!")
+    return axios.delete(`/exchanges/${exchange._id}`)
             .then(response => {
                 return response
             })
@@ -43,12 +42,12 @@ export const deleteTextbook = (textbook) => {
             })
 }
 
-export const updateTextbook = (textbook) => {
-    console.log("updating textbook!", textbook)
+export const updateExchange = (exchange) => {
+    console.log("updating exchange!", exchange)
     const request = {
     	method: 'post',
-        url: `http://localhost:3001/textbooks/update/${textbook._id}`, 
-        data: textbook,
+        url: `/exchanges/update/${exchange._id}`, 
+        data: exchange,
         headers: {
         	'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json'

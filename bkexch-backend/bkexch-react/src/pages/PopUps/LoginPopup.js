@@ -53,7 +53,6 @@ class Input extends React.Component {
 		const loginData = {username: this.state.name, password: this.state.password}
 		login(loginData).then((res) => {
 			if (res.status === 200) {
-				console.log(res)
 				this.setState({
 					name: "",
 					nameMsg: "",

@@ -25,7 +25,9 @@ router.route('/login').post((req, res) => {
         } else {
         	bcrypt.compare(password, user.password, (err, result) => {
         		if (result) {
-        			res.json(user)
+					req.session.user = user._id
+					req.session.is_admin = user.isAdmin
+        			res.json({username: user.username, isAdmin: user.isAdmin})
         		} else {
         			res.status(401).json({passwordMsg: 'incorrect password'})
         		}
@@ -34,10 +36,20 @@ router.route('/login').post((req, res) => {
     }).catch((error) => res.status(400).json('Error: ' + error))
 })
 
+router.post('/logout', (req, res) => {
+	req.session.destroy((error) => {
+		if (error) {
+			res.status(500).send(error)
+		} else {
+			res.send('Logged out succesfully')
+		}
+	})
+})
+
 router.route('/').get((req, res) => {
-	User.find().then((users) => {
-		res.json( users ) 
-	}).catch((error) => res.status(400).json('Error: ' + error))
+	User.findById(req.session.user).then((user) => {
+		res.json( {"username": user.username, "isAdmin": user.isAdmin} ) 
+	}).catch((error) => res.status(400).send('No user'))
 })
 
 

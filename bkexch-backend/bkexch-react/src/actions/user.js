@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getUsers = () => {
-	return axios.get('http://localhost:3001/users/')
+	return axios.get('/users/')
     .then(res => {
     	return res
     }).catch((error) => {
@@ -10,7 +10,7 @@ export const getUsers = () => {
 }
 
 export const getUser = (id) => {
-	return axios(`http://localhost:3001/users/${id}`)
+	return axios(`/users/${id}`)
     .then((res) => {
       console.log(res.data)
       return res
@@ -20,7 +20,7 @@ export const getUser = (id) => {
 export const signup = (signupData) => {
 	const request = {
     	method: 'post',
-        url: 'http://localhost:3001/users/', 
+        url: '/users/', 
         data: signupData,
         headers: {
         	'Accept': 'application/json, text/plain, */*',
@@ -28,7 +28,7 @@ export const signup = (signupData) => {
         }
     }
 
-     return axios(request)
+    return axios(request)
     .then(function(res) {
     	return res
     }).catch((error) => {
@@ -39,7 +39,7 @@ export const signup = (signupData) => {
 export const login = (loginData) => {
 	const request = {
     	method: 'post',
-        url: 'http://localhost:3001/users/login', 
+        url: '/users/login', 
         data: loginData,
         headers: {
         	'Accept': 'application/json, text/plain, */*',
@@ -47,7 +47,7 @@ export const login = (loginData) => {
         }
     }
 
-     return axios(request)
+    return axios(request)
     .then(function(res) {
     	return res
     }).catch((error) => {
@@ -58,7 +58,7 @@ export const login = (loginData) => {
 export const changeName = (id, newName) => {
  	const request = {
     	method: 'patch',
-        url: `http://localhost:3001/users/${id}/change-username`, 
+        url: `/users/${id}/change-username`, 
         data: newName,
         headers: {
         	'Accept': 'application/json, text/plain, */*',
@@ -77,7 +77,7 @@ export const changeName = (id, newName) => {
 export const changePassword = (id, newPassword) => {
  	const request = {
     	method: 'patch',
-        url: `http://localhost:3001/users/${id}/change-password`, 
+        url: `/users/${id}/change-password`, 
         data: newPassword,
         headers: {
         	'Accept': 'application/json, text/plain, */*',
@@ -94,7 +94,7 @@ export const changePassword = (id, newPassword) => {
 }
 
 export const deleteAccount = (id) => {
-	return axios.delete(`http://localhost:3001/users/${id}`)
+	return axios.delete(`/users/${id}`)
 	.then(function(res) {
 		return res
 	}).catch((error) => {
