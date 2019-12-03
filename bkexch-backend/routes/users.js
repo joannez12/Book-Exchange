@@ -11,7 +11,10 @@ router.route('/').post((req, res) => {
     })
 
     newUser.save()
-        .then(() => res.json('new user created'))
+        .then((user) => {
+			req.session.user = user._id
+			res.json({username: user.username, isAdmin: user.isAdmin})
+		})
         .catch(err => res.status(400).json('Error: ' + err))
 })
 
@@ -26,7 +29,6 @@ router.route('/login').post((req, res) => {
         	bcrypt.compare(password, user.password, (err, result) => {
         		if (result) {
 					req.session.user = user._id
-					req.session.is_admin = user.isAdmin
         			res.json({username: user.username, isAdmin: user.isAdmin})
         		} else {
         			res.status(401).json({passwordMsg: 'incorrect password'})
@@ -46,10 +48,16 @@ router.post('/logout', (req, res) => {
 	})
 })
 
-router.route('/').get((req, res) => {
+router.route('/current').get((req, res) => {
 	User.findById(req.session.user).then((user) => {
 		res.json( {"username": user.username, "isAdmin": user.isAdmin} ) 
 	}).catch((error) => res.status(400).send("Couldn't retrieve user"))
+})
+
+router.route('/').get((req, res) => {
+	User.find({}).then((users) => {
+		res.json(users)
+	}).catch((error) => res.status(500).send("Couldn't get users"))
 })
 
 

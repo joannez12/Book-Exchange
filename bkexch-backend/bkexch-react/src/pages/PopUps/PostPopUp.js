@@ -67,8 +67,7 @@ class PostPopUp extends React.Component {
                         descriptionMsg: "",
                         imgUrlMsg: ""
                     })
-                    this.props.addPost()
-                    this.props.onHide()
+                    window.location.reload()
                 }
             }).catch((error) => console.log(error))
         }

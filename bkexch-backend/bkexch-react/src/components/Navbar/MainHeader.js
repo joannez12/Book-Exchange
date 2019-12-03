@@ -10,9 +10,9 @@ import SignupPopup from "../../pages/PopUps/SignupPopup";
 import PostPopUp from "../../pages/PopUps/PostPopUp";
 import LoginPopup from "../../pages/PopUps/LoginPopup";
 import ProfilePopup from "../../pages/PopUps/ProfilePopup";
-import {getUsers} from '../../actions/user';
+import {currentUser} from '../../actions/user';
 import "./MainHeader.css";
-import users from '../../users';
+
 class MainHeader extends React.Component {
     state = {
         signup: false,
@@ -27,7 +27,7 @@ class MainHeader extends React.Component {
     }
 
     updateUser = () => {
-        getUsers().then((res) => {
+        currentUser().then((res) => {
             if (res.status === 200) {
                 this.setState({user: res.data})
             } else {
@@ -50,6 +50,10 @@ class MainHeader extends React.Component {
         this.setState(prevState => ({ addpost: !prevState.addpost}))
     }
 
+    handleProfilePopup = () => {
+        this.setState(prevState => ({ profile: !prevState.profile}))
+    }
+
     handleSigninButton = () => {
         if (this.state.user) {
             this.setState({user: null})
@@ -57,10 +61,6 @@ class MainHeader extends React.Component {
         } else {
             this.setState({ signin: true })
         }
-    }
-
-    handleProfilePopup = () => {
-        this.setState(prevState => ({ profile: !prevState.profile}))
     }
 
     render() {
@@ -83,7 +83,7 @@ class MainHeader extends React.Component {
                     </Navbar>
                 </div>
                 <LoginPopup show={this.state.signin} onHide={() => this.setState({ signin: false })} handleSignin={this.handleSignIn}/>
-                <SignupPopup show={this.state.signup} onHide={() => this.setState({ signup: false })}  />
+                <SignupPopup show={this.state.signup} onHide={() => this.setState({ signup: false })} handleSignin={this.handleSignIn}/>
                 <PostPopUp show={this.state.addpost} onHide={() => this.setState({ addpost: false })} user={this.state.user}/>
                 {this.state.user ? <ProfilePopup show={this.state.profile} onHide={() => this.setState({ profile: false })} user={this.state.user} deleted={this.props.deleted} updateUser={this.props.updateUser} /> : null }
             </>

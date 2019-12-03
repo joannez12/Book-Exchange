@@ -1,7 +1,16 @@
 import axios from 'axios';
 
 export const getUsers = () => {
-	return axios.get('/users/')
+	return axios.get('/users')
+    .then(res => {
+    	return res
+    }).catch((error) => {
+    	return error.response
+    })
+}
+
+export const currentUser = () => {
+    return axios.get('/users/current')
     .then(res => {
     	return res
     }).catch((error) => {

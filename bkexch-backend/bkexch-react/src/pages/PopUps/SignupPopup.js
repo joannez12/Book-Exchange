@@ -12,7 +12,8 @@ class Input extends React.Component {
 		password: "",
 		confirmPassword: "",
 		passwordMsg: "",
-		success: ""
+		cpasswordMsg: "",
+		error: ""
 	}
 
 	handleInputChange = (event) => {
@@ -21,7 +22,7 @@ class Input extends React.Component {
 		const value = target.value
 		
 		this.setState({[name]: value}, () => { this.requiredInput(value, name) })
-		this.setState({success: ""})
+		this.setState({error: ""})
 	}
 
 	requiredInput = (input, type) => {
@@ -32,12 +33,12 @@ class Input extends React.Component {
 			getUsers().then((res) => {
 				if (res.status === 200) {
 					if (res.data.filter((user) => user.username === input).length > 0) {
-						this.setState({usernameMsg: "username already exist"})
+						this.setState({usernameMsg: "username already exists"})
 					} else {
 						this.setState({usernameMsg: ""})
 					}
 				} else {
-					this.setState({success: 'error occurred'})
+					this.setState({error: 'error occurred'})
 				}
 			}).catch((error) => console.log(error))
 			return
@@ -51,7 +52,7 @@ class Input extends React.Component {
 		} else if (this.state.password === "" || this.state.confirmPassword === "") {
 			this.setState({passwordMsg: "password required"})
 		} else if (this.state.password !== this.state.confirmPassword) {
-			this.setState({passwordMsg: "passwords don't match"})
+			this.setState({cpasswordMsg: "passwords don't match"})
 		} else if (this.state.password.length < 3 || this.state.confirmPassword.length < 3) {
 			this.setState({passwordMsg: "password needs to be min 3 characters"})
 		} else if (this.state.usernameMsg === ""){
@@ -59,7 +60,7 @@ class Input extends React.Component {
 		 	signup(signupData).then((res) => {
 		 		if (res.status === 200) {
 		 			console.log(res)
-					this.setState({success: res.data})
+					this.setState({usernameMsg: "", passwordMsg: "", cpasswordMsg: ""})
 					this.setState({
 						username: "",
 						usernameMsg: "",
@@ -67,8 +68,10 @@ class Input extends React.Component {
 						confirmPassword: "",
 						passwordMsg: ""
 					})
+					this.props.handleSignin(res.data)
+					this.props.onHide()
 				} else  {
-					this.setState({success: 'error occurred'})
+					this.setState({error: 'error occurred'})
 				}
 
 			}).catch((error) => console.log(error))
@@ -92,6 +95,7 @@ class Input extends React.Component {
 				 		onChange = { this.handleInputChange }
 				 		name = "password"
 				 		placeholder = "Password" /> 
+					<p id="passwordMsg"> { this.state.passwordMsg } </p>
 				 	<p></p>
 
 				 	<label>Confirm Password:</label>
@@ -100,8 +104,8 @@ class Input extends React.Component {
 				 		onChange = { this.handleInputChange }
 				 		name = "confirmPassword"
 				 		placeholder = "Confirm Password" /> 
-				 	<p id="passwordMsg"> { this.state.passwordMsg } </p>
-				 	<p id="success"> { this.state.success } </p>
+					<p id="cpasswordMsg"> { this.state.cpasswordMsg } </p>
+				 	<p id="error"> { this.state.error } </p>
 			</>
 		)
 	}
