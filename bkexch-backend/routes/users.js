@@ -79,33 +79,6 @@ router.route('/:id').get((req, res) => {
 
 })
 
-router.route('/:id/change-username').patch((req, res) => {
-	const id = req.params.id
-
-	if (!ObjectID.isValid(id)) {
-		res.status(404).json('invalid id')
-	} else {
-		User.findOne({username: req.body.username}).then((user) => {
-			if (!user) {
-				User.findByIdAndUpdate(id, {$set: {"username": req.body.username}}, {new: true, useFindAndModify: false}).then((user) => {
-					if (!user) {
-						res.status(404).json('user not found')
-					} else {   
-						res.json('username updated')
-					}
-				}).catch((error) => {
-					res.status(400).json('Error: ' + error)
-				})
-			} else {
-				res.status(400).json({error: 'username already exists'})
-			}
-		}).catch((error) => {
-			res.status(400).json('Error: ' + error)
-		})
-	}
-		
-})
-
 router.route('/:id/change-password').patch((req, res) => {
 	const id = req.params.id
 
