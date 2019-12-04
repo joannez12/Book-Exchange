@@ -40,7 +40,6 @@ class HistoryBrowse extends React.Component {
         }
         )
         const newtextbooks = this.state.posts.filter(p => p._id !== post._id)
-        console.log("newtextbokos: ", newtextbooks)
         this.setState({posts: newtextbooks})
     }
 
@@ -65,7 +64,6 @@ class HistoryBrowse extends React.Component {
         deleteExchange(exchange).then(
             res=>{
                 if(res.status === 200){
-                    console.log(res)
                     this.setState({deletedExchange: res.data})
                 }
                 else{
@@ -74,18 +72,14 @@ class HistoryBrowse extends React.Component {
             }
         )
         const exchanges = this.state.exchanges.filter(e => e._id !== exchange._id)
-        console.log("exchangees: ", exchanges)
         this.setState({exchanges: exchanges})
 
     }
 
     componentDidMount(){
-        console.log("history browse")
-        console.log("props hey", this.props)
 
         getTextbooks().then(res => {
             if(res.status === 200){
-                console.log(res)
                 this.setState({posts:res.data})
             }
             else{
@@ -95,7 +89,6 @@ class HistoryBrowse extends React.Component {
         })
         getExchanges().then(res => {
             if(res.status === 200){
-                console.log(res.data)
                 this.setState({exchanges:res.data})
             }
             else{
