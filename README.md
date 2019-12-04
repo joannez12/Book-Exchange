@@ -1,13 +1,11 @@
 # Team 32 - Book Exchange
-The frontend is built with react and located in the `/bkexch-react` folder. Install the dependencies using `npm install` and then run using `npm start`. 
+Hosted on https://aqueous-plateau-50919.herokuapp.com
+To run locally enter the command ```npm run-script build-run``` in the root folder
 
 ## Testing Accounts
 #### Users
-Username: user1  
-Password: user1
-
-Username: user2  
-Password: user2
+Username: user  
+Password: user
 
 #### Admin
 Username: admin  
@@ -17,10 +15,10 @@ Password: admin
 The descriptions below describe website usage for a regular user. Admins will have access to the same features as a regular user in addition to being able to delete posts.
 
 SIGN UP:
-- Sign up by clicking on register button on header, automatically logs in
+- Sign up by clicking on register button on the navigation bar, automatically logs in upon successful creation
 
 SIGN IN:
-- Log in by clicking on sign in button on header
+- Log in by clicking on sign in button on the navigation bar
 
 HOME PAGE:
 - Landing page of the website, can also click on the navbar logo to navigate here
