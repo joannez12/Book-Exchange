@@ -35,6 +35,7 @@ PROFILE POPUP:
 - Get to profile by clicking on user dropdown on header and selecting profile
 - Displays username and profile image
 - Can change password or delete account by selecting button accordingly 
+    - To see changes to posting after an account deletion, the page must be refreshed
 
 HISTORY PAGE:
 - Must be signed in
