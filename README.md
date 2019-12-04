@@ -61,11 +61,11 @@ Below are the different routes used to help manipulate resources and providing f
 - GET  /users/ - returns all users in database
 - GET  /users/current - returns current user of session
 - GET  /users/:id - returns user associated with id
-- POST  /users - creates/add a new user to the database and a session
+- POST  /users - creates/adds a new user to the database and a session
 - POST  /users/login - login a user and creates a session
 - POST  /users/logout - logouts a user and destroys session
-- PATCH /users/:id/change-password - updates password of user associated with id
-- DELETE /users/:id - deletes user associated with id
+- PATCH /users/change-password - updates password of user currently logged into a session
+- DELETE /users - deletes user currently logged into a session
 
 #### Textbooks - used for displaying textbooks, specific textbook and post/delete a textbook
 - GET  /textbooks/ - returns all textbooks in database
