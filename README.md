@@ -17,8 +17,7 @@ Password: admin
 The descriptions below describe website usage for a regular user. Admins will have access to the same features as a regular user in addition to being able to delete posts.
 
 SIGN UP:
-- Sign up by clicking on register button on header
-- Once signed up, log in by clicking on sign in button 
+- Sign up by clicking on register button on header, automatically logs in
 
 SIGN IN:
 - Log in by clicking on sign in button on header
@@ -37,7 +36,7 @@ PROFILE POPUP:
 - Must be signed in
 - Get to profile by clicking on user dropdown on header and selecting profile
 - Displays username and profile image
-- Can change username, password or delete account by selecting button accordingly 
+- Can change password or delete account by selecting button accordingly 
 
 HISTORY PAGE:
 - Must be signed in
@@ -56,3 +55,36 @@ POST POPUP
 - User can post a new textbook posting
 - Posting must include title, author and price but optional picture url and description
 
+## Routes
+Below are the different routes used to help manipulate resources and providing functionality of the app
+
+#### Users - used for signup, login/logout, update user
+- GET  /users/ - returns all users in database
+- GET  /users/current - returns current user of session
+- GET  /users/:id - returns user associated with id
+- POST  /users - creates/add a new user to the database and a session
+- POST  /users/login - login a user and creates a session
+- POST  /users/logout - logouts a user and destroys session
+- PATCH /users/:id/change-password - updates password of user associated with id
+- DELETE /users/:id - deletes user associated with id
+
+#### Textbooks - used for displaying textbooks, specific textbook and post/delete a textbook
+- GET  /textbooks/ - returns all textbooks in database
+- GET  /textbooks/:id - returns textbook associated with id
+- POST  /textbooks/ - creates/add a new textbook to the database
+- POST /textbooks/update/:id - updates a textbook associated with id
+- DELETE  /textbooks/:id - deletes a textbook associated with id 
+
+#### Messages - used for displaying user messages sent and received, ability to send and delete message
+- GET  /messages/ - returns all messages in database
+- GET /messages/:id - returns message associated with id
+- POST /messages/ - creates/add a new message to the database
+- POST  /messages/update/:id - updates a message associated with id
+- DELETE  /messages/:id - deletes message associated with id
+
+#### Exchanges - used for displaying user exchanges, adding and deleting them 
+- GET  /exchanges/ - returns all exchanges in database
+- GET /exchanges/:id - returns exchange associated with id
+- POST /exchanges/ - creates/add a new exchange to the database
+- POST  /exchanges/update/:id - updates a exchange associated with id
+- DELETE  /exchanges/:id - deletes exchange associated with id

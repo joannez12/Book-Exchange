@@ -2,11 +2,6 @@ import axios from 'axios';
 
 export const getUsers = () => {
 	return axios.get('/users')
-    .then(res => {
-    	return res
-    }).catch((error) => {
-    	return error.response
-    })
 }
 
 export const currentUser = () => {
@@ -15,10 +10,6 @@ export const currentUser = () => {
 
 export const getUser = (id) => {
 	return axios(`/users/${id}`)
-    .then((res) => {
-      console.log(res.data)
-      return res
-    }).catch((error) => {return error.response})
 }
 
 export const signup = (signupData) => {
@@ -33,11 +24,6 @@ export const signup = (signupData) => {
     }
 
     return axios(request)
-    .then(function(res) {
-    	return res
-    }).catch((error) => {
-    	return error.response
-    })  
 }
 
 export const login = (loginData) => {
@@ -52,41 +38,25 @@ export const login = (loginData) => {
     }
 
     return axios(request)
-    .then(function(res) {
-    	return res
-    }).catch((error) => {
-        return error.response
-    })  
 }
 
 export const logout = () => {
     return axios.post('/users/logout')
 }
 
-export const changePassword = (id, newPassword) => {
+export const changePassword = (newPassword) => {
  	const request = {
     	method: 'patch',
-        url: `/users/${id}/change-password`, 
+        url: `/users/change-password`, 
         data: newPassword,
         headers: {
         	'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json'
         }
     }
-
      return axios(request)
-    .then(function(res) {
-    	return res
-    }).catch((error) => {
-    	return error.response
-    })  
 }
 
-export const deleteAccount = (id) => {
-	return axios.delete(`/users/${id}`)
-	.then(function(res) {
-		return res
-	}).catch((error) => {
-		return error.response
-	})  
+export const deleteAccount = () => {
+	return axios.delete(`/users`)
 }

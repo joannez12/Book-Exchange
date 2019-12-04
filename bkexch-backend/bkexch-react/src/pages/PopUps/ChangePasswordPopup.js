@@ -1,7 +1,6 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import users from '../../users';
 
 import './ChangePasswordPopup.css';
 
@@ -10,8 +9,6 @@ import {changePassword} from '../../actions/user';
 
 class ChangePasswordPopup extends React.Component {
     state = {
-        user: this.props.user,
-        users: users,
         password: "",
         confirmPassword: "",
         error: "",
@@ -36,16 +33,12 @@ class ChangePasswordPopup extends React.Component {
             this.setState({error: "password needs to be min 3 characters"})
         } else {
             const newPassword = {password: this.state.password}
-            changePassword(this.props.user._id, newPassword).then((res) => {
+            changePassword(newPassword).then((res) => {
                 if (res.status === 200) {
-                    this.setState({success: res.data})
-
-                    this.setState({
-                        user: this.props.user,
+                    this.setState({success: res.data, 
                         password: "",
                         confirmPassword: "",
-                        error: ""
-                    })
+                        error: ""})
                 }
             }).catch((error) => console.log(error))
         }

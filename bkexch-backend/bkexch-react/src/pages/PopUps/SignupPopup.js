@@ -68,7 +68,7 @@ class Input extends React.Component {
 						passwordMsg: ""
 					})
 					this.props.handleSignin(res.data)
-					window.location.reload()
+					this.props.onHide()
 				} else  {
 					this.setState({error: 'error occurred'})
 				}
@@ -124,7 +124,7 @@ class SignupPopup extends React.Component {
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<Input ref="child" handleSignin={this.props.handleSignin}/>
+					<Input ref="child" handleSignin={this.props.handleSignin} onHide={this.props.onHide}/>
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={this.props.onHide}>Close</Button>

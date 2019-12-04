@@ -20,9 +20,10 @@ function TextbookListing({ textbook, isAdmin, updatePosts }) {
                 <Card.Footer className="text-muted footer">
                     <small>${price} - {seller}</small>
                     {isAdmin ? <Button variant="danger" size="sm" onClick={(e) => {
-                        e.stopPropagation();
-                        deleteTextbook(_id);
-                        updatePosts()
+                        e.stopPropagation()
+                        deleteTextbook(_id).then(() => updatePosts())
+                        .catch(() => console.log('Textbook not deleted'))
+
                         }}>Delete</Button> : null}
                 </Card.Footer>
             </Card>

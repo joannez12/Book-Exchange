@@ -81,7 +81,7 @@ class App extends React.Component {
         } else {
             this.setState({user: null})
         }
-    }).catch((err) => console.log('Request error for retrieving user'))
+    }).catch((err) => this.setState({user: null}))
   }
 
   handleSignIn = (user) => {
@@ -103,11 +103,10 @@ class App extends React.Component {
         <Router>
           <MainHeader updateUser={this.updateUser} user={this.state.user} handleSignIn={this.handleSignIn} addPost={()=>this.setState({addPost: !this.state.addPost})} deleted={()=>this.setState({user: null})} />
           <Switch>
-            <Route exact path="/" component={SearchBrowse} />
             {this.state.user ? <Route exact path="/messagebox" component={ () => <MessageBox user={this.state.user} handleReplyMessage={this.handleReplyMessage.bind(this)} handleDeletedMessage={this.handleDeletedMessage.bind(this)} />}  /> : null }
-            <Route exact path="/" component={() => <SearchBrowse/>}/>
+            <Route exact path="/" render={(props) => (<SearchBrowse {...props} user={this.state.user}/>)}/>
             <Route exact path="/history" component={ () => <HistoryBrowse user={this.state.user} />} />
-            <Route path="/viewtextbook/:id" children={<ViewTextbook handleSendMessage={this.handleSendMessage.bind(this)} />} />
+            <Route path="/viewtextbook/:id" children={<ViewTextbook handleSendMessage={this.handleSendMessage.bind(this)} user={this.state.user}/>} />
           </Switch>
         </Router>
         {this.state.user && this.state.selectedBook?

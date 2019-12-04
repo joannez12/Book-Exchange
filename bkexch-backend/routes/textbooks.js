@@ -1,5 +1,6 @@
 const router = require('express').Router()
 let Textbook = require('../mongodb/models/textbook')
+let User = require('../mongodb/models/user')
 
 router.route('/').get((req, res) => {
     Textbook.find()
@@ -58,5 +59,16 @@ router.route('/update/:id').post((req, res) => {
                 .catch(err => res.status(400).json('Error: ' + err));
         })
         .catch(err => res.status(400).json('Error: ' + err))
+})
+
+router.delete('/', (req, res) => {
+    const id = req.session.user
+    if (req.session.user === undefined) {
+        return res.status(401).send('No session')
+    }
+    User.findById(id).then(user => {
+        Textbook.deleteMany({seller: user.username}).then(() => res.send('Successfully deleted'))
+            .catch(() => res.status(500).send("Couldn't delete textbook"))
+    }).catch(() => res.status(500).send("Couldn't find user"))
 })
 module.exports = router;
