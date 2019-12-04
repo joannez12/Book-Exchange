@@ -7,7 +7,7 @@ function HistoryTableHepler(exchange, deleteHistory){
         <tr key={exchange._id}>
             <td>{exchange.book}</td>
             <td>{exchange.author}</td>
-            <td>{exchange.createdAt}</td>
+            <td>{new Date(exchange.createdAt).toLocaleString()}</td>
             <td>{exchange.price}</td>
             <td>
                 <Button
