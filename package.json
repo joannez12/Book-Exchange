@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build-run": "cd bkexch-react && npm run build && cd .. && node index.js",
+    "heroku-postbuild": "cd bkexch-react && npm install && npm run build",
     "start": "node index.js"
   },
   "author": "",
