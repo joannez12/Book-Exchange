@@ -1,5 +1,5 @@
 # Team 32 - Book Exchange
-Hosted on https://aqueous-plateau-50919.herokuapp.com
+Hosted on https://aqueous-plateau-50919.herokuapp.com  
 To run locally enter the command ```npm run-script build-run``` in the root folder
 
 ## Testing Accounts
