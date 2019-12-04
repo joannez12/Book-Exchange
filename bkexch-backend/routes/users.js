@@ -105,12 +105,11 @@ router.route('/change-password').patch((req, res) => {
 
 })
 
-router.route('/:id').delete((req, res) => {
-	const id = req.params.id
-
-	if (!ObjectID.isValid(id)) {
-		res.status(404).json('invalid id')
-	} else {
+router.route('/').delete((req, res) => {
+	const id = req.session.user
+	if (req.session.user === undefined) {
+        return res.status(401).send('No session')
+    } else {
 		User.findByIdAndRemove(id, {useFindAndModify: false}).then((user) => {
 			if (!user) {
 				res.status(404).json('user not found')

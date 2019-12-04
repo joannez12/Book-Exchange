@@ -49,7 +49,6 @@ class Input extends React.Component {
 		} 
 		const loginData = {username: this.state.name, password: this.state.password}
 		login(loginData).then((res) => {
-			if (res.status === 200) {
 				this.setState({
 					name: "",
 					nameMsg: "",
@@ -58,12 +57,12 @@ class Input extends React.Component {
 				})
 				this.props.handleSignin(res.data)
 				this.props.onHide()
-			} else {
-				if (res.data.usernameMsg) {
-					this.setState({nameMsg: res.data.usernameMsg})
-				} else if (res.data.passwordMsg) {
-					this.setState({passwordMsg: res.data.passwordMsg})
-				}
+
+		}).catch((err) => {
+			if (err.response.data.usernameMsg) {
+				this.setState({nameMsg: err.response.data.usernameMsg})
+			} else if (err.response.data.passwordMsg) {
+				this.setState({passwordMsg: err.response.data.passwordMsg})
 			}
 		})
 	}

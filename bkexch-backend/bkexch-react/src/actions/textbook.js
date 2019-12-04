@@ -10,25 +10,11 @@ export const postTextbook = (textbook) => {
             'Content-Type': 'application/json'
         }
     }
-
-     return axios(request)
-    .then(function(res) {
-    	return res
-    }).catch((error) => {
-    	return error.response
-    })  
-
+    return axios(request)
 }
 
 export const getTextbooks = () => {
     return axios.get('/textbooks/')
-            .then(response => {
-                return response
-            })
-            .catch((error) => {
-                console.log(error);
-                return error.response
-            })
 }
 
 export const getTextbook = (id) => {
@@ -50,11 +36,9 @@ export const updateTextbook = (textbook) => {
             'Content-Type': 'application/json'
         }
     }
-
      return axios(request)
-    .then(function(res) {
-    	return res
-    }).catch((error) => {
-    	return error.response
-    }) 
+}
+
+export const deleteTextbooks = () => {
+    return axios.delete('/textbooks')
 }

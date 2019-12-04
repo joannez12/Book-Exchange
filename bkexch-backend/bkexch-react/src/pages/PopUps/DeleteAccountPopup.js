@@ -1,25 +1,26 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import {withRouter} from 'react-router-dom'
 
-import {deleteAccount} from '../../actions/user';
+import {deleteAccount, logout} from '../../actions/user';
+import {deleteTextbooks} from '../../actions/textbook';
 
 class DeleteAccountPopup extends React.Component {
-    deletePosts(){
-    }
-
     handleDeleteAccount = () => {
-        this.deletePosts();
-        /* gets users from server, requires server call */
-        //users.splice(this.state.user.id - 1, 1)
-
-        deleteAccount(this.props.user._id).then((res) => {
-            if (res.status === 200) {
-                this.props.hideProfile();
-                this.props.deleted();
-            }
-        }).catch((error) => console.log(error))
-
+        deleteTextbooks().then(() => {
+            return deleteAccount()
+        })
+        .then(() => {
+            return logout()
+        })
+        .then(() => {
+            this.props.onHide()
+            this.props.hideProfile();
+            this.props.deleted();
+            this.props.history.push('/')
+        })
+        .catch((error) => console.log(error))
     }
 
     render() {
@@ -33,7 +34,6 @@ class DeleteAccountPopup extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                     <Button variant="danger" onClick={this.handleDeleteAccount}>Confirm Delete Account</Button>
-
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={this.props.onHide}>Close</Button>
@@ -43,4 +43,4 @@ class DeleteAccountPopup extends React.Component {
     }
 }
 
-export default DeleteAccountPopup;
+export default withRouter(DeleteAccountPopup);
