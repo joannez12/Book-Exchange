@@ -6,7 +6,7 @@ import exchanges from "./exchange";
 import MyPostTable from "../../components/HistoryBrowse/MyPostTable";
 import HistoryTable from "../../components/HistoryBrowse/HistoryTable";
 import {getTextbooks, deleteTextbook} from "../../actions/textbook";
-import {getExchanges, deleteExchange} from "../../actions/exchange";
+import {getExchanges, deleteExchange,postExchange} from "../../actions/exchange";
 class HistoryBrowse extends React.Component {
     state = {
         account:this.props.user,   
@@ -28,7 +28,8 @@ class HistoryBrowse extends React.Component {
 
     deletePost(post){
         // gets textbooks from server, requires server call
-        deleteTextbook(post).then(res=>{
+        console.log("deleting textbook/post :", post)
+        deleteTextbook(post._id).then(res=>{
             if(res.status === 200){
                 console.log("deletion done!")
                 this.setState({deletedPost: res.data})
@@ -38,6 +39,19 @@ class HistoryBrowse extends React.Component {
             }
         }
         )
+        const newtextbooks = this.state.posts.filter(p => p._id !== post._id)
+        console.log("newtextbokos: ", newtextbooks)
+        this.setState({posts: newtextbooks})
+    }
+
+    addExchange(newExchange){
+        postExchange(newExchange).then(res=>{
+            if(res.status === 200){
+                console.log("posting exchange done")
+            }else{
+                console.log("fail to post exchange")
+            }
+        })
     }
 
     deleteHistory(exchange){
@@ -59,6 +73,9 @@ class HistoryBrowse extends React.Component {
                 }
             }
         )
+        const exchanges = this.state.exchanges.filter(e => e._id !== exchange._id)
+        console.log("exchangees: ", exchanges)
+        this.setState({exchanges: exchanges})
 
     }
 
